@@ -13,7 +13,7 @@ public class CSVReader {
 
     private static final String CSV_FILE_PATH = "CSV-files-go-here/clean_data.csv";
     
-    public Parameters parseCSV() throws IOException {
+    public Parameters parseCSV() {
         try (
             Reader reader = Files.newBufferedReader(Paths.get(CSV_FILE_PATH));
         ) {
@@ -28,6 +28,8 @@ public class CSVReader {
                 Parameters parameters = parameterIterator.next();
                 return parameters;
             }
+        } catch(Exception e) {
+            System.out.println(e);
         }
         return null;
     }

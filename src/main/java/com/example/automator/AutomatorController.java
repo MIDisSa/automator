@@ -15,7 +15,7 @@ public class AutomatorController {
 
     @GetMapping("/model-results")
     public String modelResults() {
-        //get csv from folder and parse it
+        //get csv from folder and parse it as Parameters object
          try {
             Parameters parameters = new CSVReader().parseCSV();
          } catch (Exception e) {
@@ -23,6 +23,7 @@ public class AutomatorController {
          }
 
         //run netlog model and receive results
+        
 
         return "result"; //TODO: this should return actual results
     }

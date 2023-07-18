@@ -31,10 +31,12 @@
 			<artifactId>opencsv</artifactId>
 			<version>4.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.nlogo/netlogo -->
 		<dependency>
 			<groupId>org.nlogo</groupId>
-			<artifactId>netlogo-6.2.2</artifactId>
+			<artifactId>NetLogo</artifactId>
+			<version>6.2</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/NetLogo.jar</systemPath>
 		</dependency>
 	</dependencies>
 

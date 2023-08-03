@@ -8,7 +8,7 @@ public class ABMRunner {
         HeadlessWorkspace workspace = HeadlessWorkspace.newInstance();
         System.out.println("workspace created");
         try {
-            workspace.open("/netlogo-model-goes-here/Fire.nlogo", true);
+            workspace.open("netlogo-model-goes-here/Fire.nlogo", true);
             workspace.command("set density 62");
             workspace.command("random-seed 0");
             workspace.command("setup");

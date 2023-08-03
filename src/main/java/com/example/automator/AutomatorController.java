@@ -25,7 +25,7 @@ public class AutomatorController {
          }
 
         //run netlog model and receive results
-        HeadlessWorkspace workspace = HeadlessWorkspace.newInstance();
+        ABMRunner.runABM();
 
         return "result"; //TODO: this should return actual results
     }

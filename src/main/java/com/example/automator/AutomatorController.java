@@ -15,7 +15,7 @@ public class AutomatorController {
         return "Greetings from Spring Boot!";
     }
 
-    @GetMapping("/model-results")
+    @GetMapping("/results")
     public String modelResults() {
         //get csv from folder and parse it as Parameters object
          try {

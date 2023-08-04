@@ -15,17 +15,19 @@ public class AutomatorController {
     }
 
     @GetMapping("/results")
-    public String modelResults() {
-        //get csv from folder and parse it as Parameters object
+    public Object modelResults() {
          try {
+            //get csv from folder and parse it as Parameters object
             Parameters parameters = new CSVReader().parseCSV();
+
+            //run netlog model and receive results
+            Object result = ABMRunner.runABM(parameters);
+
+            return result;
          } catch (Exception e) {
              System.out.println(e);
          }
 
-        //run netlog model and receive results
-        ABMRunner.runABM();
-
-        return "result"; //TODO: this should return actual results
+        return null;
     }
 }

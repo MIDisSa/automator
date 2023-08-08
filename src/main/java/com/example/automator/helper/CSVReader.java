@@ -10,7 +10,7 @@ import java.util.Iterator;
 
 public class CSVReader {
 
-    private static final String CSV_FILE_PATH = "CSV-files-go-here/clean_data.csv";
+    private static final String CSV_FILE_PATH = "CSV-files-go-here/data-processed.csv";
     
     public Parameters parseCSV() {
         try (

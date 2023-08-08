@@ -49,9 +49,9 @@ globals [
 
 
   ;; -----------------------------------------
-  ;; parameters affecting attitude after intervention
+  ;; paramters affecting attitude after intervetion
 
-  direct_ad_influence                              ;; defines influence of intervention targetted directly to farmers
+  direct_ad_influence                              ;; defines influence of intervetion targetted directly to farmers
   train_chiefs_influence                           ;; defines influence of ToT on chiefs
   direct_ad_discount_influence                     ;; defines influence of intervention targeted directly to farmers and offering them a discount on the HB
   direct_ad_delayed_payment_influence              ;; defines influence of intervention targeted directly to farmers and offering them a delayed payment option
@@ -99,15 +99,7 @@ globals [
   nr_villages_with_adopters
   nr_villages_with_considerers
 
-
-  ;;csv stuff
-  data-processed variable-names
-  avg_intra_village_interaction_frequency
-
 ]
-
-
-
 
 turtles-own [
   ;; intra village link variables
@@ -172,18 +164,6 @@ to setup
   clear-all
   reset-ticks
 
-  file-open "data-processed.csv" ;; file needs to be located in same directory as model
-  set data-processed []
-  while [not file-at-end?]
-    [
-      set data-processed lput (csv:from-row file-read-line) data-processed ;; converts string of comma-separated values into list
-    ]
-  set variable-names item 0 data-processed ;;first row contains variable names
-  set data-processed but-first data-processed ;; remove first row from data-processed csv
-
-  file-close
-
-
   set total_nr_of_interactions 0
   set total_nr_of_topic_related_interactions 0
 
@@ -206,19 +186,6 @@ to setup
 
   init_export_lists
 end
-
-
-;; to access values of csv variables
-
-to-report get-value [variable]
-  let index position variable variable-names ;; gets index of variable in variable-names list
-  if index = nobody [ error (word "No variable named " variable " found.") ]
-  if index = false [ error (word "No variable named " variable " found.") ]
-  report item index item 0 data-processed ;; access value of variable using index -->  assumes data-processed is list of lists, but only single row of data!!
-end
-
-
-
 
 ;; inititalizes lists which can be exported
 to init_export_lists
@@ -560,13 +527,6 @@ end
 ;; ----------------------------------------------------------------------------------------------------------------------------------------------------------
 ;; while running
 to go
-
-  ;; set variables based on csv
-  let mean_intra_village_interaction_frequency get-value "avg_intra_village_interaction_frequency"
-  let std_intra_village_interaction_frequency get-value "std_intra_village_interaction_frequency"
-  set avg_intra_village_interaction_frequency random-normal mean_intra_village_interaction_frequency std_intra_village_interaction_frequency
-
-
   ;; check interventions
   check_for_interventions
 
@@ -600,8 +560,6 @@ to go
 
   tick
 end
-
-
 
 ;; caculates variables for simulation to be exported
 to calc_simulation_variables
@@ -1419,7 +1377,7 @@ avg_mention_percentage
 avg_mention_percentage
 0
 100
-12.0
+1.0
 1
 1
 %
@@ -1452,6 +1410,21 @@ avg_inter_village_interaction_frequency
 1
 10
 5.0
+1
+1
+days
+HORIZONTAL
+
+SLIDER
+1485
+431
+1739
+464
+avg_intra_village_interaction_frequency
+avg_intra_village_interaction_frequency
+1
+10
+4.0
 1
 1
 days

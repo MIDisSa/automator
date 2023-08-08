@@ -9,18 +9,23 @@ public class ABMRunner {
         HeadlessWorkspace workspace = HeadlessWorkspace.newInstance();
         System.out.println("workspace created");
 
-        //get parameters
-        String parameter1 = parameters.getParameter1();
-
         try {
-            workspace.open("netlogo-model-goes-here/Fire.nlogo", true);
-            workspace.command(String.format("set density %s", parameter1));
-            workspace.command("random-seed 0");
-            workspace.command("setup");
-            workspace.command("repeat 50 [ go ]") ;
-            Object result = workspace.report("burned-trees");
-            workspace.dispose();
-            return result;
+            // open model
+            System.setProperty("org.nlogo.level", "INFO");
+            workspace.open("netlogo-model-goes-here/ABM_innovation_diffusion_tanzania.nlogo");
+            System.out.println("model opened");
+
+            // set parameters
+            //workspace.command(String.format("set base_adoption_probability %s", parameters.getBaseAdoptionProbability()));
+
+
+            //workspace.command("random-seed 0");
+            //workspace.command("setup");
+            //workspace.command("repeat 50 [ go ]") ;
+            //Object result = workspace.report("count turtles with [adoption_state = 1]");
+            //workspace.dispose();
+            //return result;
+            return null;
         } catch(Exception e) {
             e.printStackTrace();
         }

@@ -1,5 +1,4 @@
 com/example/automator/helper/CSVReader.class
-com/example/automator/CommandLineRunner.class
 com/example/automator/AutomatorApplication.class
 com/example/automator/helper/ABMRunner.class
 com/example/automator/helper/Parameters.class

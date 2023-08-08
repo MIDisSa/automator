@@ -6,10 +6,13 @@ import org.nlogo.headless.HeadlessWorkspace;
 
 public class ABMRunner {
 
-    public static Object runABM(Parameters parameters) {
+    public static ArrayList<Double> runABM(Parameters parameters) {
         // create workspace
         HeadlessWorkspace workspace = HeadlessWorkspace.newInstance();
         System.out.println("workspace created");
+
+        // establish return variable
+        ArrayList<Double> results = new ArrayList<Double>();
 
         try {
             // open model
@@ -39,18 +42,19 @@ public class ABMRunner {
             workspace.command("direct_village_intervention");
             workspace.command("repeat 50 [ go ]") ;
 
-            // get result
-            Object awareFarmers = workspace.report("count turtles with [adoption_state = 1]");
-            Object adopters = workspace.report("count turtles with [adoption_state = 2]");
-            ArrayList<Object> results = new ArrayList<Object>();
+            // get results
+            Double awareFarmers = (Double) workspace.report("count turtles with [adoption_state = 1]");
+            Double adopters = (Double) workspace.report("count turtles with [adoption_state = 2]");
+
+            workspace.dispose();
+
             results.add(awareFarmers);
             results.add(adopters);
-            workspace.dispose();
-            return results;
+
         } catch(Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return results;
     }
     
 }

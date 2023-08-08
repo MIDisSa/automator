@@ -1,10 +1,13 @@
 package com.example.automator;
 
+import java.util.ArrayList;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.automator.helper.ABMRunner;
 import com.example.automator.helper.CSVReader;
+import com.example.automator.helper.ModelResults;
 import com.example.automator.helper.Parameters;
 
 @RestController
@@ -21,9 +24,14 @@ public class AutomatorController {
             Parameters parameters = new CSVReader().parseCSV();
 
             //run netlog model and receive results
-            Object result = ABMRunner.runABM(parameters);
+            ArrayList<Double> results = ABMRunner.runABM(parameters);
 
-            return result;
+            // create ModelResults from results
+            ModelResults modelResults = new ModelResults();
+            modelResults.setAwareFarmers(results.get(0));
+            modelResults.setAdopters(results.get(1));
+
+            return modelResults;
          } catch (Exception e) {
              System.out.println(e);
          }

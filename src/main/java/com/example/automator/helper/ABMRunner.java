@@ -1,6 +1,5 @@
 package com.example.automator.helper;
 
-import java.io.Console;
 import java.util.ArrayList;
 
 import org.nlogo.headless.HeadlessWorkspace;

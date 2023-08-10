@@ -9,6 +9,7 @@ import com.example.automator.helper.ABMRunner;
 import com.example.automator.helper.CSVReader;
 import com.example.automator.helper.ModelResults;
 import com.example.automator.helper.Parameters;
+import com.example.automator.helper.CLIRunner;
 
 @RestController
 public class AutomatorController {
@@ -23,7 +24,7 @@ public class AutomatorController {
             //get csv from folder and parse it as Parameters object
             Parameters parameters = new CSVReader().parseCSV();
 
-            //run netlog model and receive results
+            //run netlogo model and receive results
             ArrayList<Double> results = ABMRunner.runABM(parameters);
 
             // create ModelResults from results
@@ -37,5 +38,35 @@ public class AutomatorController {
          }
 
         return null;
+    }
+
+    @GetMapping("/maxAdopters") //maximizes Adopters
+    public void maxAdopters() {
+        try {
+            CLIRunner CLIRunner = new CLIRunner();
+            CLIRunner.runCommand("-p optimization-settings-go-here\\MaxAdopters.bsearch -o optimization-results-go-here\\MaxAdopters --threads 3 -n 1");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @GetMapping("/maxKnowledge") //maximizes Adopters + Considerers
+    public void maxKnowledge() {
+        try {
+            CLIRunner CLIRunner = new CLIRunner();
+            CLIRunner.runCommand("-p optimization-settings-go-here\\MaxKnowledge.bsearch -o optimization-results-go-here\\MaxKnowledge --threads 3 -n 1");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @GetMapping("/minCost") //minimizes intervention cost per Adopter
+    public void optimizeModel() {
+        try {
+            CLIRunner CLIRunner = new CLIRunner();
+            CLIRunner.runCommand("-p optimization-settings-go-here\\MinCostPerAdopter.bsearch -o optimization-results-go-here\\MinCostPerAdopter --threads 3 -n 1");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

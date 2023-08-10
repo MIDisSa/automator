@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<!DOCTYPE search SYSTEM "behaviorsearch.dtd">
+<search>
+<bsearchVersionNumber>1.10</bsearchVersionNumber>
+<modelInfo>
+<modelFile>..\netlogo-model-goes-here\ABM_innovation_diffusion_tanzania.nlogo</modelFile>
+<modelSetupCommands>setup</modelSetupCommands>
+<modelStepCommands>go</modelStepCommands>
+<modelStopCondition/>
+<modelStepLimit>360</modelStepLimit>
+<modelMetricReporter>cost_per_adopter</modelMetricReporter>
+<modelMeasureIf>true</modelMeasureIf>
+</modelInfo>
+<fitnessInfo>
+<fitnessMinimized>true</fitnessMinimized>
+<fitnessCollecting>AT_FINAL_STEP</fitnessCollecting>
+<fitnessSamplingReplications>5</fitnessSamplingReplications>
+<fitnessCombineReplications>MEAN</fitnessCombineReplications>
+</fitnessInfo>
+<searchSpace>
+<paramSpec>["avg_nr_of_farmers_per_village" 10]</paramSpec>
+<paramSpec>["nr_of_villages" 100]</paramSpec>
+<paramSpec>["nr_default_friends_inter_village" 5]</paramSpec>
+<paramSpec>["avg_mention_percentage" 1]</paramSpec>
+<paramSpec>["avg_inter_village_interaction_frequency" 5]</paramSpec>
+<paramSpec>["avg_intra_village_interaction_frequency" 4]</paramSpec>
+<paramSpec>["avg_chief_farmer_meeting_frequency" 20]</paramSpec>
+<paramSpec>["is_visible_update_activated" false]</paramSpec>
+<paramSpec>["check_finished_condition" false]</paramSpec>
+<paramSpec>["percentage_negative_wom" 10]</paramSpec>
+<paramSpec>["run_until_day_x" 360]</paramSpec>
+<paramSpec>["base_adoption_probability" 1]</paramSpec>
+<paramSpec>["nr_of_neighborhoods" 20]</paramSpec>
+<paramSpec>["percentage_of_farmers_in_farmgroup" 50]</paramSpec>
+<paramSpec>["direct_ad_type" "Direct Ad" "Direct Ad + Discount" "Direct Ad + Delayed Payment"]</paramSpec>
+<paramSpec>["direct_ad_frequency" 30 60 90 120 180 360]</paramSpec>
+<paramSpec>["train_chiefs_frequency" 30 60 90 120 180 360]</paramSpec>
+<paramSpec>["direct_ad_nr_of_villages" [0 10 100]]</paramSpec>
+<paramSpec>["percentage_of_villagers_addressed" 50]</paramSpec>
+<paramSpec>["train_chiefs_nr" [0 10 100]]</paramSpec>
+<paramSpec>["max_budget" 10000]</paramSpec>
+</searchSpace>
+<searchMethod type="MutationHillClimber">
+<searchMethodParameter name="mutation-rate" value="0.05"/>
+<searchMethodParameter name="restart-after-stall-count" value="0"/>
+</searchMethod>
+<chromosomeRepresentation type="GrayBinaryChromosome"/>
+<caching>true</caching>
+<evaluationLimit>300</evaluationLimit>
+<bestCheckingNumReplications>10</bestCheckingNumReplications>
+</search>

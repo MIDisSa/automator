@@ -15,12 +15,12 @@ public class ABMRunner {
         ArrayList<Double> results = new ArrayList<Double>();
 
         try {
-            // open model
+            // OPEN MODEL
             System.setProperty("org.nlogo.level", "INFO");
             workspace.open("netlogo-model-goes-here/ABM_innovation_diffusion_tanzania.nlogo");
             System.out.println("model opened");
 
-            // set parameters
+            // SET MODEL PARAMETERS
             //workspace.command(String.format("set train_chief_influence %s", parameters.getTrainChiefInfluence()));
             workspace.command(String.format("set nr_default_friends_inter_village %s", parameters.getNrDefaultFriendsInterVillage()));
             //workspace.command(String.format("set std_nr_default_friends_inter_village %s", parameters.getStdNrDefaultFriendsInterVillage()));
@@ -36,13 +36,23 @@ public class ABMRunner {
             workspace.command(String.format("set percentage_negative_WoM %s", parameters.getPercentageNegativeWoM()));
             workspace.command(String.format("set base_adoption_probability %s", parameters.getBaseAdoptionProbability()));
 
+            
+            
+            // SET INTERVENTION PARAMETERS
+            workspace.command("set direct_ad_type \"Direct Ad\"");
+            workspace.command("set direct_ad_frequency 365");
+            workspace.command("set train_chiefs_frequency 0");
+            workspace.command("set max_budget 10000");
+            workspace.command("set direct_ad_nr_of_villages 50");
+            workspace.command("set percentage_of_villagers_addressed 50");
+            workspace.command("set train_chiefs_nr 50");
 
-            workspace.command("random-seed 0");
+            // SETUP SIMULATION
+            //workspace.command("random-seed 0");
             workspace.command("setup");
-            workspace.command("direct_village_intervention");
-            workspace.command("repeat 50 [ go ]") ;
+            workspace.command("repeat 360 [ go ]") ;
 
-            // get results
+            // GET RESULTS
             Double awareFarmers = (Double) workspace.report("count turtles with [adoption_state = 1]");
             Double adopters = (Double) workspace.report("count turtles with [adoption_state = 2]");
 

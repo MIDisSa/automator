@@ -55,16 +55,21 @@ public class ABMRunner {
                 adoptersPerTick.add((Double) workspace.report("count turtles with [adoption_state = 2]"));
             }
 
-            System.out.println(awareFarmersPerTick);
-
             // get results
             String awareFarmers = String.valueOf(workspace.report("count turtles with [adoption_state = 1]"));
             String adopters = String.valueOf(workspace.report("count turtles with [adoption_state = 2]"));
 
             workspace.dispose();
 
+            // cast awareFarmersPerTick and adoptersPerTick to string to add to return array
+            String awareFarmersPerTickString = awareFarmersPerTick.toString();
+            String adoptersPerTickString = adoptersPerTick.toString();
+
+            // add results to return array
             results.add(awareFarmers);
             results.add(adopters);
+            results.add(awareFarmersPerTickString);
+            results.add(adoptersPerTickString);
 
         } catch(Exception e) {
             e.printStackTrace();

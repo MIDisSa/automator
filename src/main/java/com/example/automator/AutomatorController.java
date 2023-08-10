@@ -24,7 +24,7 @@ public class AutomatorController {
             Parameters parameters = new CSVReader().parseCSV();
 
             //run netlog model and receive results
-            ArrayList<Double> results = ABMRunner.runABM(parameters);
+            ArrayList<String> results = ABMRunner.runABM(parameters);
 
             // create ModelResults from results
             ModelResults modelResults = new ModelResults();

@@ -46,7 +46,7 @@ public class ABMRunner {
             ArrayList<Double> adoptersPerTick = new ArrayList<Double>();
 
             // run model for set number of ticks
-            int ticks = 50;
+            int ticks = 360;
             int counter = 0;
             while (counter < ticks) {
                 workspace.command("go");

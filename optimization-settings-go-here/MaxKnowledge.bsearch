@@ -22,7 +22,7 @@
 <paramSpec>["direct_ad_frequency" 0 30 60 90 120 180 360]</paramSpec>
 <paramSpec>["train_chiefs_frequency" 0 30 60 90 120 180 360]</paramSpec>
 <paramSpec>["direct_ad_nr_of_villages" [0 10 100]]</paramSpec>
-<paramSpec>["percentage_of_villagers_addressed" [0 10 100]]</paramSpec>
+<paramSpec>["percentage_of_villagers_addressed" 50]</paramSpec>
 <paramSpec>["train_chiefs_nr" [0 10 100]]</paramSpec>
 </searchSpace>
 <searchMethod type="MutationHillClimber">

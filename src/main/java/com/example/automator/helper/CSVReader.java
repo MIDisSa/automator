@@ -9,12 +9,10 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 
 public class CSVReader {
-
-    private static final String CSV_FILE_PATH = "CSV-files-go-here/data-processed.csv";
     
-    public Parameters parseCSV() {
+    public Parameters parseCSV(String pathToCSV) {
         try (
-            Reader reader = Files.newBufferedReader(Paths.get(CSV_FILE_PATH));
+            Reader reader = Files.newBufferedReader(Paths.get(pathToCSV));
         ) {
             CsvToBean<Parameters> csvToBean = new CsvToBeanBuilder(reader)
                 .withType(Parameters.class)

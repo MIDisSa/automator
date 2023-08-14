@@ -3,10 +3,13 @@ package com.example.automator;
 import java.util.ArrayList;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.automator.helper.ABMRunner;
 import com.example.automator.helper.CSVReader;
+import com.example.automator.helper.ModelInput;
 import com.example.automator.helper.ModelResults;
 import com.example.automator.helper.Parameters;
 
@@ -17,14 +20,14 @@ public class AutomatorController {
         return "Greetings from Spring Boot!";
     }
 
-    @GetMapping("/results")
-    public Object modelResults() {
+    @PostMapping("/results")
+    public Object modelResults(@RequestBody ModelInput modelInput) {
          try {
             //get csv from folder and parse it as Parameters object
             Parameters parameters = new CSVReader().parseCSV();
 
             //run netlog model and receive results
-            ArrayList<String> results = ABMRunner.runABM(parameters);
+            ArrayList<String> results = ABMRunner.runABM(parameters, modelInput);
 
             // create ModelResults from results
             ModelResults modelResults = new ModelResults();

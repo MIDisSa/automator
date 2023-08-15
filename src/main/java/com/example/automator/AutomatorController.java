@@ -26,12 +26,14 @@ public class AutomatorController {
             Parameters parameters = new CSVReader().parseCSV();
 
             //run netlog model and receive results
-            ArrayList<Double> results = ABMRunner.runABM(parameters);
+            ArrayList<String> results = ABMRunner.runABM(parameters);
 
             // create ModelResults from results
             ModelResults modelResults = new ModelResults();
             modelResults.setAwareFarmers(results.get(0));
             modelResults.setAdopters(results.get(1));
+            modelResults.setAwareFarmersPerTick(results.get(2));
+            modelResults.setAdoptersPerTick(results.get(3));
 
             return modelResults;
          } catch (Exception e) {

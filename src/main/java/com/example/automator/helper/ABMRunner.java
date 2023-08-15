@@ -6,13 +6,13 @@ import org.nlogo.headless.HeadlessWorkspace;
 
 public class ABMRunner {
 
-    public static ArrayList<Double> runABM(Parameters parameters) {
+    public static ArrayList<String> runABM(Parameters parameters) {
         // create workspace
         HeadlessWorkspace workspace = HeadlessWorkspace.newInstance();
         System.out.println("workspace created");
 
         // establish return variable
-        ArrayList<Double> results = new ArrayList<Double>();
+        ArrayList<String> results = new ArrayList<String>();
 
         try {
             // open model
@@ -40,16 +40,36 @@ public class ABMRunner {
             workspace.command("random-seed 0");
             workspace.command("setup");
             workspace.command("direct_village_intervention");
-            workspace.command("repeat 50 [ go ]") ;
+
+            // keep track of number of aware farmers and adopters per tick (needed for graph)
+            ArrayList<Double> awareFarmersPerTick = new ArrayList<Double>();
+            ArrayList<Double> adoptersPerTick = new ArrayList<Double>();
+
+            // run model for set number of ticks
+            int ticks = 360;
+            int counter = 0;
+            while (counter < ticks) {
+                workspace.command("go");
+                counter += 1;
+                awareFarmersPerTick.add((Double) workspace.report("count turtles with [adoption_state = 1]"));
+                adoptersPerTick.add((Double) workspace.report("count turtles with [adoption_state = 2]"));
+            }
 
             // get results
-            Double awareFarmers = (Double) workspace.report("count turtles with [adoption_state = 1]");
-            Double adopters = (Double) workspace.report("count turtles with [adoption_state = 2]");
+            String awareFarmers = String.valueOf(workspace.report("count turtles with [adoption_state = 1]"));
+            String adopters = String.valueOf(workspace.report("count turtles with [adoption_state = 2]"));
 
             workspace.dispose();
 
+            // cast awareFarmersPerTick and adoptersPerTick to string to add to return array
+            String awareFarmersPerTickString = awareFarmersPerTick.toString();
+            String adoptersPerTickString = adoptersPerTick.toString();
+
+            // add results to return array
             results.add(awareFarmers);
             results.add(adopters);
+            results.add(awareFarmersPerTickString);
+            results.add(adoptersPerTickString);
 
         } catch(Exception e) {
             e.printStackTrace();

@@ -2,6 +2,7 @@ package com.example.automator;
 
 import java.util.ArrayList;
 
+import org.apache.commons.collections.functors.ExceptionClosure;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -65,6 +66,18 @@ public class AutomatorController {
         try {
             CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here\\MinCostPerAdopter.bsearch -o optimization-results-go-here\\MinCostPerAdopter --threads 3 -n 1");
+        
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @GetMapping("testOptimizer") //Starts up optimizer with a test model
+    public void testOptimizer() {
+        try {
+            CLIRunner CLIRunner = new CLIRunner();
+            CLIRunner.runCommand("-p optimization-settings-go-here\\TestSettings.bsearch -o optimization-results-go-here\\Test --threads 3 -n 1");
+                     
         } catch (Exception e) {
             System.out.println(e);
         }

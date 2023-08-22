@@ -1,27 +1,35 @@
 package com.example.automator.helper;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.ProcessBuilder;
+import org.apache.commons.lang3.SystemUtils;
 
 public class CLIRunner {
-    ProcessBuilder processBuilder = new ProcessBuilder();
-    
     public void runCommand(String cmd) {
-        try {
-            Runtime rt = Runtime.getRuntime();
-            Process pr = rt.exec("\"C:\\Program Files\\NetLogo 6.2.2\\app\\behaviorsearch\\behaviorsearch_headless.bat\" " + cmd); //Currently needs a local installation of BehaviorSearch
+        if (SystemUtils.IS_OS_WINDOWS) {
+            try {
+                ProcessBuilder pb = new ProcessBuilder();
+                //System.out.println(System.getenv()); //Prints SYSTEMPATH, enables manual check if NetLogo is part of it.
+                pb.command("cmd.exe", "/c", "behaviorsearch_headless.bat " + cmd);
+                
+                Process process = pb.start();
+                StringBuilder output = new StringBuilder();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    output.append(line + "\n");
+                }
+                System.out.println(output);
 
-
-            BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-
-            String line = null;
-
-            while ((line=input.readLine()) != null) {
-                System.out.println(line);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch(Exception e) {
-            System.out.println(e.toString());
-            e.printStackTrace();
+        }
+        else {
+            System.out.println("Only compatible with Windows atm.");
         }
     }
 }

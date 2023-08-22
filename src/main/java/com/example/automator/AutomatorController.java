@@ -2,7 +2,6 @@ package com.example.automator;
 
 import java.util.ArrayList;
 
-import org.apache.commons.collections.functors.ExceptionClosure;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

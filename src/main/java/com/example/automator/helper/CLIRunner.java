@@ -21,14 +21,12 @@ public class CLIRunner {
             }
 
             Process process = pb.start();
-            //StringBuilder output = new StringBuilder();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
                 
             String line;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
             }
-            //System.out.println(output);
 
         } catch (IOException e) {
             e.printStackTrace();

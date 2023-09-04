@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<!DOCTYPE search SYSTEM "behaviorsearch.dtd">
+<search>
+<bsearchVersionNumber>1.10</bsearchVersionNumber>
+<modelInfo>
+<modelFile>..\netlogo-model-goes-here\ABM_innovation_diffusion_tanzania.nlogo</modelFile>
+<modelSetupCommands>setup</modelSetupCommands>
+<modelStepCommands>go</modelStepCommands>
+<modelStopCondition>ticks &gt;= 360</modelStopCondition>
+<modelStepLimit>360</modelStepLimit>
+<modelMetricReporter>count turtles with [adoption_state &gt; 0]</modelMetricReporter>
+<modelMeasureIf>true</modelMeasureIf>
+</modelInfo>
+<fitnessInfo>
+<fitnessMinimized>false</fitnessMinimized>
+<fitnessCollecting>AT_FINAL_STEP</fitnessCollecting>
+<fitnessSamplingReplications>10</fitnessSamplingReplications>
+<fitnessCombineReplications>MEAN</fitnessCombineReplications>
+</fitnessInfo>
+<searchSpace>
+<paramSpec>["direct_ad_type" "Direct Ad" "Direct Ad + Discount" "Direct Ad + Delayed Payment" "Direct Ad + Delayed P. + Discount"]</paramSpec>
+<paramSpec>["direct_ad_frequency" 0 30 60 90 120 180 360]</paramSpec>
+<paramSpec>["train_chiefs_frequency" 0 30 60 90 120 180 360]</paramSpec>
+<paramSpec>["direct_ad_nr_of_villages" [0 10 100]]</paramSpec>
+<paramSpec>["percentage_of_villagers_addressed" 50]</paramSpec>
+<paramSpec>["train_chiefs_nr" [0 10 100]]</paramSpec>
+</searchSpace>
+<searchMethod type="MutationHillClimber">
+<searchMethodParameter name="mutation-rate" value="0.05"/>
+<searchMethodParameter name="restart-after-stall-count" value="0"/>
+</searchMethod>
+<chromosomeRepresentation type="GrayBinaryChromosome"/>
+<caching>true</caching>
+<evaluationLimit>300</evaluationLimit>
+<bestCheckingNumReplications>10</bestCheckingNumReplications>
+</search>

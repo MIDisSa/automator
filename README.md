@@ -21,3 +21,8 @@ Then run ```docker run -it -p 8080:8080 automator```. This starts up the Docker 
 Functionality:\
 When running the Spring Boot app as an executable jar, everything should be working as intended, on Windows at least. Not sure about UNIX-Systems.\
 When running in a Docker container, currently /results is working, optimization commands are somehow not executed though. Might be a problem with the UNIX-System commands.
+
+
+## How to make changes
+Whenever the Java-code is changed, delete old .jars in the target folder and re-package the code using maven (should be possible in all IDEs, for me IntelliJ worked best).
+Then rebuild Docker image to apply the changes.

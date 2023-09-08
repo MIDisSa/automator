@@ -1,2 +1,8 @@
 # Compiled class file
 *.class
+
+#IntelliJ specific files
+/.idea
+
+#VSCode specific files
+/.vscode

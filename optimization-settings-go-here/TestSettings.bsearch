@@ -3,7 +3,7 @@
 <search>
 <bsearchVersionNumber>1.00</bsearchVersionNumber>
 <modelInfo>
-<modelFile>..\netlogo-model-goes-here\TestModel.nlogo</modelFile>
+<modelFile>../netlogo-model-goes-here/TestModel.nlogo</modelFile>
 <modelSetupCommands>setup</modelSetupCommands>
 <modelStepCommands>go</modelStepCommands>
 <modelStopCondition>not any? turtles</modelStopCondition>

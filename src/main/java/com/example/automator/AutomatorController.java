@@ -48,7 +48,7 @@ public class AutomatorController {
     public void maxAdopters() {
         try {
             CLIRunner CLIRunner = new CLIRunner();
-            CLIRunner.runCommand("-p optimization-settings-go-here\\MaxAdopters.bsearch -o optimization-results-go-here\\MaxAdopters");
+            CLIRunner.runCommand("-p optimization-settings-go-here/MaxAdopters.bsearch -o optimization-results-go-here/MaxAdopters");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -58,7 +58,7 @@ public class AutomatorController {
     public void maxKnowledge() {
         try {
             CLIRunner CLIRunner = new CLIRunner();
-            CLIRunner.runCommand("-p optimization-settings-go-here\\MaxKnowledge.bsearch -o optimization-results-go-here\\MaxKnowledge");
+            CLIRunner.runCommand("-p optimization-settings-go-here/MaxKnowledge.bsearch -o optimization-results-go-here/MaxKnowledge");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -68,7 +68,7 @@ public class AutomatorController {
     public void optimizeModel() {
         try {
             CLIRunner CLIRunner = new CLIRunner();
-            CLIRunner.runCommand("-p optimization-settings-go-here\\MinCostPerAdopter.bsearch -o optimization-results-go-here\\MinCostPerAdopter");
+            CLIRunner.runCommand("-p optimization-settings-go-here/MinCostPerAdopter.bsearch -o optimization-results-go-here/MinCostPerAdopter");
         
         } catch (Exception e) {
             System.out.println(e);
@@ -79,7 +79,7 @@ public class AutomatorController {
     public void testOptimizer() {
         try {
             CLIRunner CLIRunner = new CLIRunner();
-            CLIRunner.runCommand("-p optimization-settings-go-here\\TestSettings.bsearch -o optimization-results-go-here\\Test");
+            CLIRunner.runCommand("-p optimization-settings-go-here/TestSettings.bsearch -o optimization-results-go-here/Test");
                      
         } catch (Exception e) {
             System.out.println(e);

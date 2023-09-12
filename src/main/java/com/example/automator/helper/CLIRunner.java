@@ -17,8 +17,8 @@ public class CLIRunner {
             } else if (SystemUtils.IS_OS_UNIX) {
                 System.out.println("Building process for UNIX-System...");
                 //pb.command("/bin/bash", "-c", "behaviorsearch_headless.sh " + cmd);
-                pb.command("/bin/bash", "-c", "/NetLogo-6.2.2/app/behaviorsearch/behaviorsearch_headless.sh " + cmd); //nothing happens...
-                pb.command("/bin/bash", "-c", "echo \"helloWorld\""); //... but this one works.
+                pb.command("/bin/bash", "-c", "./NetLogo-6.2.2/app/behaviorsearch/behaviorsearch_headless.sh " + cmd); //nothing happens...
+                //pb.command("/bin/bash", "-c", "echo \"helloWorld\""); //... but this one works.
 
             } else {
                 throw new IOException("OS not compatible.");

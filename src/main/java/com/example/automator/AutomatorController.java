@@ -13,6 +13,7 @@ import com.example.automator.helper.CSVReader;
 import com.example.automator.helper.ModelInput;
 import com.example.automator.helper.ModelResults;
 import com.example.automator.helper.Parameters;
+import com.example.automator.helper.CLIRunner;
 
 @RestController
 public class AutomatorController {
@@ -44,5 +45,47 @@ public class AutomatorController {
          }
 
         return null;
+    }
+
+    @GetMapping("/maxAdopters") //maximizes Adopters
+    public void maxAdopters() {
+        try {
+            CLIRunner CLIRunner = new CLIRunner();
+            CLIRunner.runCommand("-p optimization-settings-go-here\\MaxAdopters.bsearch -o optimization-results-go-here\\MaxAdopters");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @GetMapping("/maxKnowledge") //maximizes Adopters + Considerers
+    public void maxKnowledge() {
+        try {
+            CLIRunner CLIRunner = new CLIRunner();
+            CLIRunner.runCommand("-p optimization-settings-go-here\\MaxKnowledge.bsearch -o optimization-results-go-here\\MaxKnowledge");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @GetMapping("/minCost") //minimizes intervention cost per Adopter
+    public void optimizeModel() {
+        try {
+            CLIRunner CLIRunner = new CLIRunner();
+            CLIRunner.runCommand("-p optimization-settings-go-here\\MinCostPerAdopter.bsearch -o optimization-results-go-here\\MinCostPerAdopter");
+        
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @GetMapping("testOptimizer") //Starts up optimizer with a test model
+    public void testOptimizer() {
+        try {
+            CLIRunner CLIRunner = new CLIRunner();
+            CLIRunner.runCommand("-p optimization-settings-go-here\\TestSettings.bsearch -o optimization-results-go-here\\Test");
+                     
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

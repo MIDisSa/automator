@@ -2,6 +2,7 @@ package com.example.automator;
 
 import java.util.ArrayList;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ public class AutomatorController {
         return "Greetings from Spring Boot!";
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/results")
     public Object modelResults(@RequestBody ModelInput modelInput) {
          try {

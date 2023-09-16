@@ -109,8 +109,17 @@ public class AutomatorController {
         }
 
         try {
-            Path filePath = Path.of("CSV-files-go-here/data.csv");
+            Path filePath = Path.of("CSV-files-go-here/data-processed.csv");
+
+            // check if file already exists and delete if it does
+            if (Files.exists(filePath)) {
+                Files.delete(filePath);
+            }
+
+            // save new file to folder
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+            
+            System.out.println("File uploaded successfully");
         } catch (IOException e) {
             System.out.println(e);
         }

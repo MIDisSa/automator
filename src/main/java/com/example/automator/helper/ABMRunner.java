@@ -6,7 +6,7 @@ import org.nlogo.headless.HeadlessWorkspace;
 
 public class ABMRunner {
 
-    public static ArrayList<String> runABM(Parameters parameters) {
+    public static ArrayList<String> runABM(Parameters parameters, ModelInput modelInput) {
         // create workspace
         HeadlessWorkspace workspace = HeadlessWorkspace.newInstance();
         System.out.println("workspace created");
@@ -50,14 +50,17 @@ public class ABMRunner {
             // SETUP SIMULATION
             //workspace.command("random-seed 0");
             workspace.command("setup");
-            workspace.command("direct_village_intervention");
+
+            // run intervention
+            String kindOfIntervention = modelInput.getKindOfIntervention();
+            workspace.command(kindOfIntervention); //TODO: maybe the string from the frontend does not exactly match the needed command --> add smth to convert
 
             // keep track of number of aware farmers and adopters per tick (needed for graph)
             ArrayList<Double> awareFarmersPerTick = new ArrayList<Double>();
             ArrayList<Double> adoptersPerTick = new ArrayList<Double>();
 
             // run model for set number of ticks
-            int ticks = 360;
+            int ticks = modelInput.getNumberOfTicks();
             int counter = 0;
             while (counter < ticks) {
                 workspace.command("go");

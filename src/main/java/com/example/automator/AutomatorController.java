@@ -26,8 +26,6 @@ public class AutomatorController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/results")
     public Object modelResults(@RequestBody ModelInput modelInput) {
-    @PostMapping("/results")
-    public Object modelResults(@RequestBody ModelInput modelInput) {
          try {
             //get csv from folder and parse it as Parameters object
             Parameters parameters = new CSVReader().parseDataCSV();

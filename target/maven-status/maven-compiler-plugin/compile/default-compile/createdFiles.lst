@@ -1,5 +1,7 @@
+com\example\automator\helper\ModelResults.class
 com\example\automator\helper\Parameters.class
 com\example\automator\AutomatorController.class
 com\example\automator\helper\CSVReader.class
 com\example\automator\AutomatorApplication.class
 com\example\automator\helper\ABMRunner.class
+com\example\automator\helper\CLIRunner.class

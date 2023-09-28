@@ -3,7 +3,7 @@
 <search>
 <bsearchVersionNumber>1.10</bsearchVersionNumber>
 <modelInfo>
-<modelFile>..\netlogo-model-goes-here\ABM_innovation_diffusion_tanzania.nlogo</modelFile>
+<modelFile>../netlogo-model-goes-here/ABM_innovation_diffusion_tanzania.nlogo</modelFile>
 <modelSetupCommands>setup</modelSetupCommands>
 <modelStepCommands>go</modelStepCommands>
 <modelStopCondition/>

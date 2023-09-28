@@ -1,7 +1,6 @@
 package com.example.automator.helper;
 
 public class ModelInput {
-
     private int numberOfTicks;
     private int frequencyDirectAd;
     private String kindOfIntervention;
@@ -17,5 +16,4 @@ public class ModelInput {
     public String getKindOfIntervention() {
         return kindOfIntervention;
     }
-    
 }

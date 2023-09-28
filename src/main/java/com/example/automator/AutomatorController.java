@@ -1,12 +1,25 @@
 package com.example.automator;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.automator.helper.ABMRunner;
 import com.example.automator.helper.CSVReader;
@@ -102,5 +115,28 @@ public class AutomatorController {
             System.out.println(e);
         }
         return null;
+    }
+
+    @PostMapping("uploadCSV") //uploads CSV and stores it locally
+    public void uploadCSV(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            System.out.println("File is empty");
+        }
+
+        try {
+            Path filePath = Path.of("CSV-files-go-here/data-processed.csv");
+
+            // check if file already exists and delete if it does
+            if (Files.exists(filePath)) {
+                Files.delete(filePath);
+            }
+
+            // save new file to folder
+            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+            
+            System.out.println("File uploaded successfully");
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 }

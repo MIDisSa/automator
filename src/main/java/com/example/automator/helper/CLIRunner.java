@@ -10,15 +10,12 @@ public class CLIRunner {
     public void runCommand(String cmd) {
         try {
             ProcessBuilder pb = new ProcessBuilder();
-            //System.out.println(System.getenv()); //Prints SYSTEMPATH, enables manual check if NetLogo is part of it.
             if (SystemUtils.IS_OS_WINDOWS) {
                 System.out.println("Building process for Windows...");
                 pb.command("cmd.exe", "/c", "behaviorsearch_headless.bat " + cmd);
             } else if (SystemUtils.IS_OS_UNIX) {
                 System.out.println("Building process for UNIX-System...");
-                //pb.command("/bin/bash", "-c", "behaviorsearch_headless.sh " + cmd);
-                pb.command("/bin/bash", "-c", "./NetLogo-6.2.2/app/behaviorsearch/behaviorsearch_headless.sh " + cmd); //nothing happens...
-                //pb.command("/bin/bash", "-c", "echo \"helloWorld\""); //... but this one works.
+                pb.command("/bin/bash", "-c", "./NetLogo-6.2.2/app/behaviorsearch/behaviorsearch_headless.sh " + cmd);
 
             } else {
                 throw new IOException("OS not compatible.");

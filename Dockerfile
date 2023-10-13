@@ -1,11 +1,14 @@
 FROM openjdk:17-jdk-alpine3.13
 
 RUN apk update
-RUN apk add openjdk8-jre unzip wget bash
+RUN apk add openjdk8-jre unzip wget bash python3 python3-dev py3-pip
 
 WORKDIR /app
 
 COPY . .
+
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
 
 RUN wget https://ccl.northwestern.edu/netlogo/6.2.2/NetLogo-6.2.2-64.tgz -O /app/NetLogo-6.2.2-64.tgz
 RUN tar xzf NetLogo-6.2.2-64.tgz

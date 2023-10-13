@@ -16,4 +16,16 @@ public class ModelInput {
     public String getKindOfIntervention() {
         return kindOfIntervention;
     }
+    
+    public void setNumberOfTicks(int numberOfTicks) {
+        this.numberOfTicks = numberOfTicks;
+    }
+
+    public void setFrequencyDirectAd(int frequencyDirectAd) {
+        this.frequencyDirectAd = frequencyDirectAd;
+    }
+
+    public void setKindOfIntervention(String kindOfIntervention) {
+        this.kindOfIntervention = kindOfIntervention;
+    }
 }

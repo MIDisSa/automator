@@ -41,7 +41,8 @@ public class AutomatorController {
     public Object modelResults(@RequestBody ModelInput modelInput) {
          try {
             //get csv from folder and parse it as Parameters object
-            Parameters parameters = new CSVReader().parseDataCSV();
+            String pathToCSV = "CSV-files-go-here/data-processed.csv";
+            Parameters parameters = new CSVReader().parseCSV(pathToCSV);
 
             //run netlogo model and receive results
             ArrayList<String> results = ABMRunner.runABM(parameters, modelInput);

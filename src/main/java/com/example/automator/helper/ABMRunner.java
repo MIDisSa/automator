@@ -11,6 +11,11 @@ public class ABMRunner {
         HeadlessWorkspace workspace = HeadlessWorkspace.newInstance();
         System.out.println("workspace created");
 
+        return runABM(parameters, modelInput, workspace);
+    }
+
+    public static ArrayList<String> runABM(Parameters parameters, ModelInput modelInput, HeadlessWorkspace workspace) {
+
         // establish return variable
         ArrayList<String> results = new ArrayList<String>();
 

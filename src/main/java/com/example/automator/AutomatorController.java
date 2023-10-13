@@ -142,7 +142,7 @@ public class AutomatorController {
     }
 
     @PostMapping("uploadRawCSV") //uploads CSV, runs it through the data processing script and return parameters
-    public void uploadRawCSV(@RequestParam("file") MultipartFile file) {
+    public Parameters uploadRawCSV(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             System.out.println("Error: file is empty");
         }
@@ -170,6 +170,12 @@ public class AutomatorController {
         } catch (Exception e) {
             System.out.println(e);
         }
+
+        //get csv from folder and parse it as Parameters object
+        String CSV_FILE_PATH_DATA = "CSV-files-go-here/data-processed.csv";
+        Parameters parameters = new CSVReader().parseDataCSV(CSV_FILE_PATH_DATA);
+
+        return parameters;
     }
 
 }

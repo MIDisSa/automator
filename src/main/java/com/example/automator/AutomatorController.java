@@ -152,3 +152,4 @@ public class AutomatorController {
         return IOUtils.toByteArray(in);
     }
 }
+

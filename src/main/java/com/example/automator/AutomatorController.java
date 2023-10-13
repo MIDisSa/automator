@@ -140,4 +140,36 @@ public class AutomatorController {
             System.out.println(e);
         }
     }
+
+    @PostMapping("uploadRawCSV") //uploads CSV, runs it through the data processing script and return parameters
+    public void uploadRawCSV(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            System.out.println("Error: file is empty");
+        }
+
+        try {
+            Path filePath = Path.of("CSV-files-go-here/raw-data.csv");
+
+            // check if file already exists and delete if it does
+            if (Files.exists(filePath)) {
+                Files.delete(filePath);
+            }
+
+            // save new file to folder
+            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+            
+            System.out.println("File uploaded successfully");
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        // run python script to process data
+        try {
+            Runtime.getRuntime().exec("python3 data-processing/process-survey-data.py");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 }

@@ -3,12 +3,7 @@ C:\Users\Joël\Desktop\automator\src\main\java\com\example\automator\helper\Para
 C:\Users\Joël\Desktop\automator\src\main\java\com\example\automator\AutomatorApplication.java
 C:\Users\Joël\Desktop\automator\src\main\java\com\example\automator\helper\ModelResults.java
 C:\Users\Joël\Desktop\automator\src\main\java\com\example\automator\helper\CSVReader.java
-<<<<<<< HEAD
-C:\Users\Joël\Desktop\automator\src\main\java\com\example\automator\helper\ABMRunner.java
-C:\Users\Joël\Desktop\automator\src\main\java\com\example\automator\helper\CLIRunner.java
-=======
 C:\Users\Joël\Desktop\automator\src\main\java\com\example\automator\helper\OptimizationResults.java
 C:\Users\Joël\Desktop\automator\src\main\java\com\example\automator\helper\ABMRunner.java
 C:\Users\Joël\Desktop\automator\src\main\java\com\example\automator\helper\CLIRunner.java
 C:\Users\Joël\Desktop\automator\src\main\java\com\example\automator\helper\ModelInput.java
->>>>>>> dockerize-v2

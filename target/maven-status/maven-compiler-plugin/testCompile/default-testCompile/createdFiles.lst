@@ -1,1 +1,4 @@
+com\example\automator\ABMRunnerTest.class
 com\example\automator\AutomatorApplicationTests.class
+com\example\automator\AutomatorControllerTests.class
+com\example\automator\CSVReaderTests.class

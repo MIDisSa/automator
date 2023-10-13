@@ -3,6 +3,7 @@ package com.example.automator.helper;
 public class ModelInput {
     private int numberOfTicks;
     private int frequencyDirectAd;
+    private int frequencyChiefTraining;
     private String kindOfIntervention;
 
     public int getNumberOfTicks() {
@@ -28,4 +29,8 @@ public class ModelInput {
     public void setKindOfIntervention(String kindOfIntervention) {
         this.kindOfIntervention = kindOfIntervention;
     }
+
+    public int getFrequencyChiefTraining() {return frequencyChiefTraining;}
+
+    public void setFrequencyChiefTraining(int frequencyChiefTraining) {this.frequencyChiefTraining = frequencyChiefTraining;}
 }

@@ -36,9 +36,9 @@ public class ABMRunner {
             
             
             // SET INTERVENTION PARAMETERS
-            workspace.command("set direct_ad_type \"Direct Ad\"");
-            workspace.command("set direct_ad_frequency 365");
-            workspace.command("set train_chiefs_frequency 0");
+            workspace.command(String.format("set direct_ad_type \"Direct Ad\"",modelInput.getKindOfIntervention()));
+            workspace.command(String.format("set direct_ad_frequency 365", modelInput.getFrequencyDirectAd()));
+            workspace.command(String.format("set train_chiefs_frequency 0", modelInput.getFrequencyChiefTraining()));
             workspace.command("set max_budget 10000");
             workspace.command("set direct_ad_nr_of_villages 50");
             workspace.command("set percentage_of_villagers_addressed 50");
@@ -47,10 +47,6 @@ public class ABMRunner {
             // SETUP SIMULATION
             //workspace.command("random-seed 0");
             workspace.command("setup");
-
-            // run intervention
-            String kindOfIntervention = modelInput.getKindOfIntervention();
-            workspace.command(kindOfIntervention); //TODO: maybe the string from the frontend does not exactly match the needed command --> add smth to convert
 
             // keep track of number of aware farmers and adopters per tick (needed for graph)
             ArrayList<Double> awareFarmersPerTick = new ArrayList<Double>();

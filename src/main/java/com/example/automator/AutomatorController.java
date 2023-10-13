@@ -27,6 +27,8 @@ import com.example.automator.helper.ModelInput;
 import com.example.automator.helper.ModelResults;
 import com.example.automator.helper.OptimizationResults;
 import com.example.automator.helper.Parameters;
+import com.example.automator.helper.XMLUpdater;
+import com.fasterxml.jackson.databind.ser.std.StdArraySerializers.IntArraySerializer;
 import com.example.automator.helper.CLIRunner;
 
 @RestController
@@ -62,9 +64,12 @@ public class AutomatorController {
         return null;
     }
 
-    @GetMapping("/maxAdopters") //maximizes Adopters
-    public OptimizationResults maxAdopters() {
+    @PostMapping("/maxAdopters") //maximizes Adopters
+    public OptimizationResults maxAdopters(@RequestBody String budget) {
         try {
+            //Update Budget
+            updateBudget("MaxAdopters.bsearch", Integer.valueOf(budget));
+
             CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MaxAdopters.bsearch -o optimization-results-go-here/MaxAdopters");
 
@@ -76,9 +81,12 @@ public class AutomatorController {
         return null;
     }
 
-    @GetMapping("/maxKnowledge") //maximizes Adopters + Considerers
-    public OptimizationResults maxKnowledge() {
+    @PostMapping("/maxKnowledge") //maximizes Adopters + Considerers
+    public OptimizationResults maxKnowledge(@RequestBody String budget) {
         try {
+            //Update Budget
+            updateBudget("MaxKnowledge.bsearch", Integer.valueOf(budget));
+
             CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MaxKnowledge.bsearch -o optimization-results-go-here/MaxKnowledge");
 
@@ -90,9 +98,12 @@ public class AutomatorController {
         return null;
     }
 
-    @GetMapping("/minCost") //minimizes intervention cost per Adopter
-    public OptimizationResults optimizeModel() {
+    @PostMapping("/minCost") //minimizes intervention cost per Adopter
+    public OptimizationResults optimizeModel(@RequestBody String budget) {
         try {
+            //Update Budget
+            updateBudget("MinCostPerAdopter.bsearch.bsearch", Integer.valueOf(budget));
+
             CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MinCostPerAdopter.bsearch -o optimization-results-go-here/MinCostPerAdopter");
             
@@ -139,5 +150,13 @@ public class AutomatorController {
         } catch (IOException e) {
             System.out.println(e);
         }
+    }
+
+
+    //Helper methods:
+
+    public void updateBudget(String fileName, int value) {
+        XMLUpdater xmlUpdater = new XMLUpdater();
+        xmlUpdater.updateXML(fileName, 10000);
     }
 }

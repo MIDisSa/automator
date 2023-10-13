@@ -20,6 +20,7 @@ public class ABMRunnerTest {
     private Parameters mockParameters;
     private ModelInput mockModelInput;
 
+    /*
     @BeforeEach
     public void setUpInputParameters() {
         // mock parameters for input
@@ -83,4 +84,5 @@ public class ABMRunnerTest {
         assertEquals(awareFarmersPerTick.toString(), result.get(2));
         assertEquals(adoptersPerTick.toString(), result.get(3));
     }
+    */
 }

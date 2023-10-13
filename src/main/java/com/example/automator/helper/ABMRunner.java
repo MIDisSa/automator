@@ -6,15 +6,15 @@ import org.nlogo.headless.HeadlessWorkspace;
 
 public class ABMRunner {
 
-    public static ArrayList<String> runABM(Parameters parameters, ModelInput modelInput) {
+    public static ArrayList<String> runABM(ModelInput modelInput) {
         // create workspace
         HeadlessWorkspace workspace = HeadlessWorkspace.newInstance();
         System.out.println("workspace created");
 
-        return runABM(parameters, modelInput, workspace);
+        return runABM(modelInput, workspace);
     }
 
-    public static ArrayList<String> runABM(Parameters parameters, ModelInput modelInput, HeadlessWorkspace workspace) {
+    public static ArrayList<String> runABM(ModelInput modelInput, HeadlessWorkspace workspace) {
 
         // establish return variable
         ArrayList<String> results = new ArrayList<String>();
@@ -26,12 +26,12 @@ public class ABMRunner {
             System.out.println("model opened");
 
             // SET MODEL PARAMETERS
-            workspace.command(String.format("set nr_default_friends_inter_village %s", parameters.getNrDefaultFriendsInterVillage()));
-            workspace.command(String.format("set avg_intra_village_interaction_frequency %s", parameters.getAvgIntraVillageInteractionFrequency()));
-            workspace.command(String.format("set avg_inter_village_interaction_frequency %s", parameters.getAvgInterVillageInteractionFrequency()));
-            workspace.command(String.format("set avg_chief_farmer_meeting_frequency %s", parameters.getAvgChiefFarmerMeetingFrequency()));
-            workspace.command(String.format("set percentage_negative_WoM %s", parameters.getPercentageNegativeWoM()));
-            workspace.command(String.format("set base_adoption_probability %s", parameters.getBaseAdoptionProbability()));
+            workspace.command(String.format("set nr_default_friends_inter_village %s", modelInput.getNrDefaultFriendsInterVillage()));
+            workspace.command(String.format("set avg_intra_village_interaction_frequency %s", modelInput.getAvgIntraVillageInteractionFrequency()));
+            workspace.command(String.format("set avg_inter_village_interaction_frequency %s", modelInput.getAvgInterVillageInteractionFrequency()));
+            workspace.command(String.format("set avg_chief_farmer_meeting_frequency %s", modelInput.getAvgChiefFarmerMeetingFrequency()));
+            workspace.command(String.format("set percentage_negative_WoM %s", modelInput.getPercentageNegativeWoM()));
+            workspace.command(String.format("set base_adoption_probability %s", modelInput.getBaseAdoptionProbability()));
 
             
             

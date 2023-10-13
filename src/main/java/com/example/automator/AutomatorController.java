@@ -119,7 +119,7 @@ public class AutomatorController {
     }
 
     @PostMapping("uploadCSV") //uploads CSV and stores it locally
-    public void uploadCSV(@RequestParam("file") MultipartFile file) {
+    public Parameters uploadCSV(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             System.out.println("File is empty");
         }
@@ -139,5 +139,12 @@ public class AutomatorController {
         } catch (IOException e) {
             System.out.println(e);
         }
+
+        //get csv from folder and parse it as Parameters object
+        String CSV_FILE_PATH_DATA = "CSV-files-go-here/data-processed.csv";
+        Parameters parameters = new CSVReader().parseDataCSV(CSV_FILE_PATH_DATA);
+
+        // return parameters from csv
+        return parameters;
     }
 }

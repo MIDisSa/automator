@@ -10,10 +10,9 @@ import java.util.Iterator;
 
 public class CSVReader {
 
-    private static final String CSV_FILE_PATH_DATA = "CSV-files-go-here/data-processed.csv";
     private static final String CSV_FILE_PATH_RESULTS = "optimization-results-go-here/";
     
-    public Parameters parseDataCSV() {
+    public Parameters parseDataCSV(String CSV_FILE_PATH_DATA) {
         try (
             Reader reader = Files.newBufferedReader(Paths.get(CSV_FILE_PATH_DATA));
         ) {

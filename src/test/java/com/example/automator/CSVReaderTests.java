@@ -32,7 +32,7 @@ public class CSVReaderTests {
         // test results
         CSVReader csvReader = new CSVReader();
         String pathToTestCSV = "src/test/java/com/example/automator/test-helpers/data-processed-for-tests.csv";
-        Parameters testResult = csvReader.parseCSV(pathToTestCSV);
+        Parameters testResult = csvReader.parseDataCSV(pathToTestCSV);
 
         // assert
         assertEquals(mockParameters.getTrainChiefInfluence(), testResult.getTrainChiefInfluence());

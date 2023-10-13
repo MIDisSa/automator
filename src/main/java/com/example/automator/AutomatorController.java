@@ -1,13 +1,6 @@
 package com.example.automator;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -22,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.automator.helper.ABMRunner;
+import com.example.automator.helper.CLIRunner;
 import com.example.automator.helper.CSVReader;
 import com.example.automator.helper.ModelInput;
 import com.example.automator.helper.ModelResults;
+import com.example.automator.helper.OptimizationInput;
 import com.example.automator.helper.OptimizationResults;
 import com.example.automator.helper.Parameters;
 import com.example.automator.helper.XMLUpdater;
-import com.fasterxml.jackson.databind.ser.std.StdArraySerializers.IntArraySerializer;
-import com.example.automator.helper.CLIRunner;
 
 @RestController
 public class AutomatorController {
@@ -64,56 +57,22 @@ public class AutomatorController {
         return null;
     }
 
-    @PostMapping("/maxAdopters") //maximizes Adopters
-    public OptimizationResults maxAdopters(@RequestBody String budget) {
+    @PostMapping("/optimization") //Optimization
+    public OptimizationResults optimize(@RequestBody OptimizationInput optimizationInput) {
         try {
-            //Update Budget
-            updateBudget("MaxAdopters.bsearch", Integer.valueOf(budget));
+            String optimizationType = optimizationInput.getOptimizationType();
+            int budget = optimizationInput.getBudget();
 
-            CLIRunner CLIRunner = new CLIRunner();
-            CLIRunner.runCommand("-p optimization-settings-go-here/MaxAdopters.bsearch -o optimization-results-go-here/MaxAdopters");
-
-            OptimizationResults results = new CSVReader().parseResultsCSV("MaxAdopters.finalCheckedBests.csv");
-            return results;
-        } catch (Exception e) {
+            if (optimizationType.equalsIgnoreCase("maxAdopters")) {maxAdopters(budget);}
+            else if (optimizationType.equalsIgnoreCase("maxKnowledge")) {maxKnowledge(budget);}
+            else if (optimizationType.equalsIgnoreCase("minCost")) {minCost(budget);}
+        } catch(Exception e) {
             System.out.println(e);
         }
         return null;
     }
 
-    @PostMapping("/maxKnowledge") //maximizes Adopters + Considerers
-    public OptimizationResults maxKnowledge(@RequestBody String budget) {
-        try {
-            //Update Budget
-            updateBudget("MaxKnowledge.bsearch", Integer.valueOf(budget));
 
-            CLIRunner CLIRunner = new CLIRunner();
-            CLIRunner.runCommand("-p optimization-settings-go-here/MaxKnowledge.bsearch -o optimization-results-go-here/MaxKnowledge");
-
-            OptimizationResults results = new CSVReader().parseResultsCSV("MaxKnowledge.finalCheckedBests.csv");
-            return results;
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
-    }
-
-    @PostMapping("/minCost") //minimizes intervention cost per Adopter
-    public OptimizationResults optimizeModel(@RequestBody String budget) {
-        try {
-            //Update Budget
-            updateBudget("MinCostPerAdopter.bsearch.bsearch", Integer.valueOf(budget));
-
-            CLIRunner CLIRunner = new CLIRunner();
-            CLIRunner.runCommand("-p optimization-settings-go-here/MinCostPerAdopter.bsearch -o optimization-results-go-here/MinCostPerAdopter");
-            
-            OptimizationResults results = new CSVReader().parseResultsCSV("MinCostPerAdopter.finalCheckedBests.csv");
-            return results;
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
-    }
 
     @GetMapping("/testOptimizer") //Starts up optimizer with a test model
     public OptimizationResults testOptimizer() {
@@ -155,6 +114,54 @@ public class AutomatorController {
 
     //Helper methods:
 
+    public OptimizationResults maxAdopters(int budget) {
+        try {
+            //Update Budget
+            updateBudget("MaxAdopters.bsearch", Integer.valueOf(budget));
+
+            CLIRunner CLIRunner = new CLIRunner();
+            CLIRunner.runCommand("-p optimization-settings-go-here/MaxAdopters.bsearch -o optimization-results-go-here/MaxAdopters");
+
+            OptimizationResults results = new CSVReader().parseResultsCSV("MaxAdopters.finalCheckedBests.csv");
+            return results;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public OptimizationResults maxKnowledge(int budget) {
+        try {
+            //Update Budget
+            updateBudget("MaxKnowledge.bsearch", Integer.valueOf(budget));
+
+            CLIRunner CLIRunner = new CLIRunner();
+            CLIRunner.runCommand("-p optimization-settings-go-here/MaxKnowledge.bsearch -o optimization-results-go-here/MaxKnowledge");
+
+            OptimizationResults results = new CSVReader().parseResultsCSV("MaxKnowledge.finalCheckedBests.csv");
+            return results;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public OptimizationResults minCost(int budget) {
+        try {
+            //Update Budget
+            updateBudget("MinCostPerAdopter.bsearch.bsearch", Integer.valueOf(budget));
+
+            CLIRunner CLIRunner = new CLIRunner();
+            CLIRunner.runCommand("-p optimization-settings-go-here/MinCostPerAdopter.bsearch -o optimization-results-go-here/MinCostPerAdopter");
+            
+            OptimizationResults results = new CSVReader().parseResultsCSV("MinCostPerAdopter.finalCheckedBests.csv");
+            return results;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
     public void updateBudget(String fileName, int value) {
         XMLUpdater xmlUpdater = new XMLUpdater();
         xmlUpdater.updateXML(fileName, 10000);

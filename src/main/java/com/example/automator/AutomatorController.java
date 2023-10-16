@@ -32,6 +32,7 @@ public class AutomatorController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/results")
     public Object modelResults(@RequestBody ModelInput modelInput) {
+
          try {
             //run netlogo model and receive results
             ArrayList<String> results = ABMRunner.runABM(modelInput);

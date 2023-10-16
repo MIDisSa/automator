@@ -24,7 +24,7 @@ public class ABMRunner {
             System.setProperty("org.nlogo.level", "INFO");
             workspace.open("netlogo-model-goes-here/ABM_innovation_diffusion_tanzania.nlogo");
             System.out.println("model opened");
-
+   
             // SET MODEL PARAMETERS
             workspace.command(String.format("set nr_default_friends_inter_village %s", modelInput.getNrDefaultFriendsInterVillage()));
             workspace.command(String.format("set avg_intra_village_interaction_frequency %s", modelInput.getAvgIntraVillageInteractionFrequency()));
@@ -33,12 +33,10 @@ public class ABMRunner {
             workspace.command(String.format("set percentage_negative_WoM %s", modelInput.getPercentageNegativeWoM()));
             workspace.command(String.format("set base_adoption_probability %s", modelInput.getBaseAdoptionProbability()));
 
-            
-            
             // SET INTERVENTION PARAMETERS
-            workspace.command(String.format("set direct_ad_type \"Direct Ad\"",modelInput.getKindOfIntervention()));
-            workspace.command(String.format("set direct_ad_frequency 365", modelInput.getFrequencyDirectAd()));
-            workspace.command(String.format("set train_chiefs_frequency 0", modelInput.getFrequencyChiefTraining()));
+            workspace.command(String.format("set direct_ad_type %s",modelInput.getKindOfIntervention()));
+            workspace.command(String.format("set direct_ad_frequency %s", modelInput.getFrequencyDirectAd()));
+            workspace.command(String.format("set train_chiefs_frequency %s", modelInput.getFrequencyChiefTraining()));
             workspace.command("set max_budget 10000");
             workspace.command("set direct_ad_nr_of_villages 50");
             workspace.command("set percentage_of_villagers_addressed 50");

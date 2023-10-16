@@ -17,40 +17,37 @@ import com.example.automator.helper.ABMRunner;
 
 public class ABMRunnerTest {
 
-    private Parameters mockParameters;
     private ModelInput mockModelInput;
 
-    /*
     @BeforeEach
     public void setUpInputParameters() {
-        // mock parameters for input
-        mockParameters = new Parameters();
-        mockParameters.setTrainChiefInfluence("2");
-        mockParameters.setNrDefaultFriendsInterVillage("2");
-        mockParameters.setStdNrDefaultFriendsInterVillage("2");
-        mockParameters.setAvgIntraVillageInteractionFrequency("2");
-        mockParameters.setStdevIntraVillageInteractionFrequency("2");
-        mockParameters.setAvgInterVillageInteractionFrequency("2");
-        mockParameters.setStdevInterVillageInteractionFrequency("2");
-        mockParameters.setAvgChiefFarmerMeetingFrequency("2");
-        mockParameters.setAvgIntraMentionPercentage("2");
-        mockParameters.setStdevIntraMentionPercentage("2");
-        mockParameters.setAvgInterMentionPercentage("2");
-        mockParameters.setStdevInterMentionPercentage("2");
-        mockParameters.setPercentageNegativeWoM("2");
-        mockParameters.setBaseAdoptionProbability("2");
 
         // mock modelInput for input
         mockModelInput = new ModelInput();
         mockModelInput.setNumberOfTicks(360);
-        mockModelInput.setFrequencyDirectAd(50);
-        mockModelInput.setKindOfIntervention("direct_village_intervention");
+        mockModelInput.setFrequencyDirectAd("50");
+        mockModelInput.setFrequencyChiefTraining("1");
+        mockModelInput.setKindOfIntervention("\"Direct Ad\"");
+        mockModelInput.setTrainChiefInfluence("2");
+        mockModelInput.setNrDefaultFriendsInterVillage("2");
+        mockModelInput.setStdNrDefaultFriendsInterVillage("2");
+        mockModelInput.setAvgIntraVillageInteractionFrequency("2");
+        mockModelInput.setStdevIntraVillageInteractionFrequency("2");
+        mockModelInput.setAvgInterVillageInteractionFrequency("2");
+        mockModelInput.setStdevInterVillageInteractionFrequency("2");
+        mockModelInput.setAvgChiefFarmerMeetingFrequency("2");
+        mockModelInput.setAvgIntraMentionPercentage("2");
+        mockModelInput.setStdevIntraMentionPercentage("2");
+        mockModelInput.setAvgInterMentionPercentage("2");
+        mockModelInput.setStdevInterMentionPercentage("2");
+        mockModelInput.setPercentageNegativeWoM("2");
+        mockModelInput.setBaseAdoptionProbability("2");
     }
     
     @Test
     public void testRunABM() {
         // call runABM
-        ArrayList<String> result = ABMRunner.runABM(mockParameters, mockModelInput);
+        ArrayList<String> result = ABMRunner.runABM(mockModelInput);
 
         // assert
         assertNotNull(result);
@@ -74,7 +71,7 @@ public class ABMRunnerTest {
         }
 
         // call runABM with mocked workspace
-        ArrayList<String> result = ABMRunner.runABM(mockParameters, mockModelInput, workspace);
+        ArrayList<String> result = ABMRunner.runABM(mockModelInput, workspace);
 
         // assert
         assertNotNull(result);
@@ -84,5 +81,4 @@ public class ABMRunnerTest {
         assertEquals(awareFarmersPerTick.toString(), result.get(2));
         assertEquals(adoptersPerTick.toString(), result.get(3));
     }
-    */
 }

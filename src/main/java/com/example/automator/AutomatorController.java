@@ -62,10 +62,14 @@ public class AutomatorController {
         try {
             String optimizationType = optimizationInput.getOptimizationType();
             int budget = optimizationInput.getBudget();
+            OptimizationResults results = null;
 
-            if (optimizationType.equalsIgnoreCase("maxAdopters")) {maxAdopters(budget);}
-            else if (optimizationType.equalsIgnoreCase("maxKnowledge")) {maxKnowledge(budget);}
-            else if (optimizationType.equalsIgnoreCase("minCost")) {minCost(budget);}
+            if (optimizationType.equalsIgnoreCase("maxAdopters")) {results = maxAdopters(budget);}
+            else if (optimizationType.equalsIgnoreCase("maxKnowledge")) {results = maxKnowledge(budget);}
+            else if (optimizationType.equalsIgnoreCase("minCost")) {results = minCost(budget);}
+
+            return results;
+
         } catch(Exception e) {
             System.out.println(e);
         }
@@ -164,6 +168,6 @@ public class AutomatorController {
     
     public void updateBudget(String fileName, int value) {
         XMLUpdater xmlUpdater = new XMLUpdater();
-        xmlUpdater.updateXML(fileName, 10000);
+        xmlUpdater.updateXML(fileName, value);
     }
 }

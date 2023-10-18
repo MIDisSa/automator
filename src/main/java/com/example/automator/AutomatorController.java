@@ -164,6 +164,6 @@ public class AutomatorController {
     
     public void updateBudget(String fileName, int value) {
         XMLUpdater xmlUpdater = new XMLUpdater();
-        xmlUpdater.updateXML(fileName, 10000);
+        xmlUpdater.updateXML(fileName, value);
     }
 }

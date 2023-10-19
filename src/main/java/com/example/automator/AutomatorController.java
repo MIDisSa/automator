@@ -1,13 +1,6 @@
 package com.example.automator;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -39,13 +32,10 @@ public class AutomatorController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/results")
     public Object modelResults(@RequestBody ModelInput modelInput) {
-         try {
-            //get csv from folder and parse it as Parameters object
-            String CSV_FILE_PATH_DATA = "CSV-files-go-here/data-processed.csv";
-            Parameters parameters = new CSVReader().parseDataCSV(CSV_FILE_PATH_DATA);
 
+         try {
             //run netlogo model and receive results
-            ArrayList<String> results = ABMRunner.runABM(parameters, modelInput);
+            ArrayList<String> results = ABMRunner.runABM(modelInput);
 
             // create ModelResults from results
             ModelResults modelResults = new ModelResults();

@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,12 @@ public class AutomatorController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/results")
     public Object modelResults(@RequestBody ModelInput modelInput) {
+
+        // check if parameters are correct (to not break model)
+        ResponseEntity<String> response = ModelInput.assertCorrectParameters(modelInput);
+        if(response != null) {
+            return response;
+        }
 
          try {
             //run netlogo model and receive results

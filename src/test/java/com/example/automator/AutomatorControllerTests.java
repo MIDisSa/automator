@@ -34,8 +34,29 @@ public class AutomatorControllerTests {
     @Test
     public void testModelResults() throws Exception {
         // Create a sample ModelInput object as JSON
-        String inputJson = "{\"numberOfTicks\": \"360\", \"frequencyDirectAd\": \"50\", \"kindOfIntervention\": \"direct_village_intervention\"}";
-
+        String inputJson = "{\n" +
+                "    \"numberOfTicks\": \"360\",\n" +
+                "    \"trainChiefInfluence\": \"175\",\n" +
+                "    \"nrDefaultFriendsInterVillage\": \"5\",\n" +
+                "    \"stdNrDefaultFriendsInterVillage\": \"1\",\n" +
+                "    \"avgIntraVillageInteractionFrequency\": \"4\",\n" +
+                "    \"stdevIntraVillageInteractionFrequency\": \"1\",\n" +
+                "    \"avgInterVillageInteractionFrequency\": \"5\",\n" +
+                "    \"stdevInterVillageInteractionFrequency\": \"1\",\n" +
+                "    \"avgChiefFarmerMeetingFrequency\": \"30\",\n" +
+                "    \"avgIntraMentionPercentage\": \"1\",\n" +
+                "    \"stdevIntraMentionPercentage\": \"1\",\n" +
+                "    \"avgInterMentionPercentage\": \"1\",\n" +
+                "    \"stdevInterMentionPercentage\": \"1\",\n" +
+                "    \"percentageNegativeWoM\": \"10\",\n" +
+                "    \"baseAdoptionProbability\": \"1\",\n" +
+                "    \"frequencyDirectAd\": \"180\",\n" +
+                "    \"frequencyChiefTraining\": \"365\",\n" +
+                "    \"directAdType\": \"\\\"Direct Ad + Discount\\\"\",\n" +
+                "    \"budget\": \"10000\",\n" +
+                "    \"directAdNrOfVillages\": \"50\",\n" +
+                "    \"trainChiefsNr\": \"50\"\n" +
+                "}";
         mockMvc.perform(MockMvcRequestBuilders
             .post("/results")
             .content(inputJson)

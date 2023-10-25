@@ -1,0 +1,2 @@
+"search-number","evaluation","direct_ad_type*","direct_ad_frequency*","train_chiefs_frequency*","direct_ad_nr_of_villages*","percentage_of_villagers_addressed*","train_chiefs_nr*","num-replicates","best-fitness-so-far","recheck-replications","best-fitness-rechecked"
+"1","300","""Direct Ad + Discount""","60","0","70","50","50","10","242.1","10","248.9"

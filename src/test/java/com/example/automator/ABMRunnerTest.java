@@ -27,7 +27,7 @@ public class ABMRunnerTest {
         mockModelInput.setNumberOfTicks(360);
         mockModelInput.setFrequencyDirectAd("50");
         mockModelInput.setFrequencyChiefTraining("1");
-        mockModelInput.setKindOfIntervention("\"Direct Ad\"");
+        mockModelInput.setDirectAdType("\"Direct Ad\"");
         mockModelInput.setTrainChiefInfluence("2");
         mockModelInput.setNrDefaultFriendsInterVillage("2");
         mockModelInput.setStdNrDefaultFriendsInterVillage("2");
@@ -45,18 +45,8 @@ public class ABMRunnerTest {
     }
     
     @Test
-    public void testRunABM() {
-        // call runABM
-        ArrayList<String> result = ABMRunner.runABM(mockModelInput);
-
-        // assert
-        assertNotNull(result);
-        assertEquals(4, result.size());
-    }
-
-    @Test
     public void testRunABMWithMockedWorkspace() {
-        // mock worksapce
+        // mock workspace
         HeadlessWorkspace workspace = mock(HeadlessWorkspace.class);
         when(workspace.report(anyString())).thenReturn(64.0);
         when(workspace.report("count turtles with [adoption_state = 1]")).thenReturn(1.0);
@@ -75,10 +65,10 @@ public class ABMRunnerTest {
 
         // assert
         assertNotNull(result);
-        assertEquals(4, result.size());
+        assertEquals(6, result.size());
         assertEquals("1.0", result.get(0));
         assertEquals("2.0", result.get(1));
-        assertEquals(awareFarmersPerTick.toString(), result.get(2));
-        assertEquals(adoptersPerTick.toString(), result.get(3));
+        assertEquals(awareFarmersPerTick.toString(), result.get(4));
+        assertEquals(adoptersPerTick.toString(), result.get(5));
     }
 }

@@ -1,39 +1,37 @@
 package com.example.automator.helper;
 
 public class ModelInput {
-    private int numberOfTicks;
+    //Model parameters:
+    private int numberOfTicks = 360;
+    private String trainChiefInfluence = "175";
+    private String nrDefaultFriendsInterVillage = "5";
+    private String stdNrDefaultFriendsInterVillage = "1";
+    private String avgIntraVillageInteractionFrequency = "4";
+    private String stdevIntraVillageInteractionFrequency = "1";
+    private String avgInterVillageInteractionFrequency = "5";
+    private String stdevInterVillageInteractionFrequency = "1";
+    private String avgChiefFarmerMeetingFrequency = "30";
+    private String avgIntraMentionPercentage = "1";
+    private String stdevIntraMentionPercentage = "1";
+    private String avgInterMentionPercentage = "1";
+    private String stdevInterMentionPercentage = "1";
+    private String percentageNegativeWoM = "10";
+    private String baseAdoptionProbability = "1";
+
+    //Optimization parameters:
     private String frequencyDirectAd;
     private String frequencyChiefTraining;
-    private String kindOfIntervention;
-    private String trainChiefInfluence;
-    private String nrDefaultFriendsInterVillage;
-    private String stdNrDefaultFriendsInterVillage;
-    private String avgIntraVillageInteractionFrequency;
-    private String stdevIntraVillageInteractionFrequency;
-    private String avgInterVillageInteractionFrequency;
-    private String stdevInterVillageInteractionFrequency;
-    private String avgChiefFarmerMeetingFrequency;
-    private String avgIntraMentionPercentage;
-    private String stdevIntraMentionPercentage;
-    private String avgInterMentionPercentage;
-    private String stdevInterMentionPercentage;
-    private String percentageNegativeWoM;
-    private String baseAdoptionProbability;
+    private String directAdType;
+    private String budget;
+    private String directAdNrOfVillages;
+    private String trainChiefsNr;
 
     public ModelInput() {
     }
 
-    // getter
+    // GETTER (Model Parameters)
     public int getNumberOfTicks() {
         return numberOfTicks;
-    }
-
-    public String getFrequencyDirectAd() {
-        return frequencyDirectAd;
-    }
-
-    public String getKindOfIntervention() {
-        return kindOfIntervention;
     }
 
     public String getTrainChiefInfluence() {
@@ -92,21 +90,35 @@ public class ModelInput {
         return baseAdoptionProbability;
     }
 
+
+    //GETTER (Optimization Parameters)
+    public String getFrequencyDirectAd() {
+        return frequencyDirectAd;
+    }
+
+    public String getDirectAdType() {
+        return directAdType;
+    }
+
     public String getFrequencyChiefTraining() {
         return frequencyChiefTraining;
     }
 
-    // setter
+    public String getBudget() {
+        return budget;
+    }
+
+    public String getDirectAdNrOfVillages() {
+        return directAdNrOfVillages;
+    }
+
+    public String getTrainChiefsNr() {
+        return trainChiefsNr;
+    }
+
+    // SETTER (Model Parameters)
     public void setNumberOfTicks(int numberOfTicks) {
         this.numberOfTicks = numberOfTicks;
-    }
-
-    public void setFrequencyDirectAd(String frequencyDirectAd) {
-        this.frequencyDirectAd = frequencyDirectAd;
-    }
-
-    public void setKindOfIntervention(String kindOfIntervention) {
-        this.kindOfIntervention = kindOfIntervention;
     }
 
     public void setTrainChiefInfluence(String trainChiefInfluence) {
@@ -165,7 +177,65 @@ public class ModelInput {
         this.baseAdoptionProbability = baseAdoptionProbability;
     }
 
+    
+    //SETTER (Optimization Parameters)
+    public void setFrequencyDirectAd(String frequencyDirectAd) {
+        this.frequencyDirectAd = frequencyDirectAd;
+    }
+
+    public void setDirectAdType(String directAdType) {
+        this.directAdType = directAdType;
+    }
+    
     public void setFrequencyChiefTraining(String frequencyChiefTraining) {
         this.frequencyChiefTraining = frequencyChiefTraining;
+    }
+
+    public void setBudget(String budget) {
+        this.budget = budget;
+    }
+
+    public void setDirectAdNrOfVillages(String directAdNrOfVillages) {
+        this.directAdNrOfVillages = directAdNrOfVillages;
+    }
+
+    public void setTrainChiefsNr(String trainChiefsNr) {
+        this.trainChiefsNr = trainChiefsNr;
+    }
+
+    public void setTrainChiefInfluence(String trainChiefInfluence) {
+        this.trainChiefInfluence = trainChiefInfluence;
+    }
+
+    public void setNrDefaultFriendsInterVillage(String nrDefaultFriendsInterVillage) {
+        this.nrDefaultFriendsInterVillage = nrDefaultFriendsInterVillage;
+    }
+
+    public void setStdNrDefaultFriendsInterVillage(String stdNrDefaultFriendsInterVillage) {
+        this.stdNrDefaultFriendsInterVillage = stdNrDefaultFriendsInterVillage;
+    }
+
+    public void setAvgIntraVillageInteractionFrequency(String avgIntraVillageInteractionFrequency) {
+        this.avgIntraVillageInteractionFrequency = avgIntraVillageInteractionFrequency;
+    }
+
+    public void setStdevIntraVillageInteractionFrequency(String stdevIntraVillageInteractionFrequency) {
+        this.stdevIntraVillageInteractionFrequency = stdevIntraVillageInteractionFrequency;
+    }
+
+    public void setAvgInterVillageInteractionFrequency(String avgInterVillageInteractionFrequency) {
+        this.avgInterVillageInteractionFrequency = avgInterVillageInteractionFrequency;
+    }
+
+    public void setStdevInterVillageInteractionFrequency(String stdevInterVillageInteractionFrequency) {
+        this.stdevInterVillageInteractionFrequency = stdevInterVillageInteractionFrequency;
+    }
+
+    public void setAvgChiefFarmerMeetingFrequency(String avgChiefFarmerMeetingFrequency) {
+        this.avgChiefFarmerMeetingFrequency = avgChiefFarmerMeetingFrequency;
+    }
+
+    public void setAvgIntraMentionPercentage(String avgIntraMentionPercentage) {
+        this.avgIntraMentionPercentage = avgIntraMentionPercentage;
     }
 }

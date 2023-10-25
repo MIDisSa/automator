@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
+import org.springframework.boot.autoconfigure.web.reactive.ResourceHandlerRegistrationCustomizer;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import com.example.automator.helper.ModelInput;
 import com.example.automator.helper.ModelResults;
 import com.example.automator.helper.OptimizationInput;
 import com.example.automator.helper.OptimizationResults;
+import com.example.automator.helper.ResultsInterpreter;
 import com.example.automator.helper.Parameters;
 import com.example.automator.helper.XMLUpdater;
 
@@ -63,11 +65,16 @@ public class AutomatorController {
             String optimizationType = optimizationInput.getOptimizationType();
             int budget = optimizationInput.getBudget();
             OptimizationResults results = null;
+            
 
             if (optimizationType.equalsIgnoreCase("maxAdopters")) {results = maxAdopters(budget);}
             else if (optimizationType.equalsIgnoreCase("maxKnowledge")) {results = maxKnowledge(budget);}
             else if (optimizationType.equalsIgnoreCase("minCost")) {results = minCost(budget);}
+            else if(optimizationType.equals("test")) {results = testResults(budget);}
 
+            ResultsInterpreter interpreter = new ResultsInterpreter();
+            //Make Interpreter return results + the nr of ads/trainings and change return type of optimize() to a new type which includes those?
+            
             return results;
 
         } catch(Exception e) {
@@ -159,6 +166,16 @@ public class AutomatorController {
             CLIRunner.runCommand("-p optimization-settings-go-here/MinCostPerAdopter.bsearch -o optimization-results-go-here/MinCostPerAdopter");
             
             OptimizationResults results = new CSVReader().parseResultsCSV("MinCostPerAdopter.finalCheckedBests.csv");
+            return results;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public OptimizationResults testResults(int budget) {
+        try {
+            OptimizationResults results = new CSVReader().parseResultsCSV("testResults.csv");
             return results;
         } catch (Exception e) {
             System.out.println(e);

@@ -6,15 +6,15 @@ import org.nlogo.headless.HeadlessWorkspace;
 
 public class ABMRunner {
 
-    public static ArrayList<String> runABM(ModelInput modelInput) {
+    public static ArrayList<String> runABM(DataInput dataInput, UserInput userInput) {
         // create workspace
         HeadlessWorkspace workspace = HeadlessWorkspace.newInstance();
         System.out.println("workspace created");
 
-        return runABM(modelInput, workspace);
+        return runABM(dataInput, userInput, workspace);
     }
 
-    public static ArrayList<String> runABM(ModelInput modelInput, HeadlessWorkspace workspace) {
+    public static ArrayList<String> runABM(DataInput dataInput, UserInput userInput, HeadlessWorkspace workspace) {
 
         // establish return variable
         ArrayList<String> results = new ArrayList<String>();
@@ -26,21 +26,22 @@ public class ABMRunner {
             System.out.println("model opened");
    
             // SET MODEL PARAMETERS
-            workspace.command(String.format("set nr_default_friends_inter_village %s", modelInput.getNrDefaultFriendsInterVillage()));
-            workspace.command(String.format("set avg_intra_village_interaction_frequency %s", modelInput.getAvgIntraVillageInteractionFrequency()));
-            workspace.command(String.format("set avg_inter_village_interaction_frequency %s", modelInput.getAvgInterVillageInteractionFrequency()));
-            workspace.command(String.format("set avg_chief_farmer_meeting_frequency %s", modelInput.getAvgChiefFarmerMeetingFrequency()));
-            workspace.command(String.format("set percentage_negative_WoM %s", modelInput.getPercentageNegativeWoM()));
-            workspace.command(String.format("set base_adoption_probability %s", modelInput.getBaseAdoptionProbability()));
+            workspace.command(String.format("set nr_default_friends_inter_village %s", dataInput.getNrDefaultFriendsInterVillage()));
+            workspace.command(String.format("set avg_intra_village_interaction_frequency %s", dataInput.getAvgIntraVillageInteractionFrequency()));
+            workspace.command(String.format("set avg_inter_village_interaction_frequency %s", dataInput.getAvgInterVillageInteractionFrequency()));
+            workspace.command(String.format("set avg_chief_farmer_meeting_frequency %s", dataInput.getAvgChiefFarmerMeetingFrequency()));
+            workspace.command(String.format("set percentage_negative_WoM %s", dataInput.getPercentageNegativeWoM()));
+            workspace.command(String.format("set base_adoption_probability %s", dataInput.getBaseAdoptionProbability()));
 
             // SET INTERVENTION PARAMETERS
-            workspace.command(String.format("set direct_ad_type %s",modelInput.getDirectAdType()));
-            workspace.command(String.format("set direct_ad_frequency %s", modelInput.getFrequencyDirectAd()));
-            workspace.command(String.format("set train_chiefs_frequency %s", modelInput.getFrequencyChiefTraining()));
-            workspace.command(String.format("set max_budget %s", modelInput.getBudget()));
-            workspace.command(String.format("set direct_ad_nr_of_villages %s", modelInput.getDirectAdNrOfVillages()));
+            workspace.command(String.format("set direct_ad_type %s", userInput.getDirectAdType()));
+            workspace.command(String.format("set direct_ad_frequency %s", userInput.getFrequencyDirectAd()));
+            workspace.command(String.format("set train_chiefs_frequency %s", userInput.getFrequencyChiefTraining()));
+            workspace.command(String.format("set max_budget %s", userInput.getBudget()));
+            workspace.command(String.format("set direct_ad_nr_of_villages %s", userInput.getDirectAdNrOfVillages()));
             workspace.command("set percentage_of_villagers_addressed 50"); //not part of optimization atm
-            workspace.command(String.format("set train_chiefs_nr %s", modelInput.getTrainChiefsNr())); 
+            workspace.command(String.format("set train_chiefs_nr %s", userInput.getTrainChiefsNr())); 
+            workspace.command(String.format("set max_budget %s", userInput.getBudget()));
 
             // SETUP SIMULATION
             //workspace.command("random-seed 0");
@@ -51,7 +52,7 @@ public class ABMRunner {
             ArrayList<Double> adoptersPerTick = new ArrayList<Double>();
 
             // run model for set number of ticks
-            int ticks = modelInput.getNumberOfTicks();
+            int ticks = userInput.getNumberOfTicks();
             int counter = 0;
             while (counter < ticks) {
                 workspace.command("go");

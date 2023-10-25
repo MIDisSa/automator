@@ -108,7 +108,7 @@ public class AutomatorController {
         return null;
     }
 
-    @PostMapping("uploadRawCSV") //uploads CSV, runs it through the data processing script and return parameters
+    @PostMapping("/uploadRawCSV") //uploads CSV, runs it through the data processing script and return parameters
     public Parameters uploadRawCSV(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             System.out.println("Error: file is empty");

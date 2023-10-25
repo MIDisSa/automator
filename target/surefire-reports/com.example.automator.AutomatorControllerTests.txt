@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.automator.AutomatorControllerTests
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 76.121 s - in com.example.automator.AutomatorControllerTests
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 46.99 s - in com.example.automator.AutomatorControllerTests

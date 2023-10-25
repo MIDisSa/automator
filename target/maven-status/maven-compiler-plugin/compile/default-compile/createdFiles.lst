@@ -4,7 +4,9 @@ com\example\automator\AutomatorController.class
 com\example\automator\helper\CSVReader.class
 com\example\automator\helper\XMLUpdater.class
 com\example\automator\helper\ABMRunner.class
+com\example\automator\helper\OptimizationResultsMerger.class
 com\example\automator\helper\ModelInput.class
 com\example\automator\AutomatorApplication.class
 com\example\automator\helper\CLIRunner.class
+com\example\automator\helper\OptimizationInput.class
 com\example\automator\helper\OptimizationResults.class

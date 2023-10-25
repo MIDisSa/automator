@@ -99,37 +99,6 @@ public class AutomatorController {
         return null;
     }
 
-    @PostMapping("uploadCSV") //uploads CSV and stores it locally
-    public Parameters uploadCSV(@RequestParam("file") MultipartFile file) {
-        if (file.isEmpty()) {
-            System.out.println("File is empty");
-        }
-
-        try {
-            Path filePath = Path.of("CSV-files-go-here/data-processed.csv");
-
-            // check if file already exists and delete if it does
-            if (Files.exists(filePath)) {
-                Files.delete(filePath);
-            }
-
-            // save new file to folder
-            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-            
-            System.out.println("File uploaded successfully");
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-
-        //get csv from folder and parse it as Parameters object
-        String CSV_FILE_PATH_DATA = "CSV-files-go-here/data-processed.csv";
-        Parameters parameters = new CSVReader().parseDataCSV(CSV_FILE_PATH_DATA);
-
-        // return parameters from csv
-        return parameters;
-    }
-
-
     //Helper methods:
 
     public ModelResults maxAdopters(int budget) {

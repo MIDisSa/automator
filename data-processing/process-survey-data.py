@@ -6,8 +6,6 @@
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm
-import seaborn as sb
-import math
 
 # read csv file
 df = pd.read_csv("CSV-files-go-here/raw-data.csv", header=0, decimal=",")

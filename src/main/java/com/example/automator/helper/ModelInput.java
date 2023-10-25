@@ -202,40 +202,4 @@ public class ModelInput {
     public void setTrainChiefsNr(String trainChiefsNr) {
         this.trainChiefsNr = trainChiefsNr;
     }
-
-    public void setTrainChiefInfluence(String trainChiefInfluence) {
-        this.trainChiefInfluence = trainChiefInfluence;
-    }
-
-    public void setNrDefaultFriendsInterVillage(String nrDefaultFriendsInterVillage) {
-        this.nrDefaultFriendsInterVillage = nrDefaultFriendsInterVillage;
-    }
-
-    public void setStdNrDefaultFriendsInterVillage(String stdNrDefaultFriendsInterVillage) {
-        this.stdNrDefaultFriendsInterVillage = stdNrDefaultFriendsInterVillage;
-    }
-
-    public void setAvgIntraVillageInteractionFrequency(String avgIntraVillageInteractionFrequency) {
-        this.avgIntraVillageInteractionFrequency = avgIntraVillageInteractionFrequency;
-    }
-
-    public void setStdevIntraVillageInteractionFrequency(String stdevIntraVillageInteractionFrequency) {
-        this.stdevIntraVillageInteractionFrequency = stdevIntraVillageInteractionFrequency;
-    }
-
-    public void setAvgInterVillageInteractionFrequency(String avgInterVillageInteractionFrequency) {
-        this.avgInterVillageInteractionFrequency = avgInterVillageInteractionFrequency;
-    }
-
-    public void setStdevInterVillageInteractionFrequency(String stdevInterVillageInteractionFrequency) {
-        this.stdevInterVillageInteractionFrequency = stdevInterVillageInteractionFrequency;
-    }
-
-    public void setAvgChiefFarmerMeetingFrequency(String avgChiefFarmerMeetingFrequency) {
-        this.avgChiefFarmerMeetingFrequency = avgChiefFarmerMeetingFrequency;
-    }
-
-    public void setAvgIntraMentionPercentage(String avgIntraMentionPercentage) {
-        this.avgIntraMentionPercentage = avgIntraMentionPercentage;
-    }
 }

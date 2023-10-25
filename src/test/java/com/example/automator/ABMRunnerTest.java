@@ -11,37 +11,41 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.nlogo.headless.HeadlessWorkspace;
 
-import com.example.automator.helper.ModelInput;
+import com.example.automator.helper.DataInput;
+import com.example.automator.helper.UserInput;
 import com.example.automator.helper.Parameters;
 import com.example.automator.helper.ABMRunner;
 
 public class ABMRunnerTest {
 
-    private ModelInput mockModelInput;
+    private DataInput mockDataInput;
+    private UserInput mockUserInput;
 
     @BeforeEach
-    public void setUpInputParameters() {
+    public void setUpDataInputParameters() {
 
         // mock modelInput for input
-        mockModelInput = new ModelInput();
-        mockModelInput.setNumberOfTicks(360);
-        mockModelInput.setFrequencyDirectAd("50");
-        mockModelInput.setFrequencyChiefTraining("1");
-        mockModelInput.setDirectAdType("\"Direct Ad\"");
-        mockModelInput.setTrainChiefInfluence("2");
-        mockModelInput.setNrDefaultFriendsInterVillage("2");
-        mockModelInput.setStdNrDefaultFriendsInterVillage("2");
-        mockModelInput.setAvgIntraVillageInteractionFrequency("2");
-        mockModelInput.setStdevIntraVillageInteractionFrequency("2");
-        mockModelInput.setAvgInterVillageInteractionFrequency("2");
-        mockModelInput.setStdevInterVillageInteractionFrequency("2");
-        mockModelInput.setAvgChiefFarmerMeetingFrequency("2");
-        mockModelInput.setAvgIntraMentionPercentage("2");
-        mockModelInput.setStdevIntraMentionPercentage("2");
-        mockModelInput.setAvgInterMentionPercentage("2");
-        mockModelInput.setStdevInterMentionPercentage("2");
-        mockModelInput.setPercentageNegativeWoM("2");
-        mockModelInput.setBaseAdoptionProbability("2");
+        mockDataInput = new DataInput();
+        
+        mockDataInput.setTrainChiefInfluence("2");
+        mockDataInput.setNrDefaultFriendsInterVillage("2");
+        mockDataInput.setStdNrDefaultFriendsInterVillage("2");
+        mockDataInput.setAvgIntraVillageInteractionFrequency("2");
+        mockDataInput.setStdevIntraVillageInteractionFrequency("2");
+        mockDataInput.setAvgInterVillageInteractionFrequency("2");
+        mockDataInput.setStdevInterVillageInteractionFrequency("2");
+        mockDataInput.setAvgChiefFarmerMeetingFrequency("2");
+        mockDataInput.setAvgIntraMentionPercentage("2");
+        mockDataInput.setStdevIntraMentionPercentage("2");
+        mockDataInput.setAvgInterMentionPercentage("2");
+        mockDataInput.setStdevInterMentionPercentage("2");
+        mockDataInput.setPercentageNegativeWoM("2");
+        mockDataInput.setBaseAdoptionProbability("2");
+    }
+
+    @BeforeEach
+    public void setUpUserInputParameters() {
+        mockUserInput = new UserInput();
     }
     
     @Test
@@ -55,13 +59,13 @@ public class ABMRunnerTest {
         // mock result
         ArrayList<Double> awareFarmersPerTick = new ArrayList<Double>();
         ArrayList<Double> adoptersPerTick = new ArrayList<Double>();
-        for (int i = 0; i < mockModelInput.getNumberOfTicks(); i++) {
+        for (int i = 0; i < mockUserInput.getNumberOfTicks(); i++) {
             awareFarmersPerTick.add(1.0);
             adoptersPerTick.add(2.0);
         }
 
         // call runABM with mocked workspace
-        ArrayList<String> result = ABMRunner.runABM(mockModelInput, workspace);
+        ArrayList<String> result = ABMRunner.runABM(mockDataInput, mockUserInput, workspace);
 
         // assert
         assertNotNull(result);

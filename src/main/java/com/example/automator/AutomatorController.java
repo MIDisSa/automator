@@ -59,6 +59,30 @@ public class AutomatorController {
         return null;
     }
 
+        @PostMapping("/resultsGUI")
+        public Object modelResultsGui(@RequestBody ModelInput modelInput) {
+
+            try {
+                //run netlogo model and receive results
+                ArrayList<String> results = ABMRunner.runABMWithGUI(modelInput);
+
+                // create ModelResults from results
+                ModelResults modelResults = new ModelResults();
+                modelResults.setAwareFarmers(results.get(0));
+                modelResults.setAdopters(results.get(1));
+                modelResults.setNrOfDirectAds(results.get(2));
+                modelResults.setNrOfChiefTrainings(results.get(3));
+                modelResults.setAwareFarmersPerTick(results.get(4));
+                modelResults.setAdoptersPerTick(results.get(5));
+
+                return modelResults;
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            return null;
+        }
+
     @PostMapping("/optimization") //Optimization
     public ModelResults optimize(@RequestBody OptimizationInput optimizationInput) {
         try {

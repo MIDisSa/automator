@@ -1,8 +1,6 @@
 package com.example.automator.helper;
 
-public class ModelInput {
-    //Model parameters:
-    private int numberOfTicks = 360;
+public class DataInput {
     private String trainChiefInfluence = "175";
     private String nrDefaultFriendsInterVillage = "5";
     private String stdNrDefaultFriendsInterVillage = "1";
@@ -17,23 +15,9 @@ public class ModelInput {
     private String stdevInterMentionPercentage = "1";
     private String percentageNegativeWoM = "10";
     private String baseAdoptionProbability = "1";
+    
 
-    //Optimization parameters:
-    private String frequencyDirectAd;
-    private String frequencyChiefTraining;
-    private String directAdType;
-    private String budget;
-    private String directAdNrOfVillages;
-    private String trainChiefsNr;
-
-    public ModelInput() {
-    }
-
-    // GETTER (Model Parameters)
-    public int getNumberOfTicks() {
-        return numberOfTicks;
-    }
-
+    //GETTER:
     public String getTrainChiefInfluence() {
         return trainChiefInfluence;
     }
@@ -90,37 +74,7 @@ public class ModelInput {
         return baseAdoptionProbability;
     }
 
-
-    //GETTER (Optimization Parameters)
-    public String getFrequencyDirectAd() {
-        return frequencyDirectAd;
-    }
-
-    public String getDirectAdType() {
-        return directAdType;
-    }
-
-    public String getFrequencyChiefTraining() {
-        return frequencyChiefTraining;
-    }
-
-    public String getBudget() {
-        return budget;
-    }
-
-    public String getDirectAdNrOfVillages() {
-        return directAdNrOfVillages;
-    }
-
-    public String getTrainChiefsNr() {
-        return trainChiefsNr;
-    }
-
-    // SETTER (Model Parameters)
-    public void setNumberOfTicks(int numberOfTicks) {
-        this.numberOfTicks = numberOfTicks;
-    }
-
+    //SETTER:
     public void setTrainChiefInfluence(String trainChiefInfluence) {
         this.trainChiefInfluence = trainChiefInfluence;
     }
@@ -175,31 +129,5 @@ public class ModelInput {
 
     public void setBaseAdoptionProbability(String baseAdoptionProbability) {
         this.baseAdoptionProbability = baseAdoptionProbability;
-    }
-
-    
-    //SETTER (Optimization Parameters)
-    public void setFrequencyDirectAd(String frequencyDirectAd) {
-        this.frequencyDirectAd = frequencyDirectAd;
-    }
-
-    public void setDirectAdType(String directAdType) {
-        this.directAdType = directAdType;
-    }
-    
-    public void setFrequencyChiefTraining(String frequencyChiefTraining) {
-        this.frequencyChiefTraining = frequencyChiefTraining;
-    }
-
-    public void setBudget(String budget) {
-        this.budget = budget;
-    }
-
-    public void setDirectAdNrOfVillages(String directAdNrOfVillages) {
-        this.directAdNrOfVillages = directAdNrOfVillages;
-    }
-
-    public void setTrainChiefsNr(String trainChiefsNr) {
-        this.trainChiefsNr = trainChiefsNr;
     }
 }

@@ -22,7 +22,7 @@
 <paramSpec>["direct_ad_nr_of_villages" [0 10 100]]</paramSpec>
 <paramSpec>["percentage_of_villagers_addressed" 50]</paramSpec>
 <paramSpec>["train_chiefs_nr" [0 10 100]]</paramSpec>
-<paramSpec>["max_budget" 9999]</paramSpec>
+<paramSpec>["max_budget" 100000]</paramSpec>
 </searchSpace>
 <searchMethod type="MutationHillClimber">
 <searchMethodParameter name="mutation-rate" value="0.05"/>

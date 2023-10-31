@@ -261,13 +261,13 @@ to init_parameters
   set cost_per_considerer 1
   set nr_of_contacted_villages ((direct_ad_nr_of_villages / 100) * nr_of_villages)
 
-  set fixed_costs_direct_ad 1500
-  set fixed_costs_train_chiefs 500
-  set variable_costs_direct_ad 30
-  set variable_costs_discount 50
-  set variable_costs_delayed 70
-  set variable_costs_delayed_discount 90
-  set variable_costs_train_chiefs 10
+  set fixed_costs_direct_ad 6000
+  set fixed_costs_train_chiefs 5000
+  set variable_costs_direct_ad 400  ;;all variable_costs are per village
+  set variable_costs_discount 500
+  set variable_costs_delayed 700
+  set variable_costs_delayed_discount 800
+  set variable_costs_train_chiefs 400
 end
 
 
@@ -1913,7 +1913,7 @@ INPUTBOX
 307
 694
 max_budget
-10000.0
+100000.0
 1
 0
 Number

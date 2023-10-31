@@ -1,7 +1,5 @@
 package com.example.automator.helper;
 
-import org.apache.commons.beanutils.converters.StringArrayConverter;
-
 public class UserInput { //UserInput?
     //Optimization parameters:
     private int numberOfTicks = 360;

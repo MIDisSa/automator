@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
-import org.springframework.boot.autoconfigure.web.reactive.ResourceHandlerRegistrationCustomizer;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,6 +55,11 @@ public class AutomatorController {
         System.out.println("Updated input");
     }
 
+    @PostMapping("/resetInput")
+    public void resetInput() {
+        workingDataInput = new DataInput();
+    }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/results")
     public Object modelResults(@RequestBody UserInput userInput) {
@@ -81,11 +85,15 @@ public class AutomatorController {
         return null;
     }
 
+    @PostMapping("/testUpdateXML") 
+    public void updateXML(@RequestBody UserInput input) {
+        XMLUpdater.updateXML("MaxAdoptersTest.bsearch", workingDataInput, input);
+    }
+    
     @PostMapping("/optimization") //Optimization
     public ModelResults optimize(@RequestBody UserInput userInput) {
         try {
             String optimizationType = userInput.getOptimizationType();
-            int budget = Integer.valueOf(userInput.getBudget());
             ModelResults results = null;
             
 
@@ -150,7 +158,7 @@ public class AutomatorController {
     public ModelResults maxAdopters(UserInput userInput) {
         try {
             //Update Budget
-            updateBudget("MaxAdopters.bsearch", Integer.valueOf(userInput.getBudget()));
+            XMLUpdater.updateXML("MaxAdopters.bsearch", workingDataInput, userInput);
 
             CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MaxAdopters.bsearch -o optimization-results-go-here/MaxAdopters");
@@ -177,7 +185,7 @@ public class AutomatorController {
     public ModelResults maxKnowledge(UserInput userInput) {
         try {
             //Update Budget
-            updateBudget("MaxKnowledge.bsearch", Integer.valueOf(userInput.getBudget()));
+            XMLUpdater.updateXML("MaxKnowledge.bsearch", workingDataInput, userInput);
 
             CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MaxKnowledge.bsearch -o optimization-results-go-here/MaxKnowledge");
@@ -204,7 +212,7 @@ public class AutomatorController {
     public ModelResults minCost(UserInput userInput) {
         try {
             //Update Budget
-            updateBudget("MinCostPerAdopter.bsearch.bsearch", Integer.valueOf(userInput.getBudget()));
+            XMLUpdater.updateXML("MinCostPerAdopter.bsearch.bsearch", workingDataInput, userInput);
 
             CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MinCostPerAdopter.bsearch -o optimization-results-go-here/MinCostPerAdopter");
@@ -248,10 +256,5 @@ public class AutomatorController {
             System.out.println(e);
         }
         return null;
-    }
-    
-    public void updateBudget(String fileName, int value) {
-        XMLUpdater xmlUpdater = new XMLUpdater();
-        xmlUpdater.updateXML(fileName, value);
     }
 }

@@ -43,7 +43,18 @@ public class ABMRunner {
             workspace.command(String.format("set train_chiefs_nr %s", userInput.getTrainChiefsNr())); 
             workspace.command(String.format("set max_budget %s", userInput.getBudget()));
 
-            // SETUP SIMULATION
+            // SET FIXED AND VARIABLE COST
+            workspace.command(String.format("set fixed_costs_direct_ad %s", userInput.getFixedCostsDirectAd()));
+            workspace.command(String.format("set fixed_costs_train_chiefs %s", userInput.getFixedCostsTrainChiefs()));
+            workspace.command(String.format("set variable_costs_direct_ad %s", userInput.getVariableCostsDirectAd()));
+            workspace.command(String.format("set variable_costs_discount %s", userInput.getVariableCostsDiscount()));
+            workspace.command(String.format("set variable_costs_delayed %s", userInput.getVariableCostsDelayed()));
+            workspace.command(String.format("set variable_costs_delayed_discount %s", userInput.getVariableCostsDelayedDiscount()));
+            workspace.command(String.format("set variable_costs_train_chiefs %s", userInput.getVariableCostsTrainChiefs()));
+
+
+
+            // SETUP SIMULATIO
             //workspace.command("random-seed 0");
             workspace.command("setup");
 

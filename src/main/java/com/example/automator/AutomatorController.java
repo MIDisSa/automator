@@ -121,14 +121,17 @@ public class AutomatorController {
         return null;
     }
 
-    @PostMapping("uploadCSV") //uploads CSV and stores it locally
-    public void uploadCSV(@RequestParam("file") MultipartFile file) {
+
+    @PostMapping("/uploadRawCSV") //uploads CSV, runs it through the data processing script and return parameters
+    public Parameters uploadRawCSV(@RequestParam("file") MultipartFile file) {
+
+
         if (file.isEmpty()) {
-            System.out.println("File is empty");
+            System.out.println("Error: file is empty");
         }
 
         try {
-            Path filePath = Path.of("CSV-files-go-here/data-processed.csv");
+            Path filePath = Path.of("CSV-files-go-here/raw-data.csv");
 
             // check if file already exists and delete if it does
             if (Files.exists(filePath)) {
@@ -139,6 +142,7 @@ public class AutomatorController {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
             
             System.out.println("File uploaded successfully");
+
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -173,6 +177,20 @@ public class AutomatorController {
         }
         return null;
     }
+
+
+        // run python script to process data
+        try {
+            Runtime.getRuntime().exec("python3 data-processing/process-survey-data.py");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        //get csv from folder and parse it as Parameters object
+        String CSV_FILE_PATH_DATA = "CSV-files-go-here/data-processed.csv";
+        Parameters parameters = new CSVReader().parseDataCSV(CSV_FILE_PATH_DATA);
+
+        return parameters;
 
     public ModelResults maxKnowledge(UserInput userInput) {
         try {
@@ -253,5 +271,7 @@ public class AutomatorController {
     public void updateBudget(String fileName, int value) {
         XMLUpdater xmlUpdater = new XMLUpdater();
         xmlUpdater.updateXML(fileName, value);
+
     }
+
 }

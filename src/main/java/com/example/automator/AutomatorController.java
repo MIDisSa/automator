@@ -24,6 +24,7 @@ import com.example.automator.helper.OptimizationResultsMerger;
 import com.example.automator.helper.XMLUpdater;
 import com.example.automator.helper.DataInput;
 import com.example.automator.helper.UserInput;
+import com.example.automator.helper.Parameters;
 
 @RestController
 public class AutomatorController { 
@@ -121,10 +122,9 @@ public class AutomatorController {
         return null;
     }
 
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/uploadRawCSV") //uploads CSV, runs it through the data processing script and return parameters
     public Parameters uploadRawCSV(@RequestParam("file") MultipartFile file) {
-
 
         if (file.isEmpty()) {
             System.out.println("Error: file is empty");
@@ -146,6 +146,21 @@ public class AutomatorController {
         } catch (IOException e) {
             System.out.println(e);
         }
+
+        // run python script to process data
+        try {
+            Runtime.getRuntime().exec("python3 data-processing/process-survey-data.py");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        //get csv from folder and parse it as Parameters object
+        String CSV_FILE_PATH_DATA = "CSV-files-go-here/data-processed.csv";
+        Parameters parameters = new CSVReader().parseDataCSV(CSV_FILE_PATH_DATA);
+
+        return parameters;
+
+
     }
 
 
@@ -179,18 +194,7 @@ public class AutomatorController {
     }
 
 
-        // run python script to process data
-        try {
-            Runtime.getRuntime().exec("python3 data-processing/process-survey-data.py");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
 
-        //get csv from folder and parse it as Parameters object
-        String CSV_FILE_PATH_DATA = "CSV-files-go-here/data-processed.csv";
-        Parameters parameters = new CSVReader().parseDataCSV(CSV_FILE_PATH_DATA);
-
-        return parameters;
 
     public ModelResults maxKnowledge(UserInput userInput) {
         try {

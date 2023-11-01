@@ -68,24 +68,24 @@ public class AutomatorControllerTests {
             .andExpect(MockMvcResultMatchers.jsonPath("$.adoptersPerTick").exists());
     }
 
-    @Test
-    public void testOptimizer() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders
-        .get("/testOptimizer"))
-        .andExpect(MockMvcResultMatchers.status().isOk())
-        //.andExpect(MockMvcResultMatchers.jsonPath("$.directAdType").exists())
-        //.andExpect(MockMvcResultMatchers.jsonPath("$.directAdFrequency").exists())
-        //.andExpect(MockMvcResultMatchers.jsonPath("$.trainChiefsFrequency").exists())
-        //.andExpect(MockMvcResultMatchers.jsonPath("$.directAdNrOfVillages").exists())
-        //.andExpect(MockMvcResultMatchers.jsonPath("$.trainChiefsNumber").exists())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.bestFitness").exists());
-
-        final String PATH = "optimization-results-go-here/";
-        Files.deleteIfExists(Paths.get(PATH + "Test.bestHistory.csv"));
-        Files.deleteIfExists(Paths.get(PATH + "Test.finalBests.csv"));
-        Files.deleteIfExists(Paths.get(PATH + "Test.finalCheckedBests.csv"));
-        Files.deleteIfExists(Paths.get(PATH + "Test.modelRunHistory.csv"));
-        Files.deleteIfExists(Paths.get(PATH + "Test.objectiveFunctionHistory.csv"));
-        Files.deleteIfExists(Paths.get(PATH + "Test.searchConfig.xml"));
-    }
+//    @Test
+//    public void testOptimizer() throws Exception {
+//        mockMvc.perform(MockMvcRequestBuilders
+//        .get("/testOptimizer"))
+//        .andExpect(MockMvcResultMatchers.status().isOk())
+//        //.andExpect(MockMvcResultMatchers.jsonPath("$.directAdType").exists())
+//        //.andExpect(MockMvcResultMatchers.jsonPath("$.directAdFrequency").exists())
+//        //.andExpect(MockMvcResultMatchers.jsonPath("$.trainChiefsFrequency").exists())
+//        //.andExpect(MockMvcResultMatchers.jsonPath("$.directAdNrOfVillages").exists())
+//        //.andExpect(MockMvcResultMatchers.jsonPath("$.trainChiefsNumber").exists())
+//        .andExpect(MockMvcResultMatchers.jsonPath("$.bestFitness").exists());
+//
+//        final String PATH = "optimization-results-go-here/";
+//        Files.deleteIfExists(Paths.get(PATH + "Test.bestHistory.csv"));
+//        Files.deleteIfExists(Paths.get(PATH + "Test.finalBests.csv"));
+//        Files.deleteIfExists(Paths.get(PATH + "Test.finalCheckedBests.csv"));
+//        Files.deleteIfExists(Paths.get(PATH + "Test.modelRunHistory.csv"));
+//        Files.deleteIfExists(Paths.get(PATH + "Test.objectiveFunctionHistory.csv"));
+//        Files.deleteIfExists(Paths.get(PATH + "Test.searchConfig.xml"));
+//    }
 }

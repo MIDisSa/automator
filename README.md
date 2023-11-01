@@ -19,8 +19,7 @@ In terminal navigate to .../automator and run ```docker build -t automator .```.
 Then run ```docker run -it -p 8080:8080 automator```. This starts up the Docker container.
 
 Functionality:\
-When running the Spring Boot app as an executable jar, everything should be working as intended, on Windows at least. Not sure about UNIX-Systems.\
-When running in a Docker container, currently /results is working, optimization commands are somehow not executed though. Might be a problem with the UNIX-System commands.
+The .jar can be executed on Windows as well as UNIX-based operating systems. The docker container can be run on any operating system with docker installed.
 
 
 ## How to make changes

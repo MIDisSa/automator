@@ -43,7 +43,18 @@ public class ABMRunner {
             workspace.command(String.format("set train_chiefs_nr %s", userInput.getTrainChiefsNr())); 
             workspace.command(String.format("set max_budget %s", userInput.getBudget()));
 
-            // SETUP SIMULATION
+            // SET FIXED AND VARIABLE COST
+            workspace.command(String.format("set fixed_costs_direct_ad %s", userInput.getFixedCostsDirectAd()));
+            workspace.command(String.format("set fixed_costs_train_chiefs %s", userInput.getFixedCostsTrainChiefs()));
+            workspace.command(String.format("set variable_costs_direct_ad %s", userInput.getVariableCostsDirectAd()));
+            workspace.command(String.format("set variable_costs_discount %s", userInput.getVariableCostsDiscount()));
+            workspace.command(String.format("set variable_costs_delayed %s", userInput.getVariableCostsDelayed()));
+            workspace.command(String.format("set variable_costs_delayed_discount %s", userInput.getVariableCostsDelayedDiscount()));
+            workspace.command(String.format("set variable_costs_train_chiefs %s", userInput.getVariableCostsTrainChiefs()));
+
+
+
+            // SETUP SIMULATIO
             //workspace.command("random-seed 0");
             workspace.command("setup");
 
@@ -66,6 +77,7 @@ public class ABMRunner {
             String adopters = String.valueOf(workspace.report("count turtles with [adoption_state = 2]"));
             String nrOfDirectAds = String.valueOf(workspace.report("nr_of_direct_ads"));
             String nrOfChiefTrainings = String.valueOf(workspace.report("nr_of_chief_trainings"));
+            String totalCost = String.valueOf(workspace.report("current_cost"));
 
             workspace.dispose();
 
@@ -78,6 +90,7 @@ public class ABMRunner {
             results.add(adopters);
             results.add(nrOfDirectAds);
             results.add(nrOfChiefTrainings);
+            results.add(totalCost);
             results.add(awareFarmersPerTickString);
             results.add(adoptersPerTickString);
 

@@ -22,7 +22,6 @@ public class OptimizationResults {
     @CsvBindByName(column = "best-fitness-rechecked")
     private String best_fitness_rechecked;
 
-
     public String getDirectAdType() {
         return direct_ad_type;
     }

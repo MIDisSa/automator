@@ -69,10 +69,10 @@ public class ABMRunnerTest {
 
         // assert
         assertNotNull(result);
-        assertEquals(6, result.size());
+        assertEquals(7, result.size());
         assertEquals("1.0", result.get(0));
         assertEquals("2.0", result.get(1));
-        assertEquals(awareFarmersPerTick.toString(), result.get(4));
-        assertEquals(adoptersPerTick.toString(), result.get(5));
+        assertEquals(awareFarmersPerTick.toString(), result.get(5));
+        assertEquals(adoptersPerTick.toString(), result.get(6));
     }
 }

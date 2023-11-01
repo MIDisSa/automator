@@ -10,6 +10,14 @@ public class UserInput { //UserInput?
     private String directAdNrOfVillages;
     private String trainChiefsNr;
     private String optimizationType;
+    
+    private String fixedCostsDirectAd;
+    private String fixedCostsTrainChiefs;
+    private String variableCostsDirectAd;
+    private String variableCostsDiscount; //discount only
+    private String variableCostsDelayed; //deferred payment only
+    private String variableCostsDelayedDiscount; //discount + deferred payment
+    private String variableCostsTrainChiefs; 
 
 
     public UserInput() {
@@ -48,6 +56,33 @@ public class UserInput { //UserInput?
         return optimizationType;
     }
 
+    public String getFixedCostsDirectAd() {
+        return fixedCostsDirectAd;
+    }
+
+    public String getFixedCostsTrainChiefs() {
+        return fixedCostsTrainChiefs;
+    }
+
+    public String getVariableCostsDirectAd() {
+        return variableCostsDirectAd;
+    }
+
+    public String getVariableCostsDiscount() {
+        return variableCostsDiscount;
+    }
+
+    public String getVariableCostsDelayed() {
+        return variableCostsDelayed;
+    }
+
+    public String getVariableCostsDelayedDiscount() {
+        return variableCostsDelayedDiscount;
+    }
+
+    public String getVariableCostsTrainChiefs() {
+        return variableCostsTrainChiefs;
+    }
 
     
     //SETTER (Optimization Parameters)
@@ -81,5 +116,33 @@ public class UserInput { //UserInput?
 
     public void setOptimizationType(String optimizationType) {
         this.optimizationType = optimizationType;
+    }
+
+    public void setFixedCostsDirectAd(String fixedCostsDirectAd) {
+        this.fixedCostsDirectAd = fixedCostsDirectAd;
+    }
+
+    public void setFixedCostsTrainChiefs(String fixedCostsTrainChiefs) {
+        this.fixedCostsTrainChiefs = fixedCostsTrainChiefs;
+    }
+
+    public void setVariableCostsDirectAd(String variableCostsDirectAd) {
+        this.variableCostsDirectAd = variableCostsDirectAd;
+    }
+
+    public void setVariableCostsDiscount(String variableCostsDiscount) {
+        this.variableCostsDiscount = variableCostsDiscount;
+    }
+
+    public void setVariableCostsDelayed(String variableCostsDelayed) {
+        this.variableCostsDelayed = variableCostsDelayed;
+    }
+
+    public void setVariableCostsDelayedDiscount(String variableCostsDelayedDiscount) {
+        this.variableCostsDelayedDiscount = variableCostsDelayedDiscount;
+    }
+
+    public void setVariableCostsTrainChiefs(String variableCostsTrainChiefs) {
+        this.variableCostsTrainChiefs = variableCostsTrainChiefs;
     }
 }

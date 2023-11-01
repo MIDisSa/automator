@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
-import org.springframework.boot.autoconfigure.web.reactive.ResourceHandlerRegistrationCustomizer;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,10 +19,11 @@ import com.example.automator.helper.CLIRunner;
 import com.example.automator.helper.CSVReader;
 import com.example.automator.helper.ModelResults;
 import com.example.automator.helper.OptimizationResults;
-import com.example.automator.helper.OptimizationResultsMerger;
+import com.example.automator.helper.OptimizationResultsConverter;
 import com.example.automator.helper.XMLUpdater;
 import com.example.automator.helper.DataInput;
 import com.example.automator.helper.UserInput;
+import com.example.automator.helper.OptimizationOutput;
 import com.example.automator.helper.Parameters;
 
 @RestController
@@ -57,6 +57,11 @@ public class AutomatorController {
         System.out.println("Updated input");
     }
 
+    @PostMapping("/resetInput")
+    public void resetInput() {
+        workingDataInput = new DataInput();
+    }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/results")
     public Object modelResults(@RequestBody UserInput userInput) {
@@ -67,13 +72,8 @@ public class AutomatorController {
 
             // create ModelResults from results
             ModelResults modelResults = new ModelResults();
-            modelResults.setAwareFarmers(results.get(0));
-            modelResults.setAdopters(results.get(1));
-            modelResults.setNrOfDirectAds(results.get(2));
-            modelResults.setNrOfChiefTrainings(results.get(3));
-            modelResults.setAwareFarmersPerTick(results.get(4));
-            modelResults.setAdoptersPerTick(results.get(5));
-
+            modelResults.saveABMRunnerOutput(results);
+            
             return modelResults;
          } catch (Exception e) {
              System.out.println(e);
@@ -82,19 +82,32 @@ public class AutomatorController {
         return null;
     }
 
+    @PostMapping("/testUpdateXML") 
+    public void updateXML(@RequestBody UserInput input) {
+        XMLUpdater.updateXML("MaxAdoptersTest.bsearch", workingDataInput, input);
+    }
+    
     @PostMapping("/optimization") //Optimization
-    public ModelResults optimize(@RequestBody UserInput userInput) {
+    public OptimizationOutput optimize(@RequestBody UserInput userInput) {
         try {
             String optimizationType = userInput.getOptimizationType();
-            int budget = Integer.valueOf(userInput.getBudget());
-            ModelResults results = null;
+            OptimizationOutput results = null;
             
-
-            if (optimizationType.equalsIgnoreCase("maxAdopters")) {results = maxAdopters(userInput);}
-            else if (optimizationType.equalsIgnoreCase("maxKnowledge")) {results = maxKnowledge(userInput);}
-            else if (optimizationType.equalsIgnoreCase("minCost")) {results = minCost(userInput);}
-            else if(optimizationType.equalsIgnoreCase("test")) {results = testResults(userInput);}
-
+            
+            switch(optimizationType) {
+                case "maxAdopters":
+                    results = maxAdopters(userInput);
+                    break;
+                case "maxKnowledge":
+                    results = maxKnowledge(userInput);
+                    break;
+                case "minCost":
+                    results = minCost(userInput);
+                    break;
+                case "test":
+                    results = testResults(userInput);
+                    break;
+            }
 
             //Make Interpreter return results + the nr of ads/trainings and change return type of optimize() to a new type which includes those?
             
@@ -166,116 +179,93 @@ public class AutomatorController {
 
     //Helper methods:
 
-    public ModelResults maxAdopters(UserInput userInput) {
+    public OptimizationOutput maxAdopters(UserInput userInput) {
         try {
             //Update Budget
-            updateBudget("MaxAdopters.bsearch", Integer.valueOf(userInput.getBudget()));
+            XMLUpdater.updateXML("MaxAdopters.bsearch", workingDataInput, userInput);
 
             CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MaxAdopters.bsearch -o optimization-results-go-here/MaxAdopters");
 
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("MaxAdopters.finalCheckedBests.csv");
-            UserInput optimalInput = OptimizationResultsMerger.mergeResults(OptimizationResults, Integer.valueOf(userInput.getBudget()), userInput);
+            UserInput optimalInput = OptimizationResultsConverter.convertResultsToUserInput(OptimizationResults, userInput);
             
             ArrayList<String> results = ABMRunner.runABM(workingDataInput, optimalInput);
             ModelResults modelResults = new ModelResults();
-            modelResults.setAwareFarmers(results.get(0));
-            modelResults.setAdopters(results.get(1));
-            modelResults.setNrOfDirectAds(results.get(2));
-            modelResults.setNrOfChiefTrainings(results.get(3));
-            modelResults.setAwareFarmersPerTick(results.get(4));
-            modelResults.setAdoptersPerTick(results.get(5));
+            modelResults.saveABMRunnerOutput(results);
 
-            return modelResults;
+            OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            return output;
+
         } catch (Exception e) {
             System.out.println(e);
         }
         return null;
     }
 
-
-
-
-    public ModelResults maxKnowledge(UserInput userInput) {
+    public OptimizationOutput maxKnowledge(UserInput userInput) {
         try {
             //Update Budget
-            updateBudget("MaxKnowledge.bsearch", Integer.valueOf(userInput.getBudget()));
+            XMLUpdater.updateXML("MaxKnowledge.bsearch", workingDataInput, userInput);
 
             CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MaxKnowledge.bsearch -o optimization-results-go-here/MaxKnowledge");
 
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("MaxKnowledge.finalCheckedBests.csv");
-            UserInput optimalInput = OptimizationResultsMerger.mergeResults(OptimizationResults, Integer.valueOf(userInput.getBudget()), userInput);
+            UserInput optimalInput = OptimizationResultsConverter.convertResultsToUserInput(OptimizationResults, userInput);
             
             ArrayList<String> results = ABMRunner.runABM(workingDataInput, optimalInput);
             ModelResults modelResults = new ModelResults();
-            modelResults.setAwareFarmers(results.get(0));
-            modelResults.setAdopters(results.get(1));
-            modelResults.setNrOfDirectAds(results.get(2));
-            modelResults.setNrOfChiefTrainings(results.get(3));
-            modelResults.setAwareFarmersPerTick(results.get(4));
-            modelResults.setAdoptersPerTick(results.get(5));
+            modelResults.saveABMRunnerOutput(results);
 
-            return modelResults;
+            OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            return output;
+
         } catch (Exception e) {
             System.out.println(e);
         }
         return null;
     }
 
-    public ModelResults minCost(UserInput userInput) {
+    public OptimizationOutput minCost(UserInput userInput) {
         try {
             //Update Budget
-            updateBudget("MinCostPerAdopter.bsearch.bsearch", Integer.valueOf(userInput.getBudget()));
+            XMLUpdater.updateXML("MinCostPerAdopter.bsearch.bsearch", workingDataInput, userInput);
 
             CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MinCostPerAdopter.bsearch -o optimization-results-go-here/MinCostPerAdopter");
             
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("MinCostPerAdopter.finalCheckedBests.csv");
-            UserInput optimalInput = OptimizationResultsMerger.mergeResults(OptimizationResults, Integer.valueOf(userInput.getBudget()), userInput);
+            UserInput optimalInput = OptimizationResultsConverter.convertResultsToUserInput(OptimizationResults, userInput);
             
             ArrayList<String> results = ABMRunner.runABM(workingDataInput, optimalInput);
             ModelResults modelResults = new ModelResults();
-            modelResults.setAwareFarmers(results.get(0));
-            modelResults.setAdopters(results.get(1));
-            modelResults.setNrOfDirectAds(results.get(2));
-            modelResults.setNrOfChiefTrainings(results.get(3));
-            modelResults.setAwareFarmersPerTick(results.get(4));
-            modelResults.setAdoptersPerTick(results.get(5));
+            modelResults.saveABMRunnerOutput(results);
 
-            return modelResults;
+            OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            return output;
+
         } catch (Exception e) {
             System.out.println(e);
         }
         return null;
     }
 
-    public ModelResults testResults(UserInput userInput) {
+    public OptimizationOutput testResults(UserInput userInput) {
         try {
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("testResults.csv");
-            UserInput optimalInput = OptimizationResultsMerger.mergeResults(OptimizationResults, Integer.valueOf(userInput.getBudget()), userInput);
+            UserInput optimalInput = OptimizationResultsConverter.convertResultsToUserInput(OptimizationResults, userInput);
             
             ArrayList<String> results = ABMRunner.runABM(workingDataInput, optimalInput);
             ModelResults modelResults = new ModelResults();
-            modelResults.setAwareFarmers(results.get(0));
-            modelResults.setAdopters(results.get(1));
-            modelResults.setNrOfDirectAds(results.get(2));
-            modelResults.setNrOfChiefTrainings(results.get(3));
-            modelResults.setAwareFarmersPerTick(results.get(4));
-            modelResults.setAdoptersPerTick(results.get(5));
+            modelResults.saveABMRunnerOutput(results);
 
-            return modelResults;
+            OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            return output;
 
         } catch (Exception e) {
             System.out.println(e);
         }
         return null;
     }
-    
-    public void updateBudget(String fileName, int value) {
-        XMLUpdater xmlUpdater = new XMLUpdater();
-        xmlUpdater.updateXML(fileName, value);
-
-    }
-
 }

@@ -22,7 +22,22 @@
 <paramSpec>["direct_ad_nr_of_villages" [0 10 100]]</paramSpec>
 <paramSpec>["percentage_of_villagers_addressed" 50]</paramSpec>
 <paramSpec>["train_chiefs_nr" [0 10 100]]</paramSpec>
+<paramSpec>["run_until_day_x" 360]</paramSpec>
+<paramSpec>["nr_default_friends_inter_village" 5]</paramSpec>
+<paramSpec>["avg_intra_village_interaction_frequency" 4]</paramSpec>
+<paramSpec>["avg_inter_village_interaction_frequency" 5]</paramSpec>
+<paramSpec>["avg_chief_farmer_meeting_frequency" 30]</paramSpec>
+<paramSpec>["percentage_negative_WoM" 10]</paramSpec>
+<paramSpec>["base_adoption_probability" 1]</paramSpec>
 <paramSpec>["max_budget" 100000]</paramSpec>
+<paramSpec>["fixed_costs_direct_ad" 6000]</paramSpec>
+<paramSpec>["fixed_costs_train_chiefs" 5000]</paramSpec>
+<paramSpec>["variable_costs_direct_ad" 400]</paramSpec>
+<paramSpec>["variable_costs_discount" 500]</paramSpec>
+<paramSpec>["variable_costs_delayed" 700]</paramSpec>
+<paramSpec>["variable_costs_delayed_discount" 800]</paramSpec>
+<paramSpec>["variable_costs_train_chiefs" 400]</paramSpec>
+
 </searchSpace>
 <searchMethod type="MutationHillClimber">
 <searchMethodParameter name="mutation-rate" value="0.05"/>

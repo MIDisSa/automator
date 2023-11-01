@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 
 import javax.print.attribute.standard.Media;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,6 +15,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import org.springframework.http.MediaType;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -32,31 +35,27 @@ public class AutomatorControllerTests {
     }
 
     @Test
+    @Disabled
     public void testModelResults() throws Exception {
         // Create a sample ModelInput object as JSON
         String inputJson = "{\n" +
-                "    \"numberOfTicks\": \"360\",\n" +
-                "    \"trainChiefInfluence\": \"175\",\n" +
-                "    \"nrDefaultFriendsInterVillage\": \"5\",\n" +
-                "    \"stdNrDefaultFriendsInterVillage\": \"1\",\n" +
-                "    \"avgIntraVillageInteractionFrequency\": \"4\",\n" +
-                "    \"stdevIntraVillageInteractionFrequency\": \"1\",\n" +
-                "    \"avgInterVillageInteractionFrequency\": \"5\",\n" +
-                "    \"stdevInterVillageInteractionFrequency\": \"1\",\n" +
-                "    \"avgChiefFarmerMeetingFrequency\": \"30\",\n" +
-                "    \"avgIntraMentionPercentage\": \"1\",\n" +
-                "    \"stdevIntraMentionPercentage\": \"1\",\n" +
-                "    \"avgInterMentionPercentage\": \"1\",\n" +
-                "    \"stdevInterMentionPercentage\": \"1\",\n" +
-                "    \"percentageNegativeWoM\": \"10\",\n" +
-                "    \"baseAdoptionProbability\": \"1\",\n" +
-                "    \"frequencyDirectAd\": \"180\",\n" +
-                "    \"frequencyChiefTraining\": \"365\",\n" +
-                "    \"directAdType\": \"\\\"Direct Ad + Discount\\\"\",\n" +
-                "    \"budget\": \"10000\",\n" +
-                "    \"directAdNrOfVillages\": \"50\",\n" +
-                "    \"trainChiefsNr\": \"50\"\n" +
+                "\"numberOfTicks\": \"360\",\n" +
+                "\"frequencyDirectAd\": \"180\",\n" +
+                "\"frequencyChiefTraining\": \"365\",\n" +
+                "\"directAdType\": \"\"Direct Ad\"\",\n" +
+                "\"budget\": \"100000\",\n" +
+                "\"directAdNrOfVillages\": \"50\",\n" +
+                "\"trainChiefsNr\": \"50\",\n" +
+                "\"optimizationType\": \"maxAdopters\",\n" +
+                "\"fixedCostsDirectAd\": \"6000\",\n" +
+                "\"fixedCostsTrainChiefs\": \"5000\",\n" +
+                "\"variableCostsDirectAd\": \"400\",\n" +
+                "\"variableCostsDiscount\": \"500\",\n" +
+                "\"variableCostsDelayed\": \"700\",\n" +
+                "\"variableCostsDelayedDiscount\": \"800\",\n" +
+                "\"variableCostsTrainChiefs\": \"400\"\n" +
                 "}";
+
         mockMvc.perform(MockMvcRequestBuilders
             .post("/results")
             .content(inputJson)

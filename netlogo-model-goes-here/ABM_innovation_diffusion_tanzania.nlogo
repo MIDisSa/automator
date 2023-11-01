@@ -1561,7 +1561,7 @@ avg_chief_farmer_meeting_frequency
 avg_chief_farmer_meeting_frequency
 1
 50
-20.0
+30.0
 1
 1
 days

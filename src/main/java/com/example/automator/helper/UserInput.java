@@ -6,18 +6,18 @@ public class UserInput { //UserInput?
     private String frequencyDirectAd;
     private String frequencyChiefTraining;
     private String directAdType;
-    private String budget;
-    private String directAdNrOfVillages;
-    private String trainChiefsNr;
-    private String optimizationType;
+    private String budget = "100000";
+    private String directAdNrOfVillages = "50";
+    private String trainChiefsNr = "50";
+    private String optimizationType = "test";
     
-    private String fixedCostsDirectAd;
-    private String fixedCostsTrainChiefs;
-    private String variableCostsDirectAd;
-    private String variableCostsDiscount; //discount only
-    private String variableCostsDelayed; //deferred payment only
-    private String variableCostsDelayedDiscount; //discount + deferred payment
-    private String variableCostsTrainChiefs; 
+    private String fixedCostsDirectAd = "6000";
+    private String fixedCostsTrainChiefs = "5000";
+    private String variableCostsDirectAd = "400";
+    private String variableCostsDiscount = "500"; //discount only
+    private String variableCostsDelayed = "700"; //deferred payment only
+    private String variableCostsDelayedDiscount = "800"; //discount + deferred payment
+    private String variableCostsTrainChiefs = "400";
 
 
     public UserInput() {
@@ -95,7 +95,7 @@ public class UserInput { //UserInput?
     }
 
     public void setDirectAdType(String directAdType) {
-        this.directAdType = directAdType;
+        this.directAdType = String.format("\"%s\"", directAdType ) ;
     }
     
     public void setFrequencyChiefTraining(String frequencyChiefTraining) {

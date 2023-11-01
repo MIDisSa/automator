@@ -27,6 +27,7 @@ import com.example.automator.helper.OptimizationOutput;
 import com.example.automator.helper.Parameters;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class AutomatorController { 
     DataInput defaultDataInput = new DataInput();
     DataInput workingDataInput = new DataInput();
@@ -172,8 +173,6 @@ public class AutomatorController {
         Parameters parameters = new CSVReader().parseDataCSV(CSV_FILE_PATH_DATA);
 
         return parameters;
-
-
     }
 
 

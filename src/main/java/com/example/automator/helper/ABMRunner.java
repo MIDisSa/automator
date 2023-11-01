@@ -97,7 +97,9 @@ public class ABMRunner {
         } catch(Exception e) {
             e.printStackTrace();
         }
+        System.out.println("model ended");
         return results;
+
     }
     
 }

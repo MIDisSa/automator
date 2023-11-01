@@ -77,6 +77,7 @@ public class ABMRunner {
             String adopters = String.valueOf(workspace.report("count turtles with [adoption_state = 2]"));
             String nrOfDirectAds = String.valueOf(workspace.report("nr_of_direct_ads"));
             String nrOfChiefTrainings = String.valueOf(workspace.report("nr_of_chief_trainings"));
+            String totalCost = String.valueOf(workspace.report("current_cost"));
 
             workspace.dispose();
 
@@ -89,6 +90,7 @@ public class ABMRunner {
             results.add(adopters);
             results.add(nrOfDirectAds);
             results.add(nrOfChiefTrainings);
+            results.add(totalCost);
             results.add(awareFarmersPerTickString);
             results.add(adoptersPerTickString);
 

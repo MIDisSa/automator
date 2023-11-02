@@ -23,7 +23,7 @@ public class OptimizationResults {
     private String best_fitness_rechecked;
 
     public String getDirectAdType() {
-        return direct_ad_type;
+        return direct_ad_type.substring(1, direct_ad_type.length() - 1);
     }
 
     public String getDirectAdFrequency() {

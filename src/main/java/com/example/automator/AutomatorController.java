@@ -97,15 +97,19 @@ public class AutomatorController {
             
             switch(optimizationType) {
                 case "maxAdopters":
+                    System.out.println("maximizing adopters");
                     results = maxAdopters(userInput);
                     break;
                 case "maxKnowledge":
+                    System.out.println("maximizing considerers");
                     results = maxKnowledge(userInput);
                     break;
                 case "minCost":
+                    System.out.println("minimizing cost");
                     results = minCost(userInput);
                     break;
                 case "test":
+                    System.out.println("returning test results");
                     results = testResults(userInput);
                     break;
             }
@@ -254,6 +258,7 @@ public class AutomatorController {
         try {
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("testResults.csv");
             UserInput optimalInput = OptimizationResultsConverter.convertResultsToUserInput(OptimizationResults, userInput);
+            
             
             ArrayList<String> results = ABMRunner.runABM(workingDataInput, optimalInput);
             ModelResults modelResults = new ModelResults();

@@ -92,8 +92,6 @@ public class ABMRunner {
         // establish return variable
         ArrayList<String> results = new ArrayList<String>();
 
-        App.main(new String[0]);
-
         try {
             // OPEN MODEL
             java.awt.EventQueue.invokeAndWait(
@@ -130,6 +128,8 @@ public class ABMRunner {
             // SETUP SIMULATION
             //workspace.command("random-seed 0");
             App.app().command("setup");
+            App.app().command("set is_visible_update_activated true");
+            App.app().command("set check_finished_condition true");
 
             // keep track of number of aware farmers and adopters per tick (needed for graph)
             ArrayList<Double> awareFarmersPerTick = new ArrayList<Double>();

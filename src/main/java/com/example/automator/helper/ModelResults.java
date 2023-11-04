@@ -1,5 +1,6 @@
 package com.example.automator.helper;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class ModelResults {
@@ -8,8 +9,8 @@ public class ModelResults {
     private String nrOfDirectAds;
     private String nrOfChiefTrainings;
     private String totalCost;
-    private String awareFarmersPerTick;
-    private String adoptersPerTick;
+    private ArrayList<Double> awareFarmersPerTick;
+    private ArrayList<Double> adoptersPerTick;
 
     public ModelResults() {
     }
@@ -34,11 +35,11 @@ public class ModelResults {
         this.totalCost = totalCost;
     }
 
-    public void setAwareFarmersPerTick(String awareFarmersPerTick) {
+    public void setAwareFarmersPerTick(ArrayList<Double> awareFarmersPerTick) {
         this.awareFarmersPerTick = awareFarmersPerTick;
     }
 
-    public void setAdoptersPerTick(String adoptersPerTick) {
+    public void setAdoptersPerTick(ArrayList<Double> adoptersPerTick) {
         this.adoptersPerTick = adoptersPerTick;
     }
 
@@ -62,11 +63,11 @@ public class ModelResults {
         return totalCost;
     }
 
-    public String getAwareFarmersPerTick() {
+    public ArrayList<Double> getAwareFarmersPerTick() {
         return awareFarmersPerTick;
     }
 
-    public String getAdoptersPerTick() {
+    public ArrayList<Double> getAdoptersPerTick() {
         return adoptersPerTick;
     }
 
@@ -76,9 +77,31 @@ public class ModelResults {
         this.nrOfDirectAds = list.get(2);
         this.nrOfChiefTrainings = list.get(3);
         this.totalCost = list.get(4);
-        this.awareFarmersPerTick = list.get(5);
-        this.adoptersPerTick = list.get(6);
+
+        ArrayList<Double> awareFarmersPerTickArray = convertToArrayList(list.get(5));
+        this.awareFarmersPerTick = awareFarmersPerTickArray;
+
+        ArrayList<Double> adoptersPerTickArray = convertToArrayList(list.get(6));
+        this.adoptersPerTick = adoptersPerTickArray;
 
         return this;
+    }
+
+    public ArrayList<Double> convertToArrayList(String string) {
+        ArrayList<Double> list = new ArrayList<Double>();
+
+        // replace brackets in string
+        String replace = string.replace("[", "");
+        String replaceAgain = replace.replace("]", "");
+
+        // split string on comma
+        ArrayList<String> stringList = new ArrayList<String>(Arrays.asList(replaceAgain.split(",")));
+
+        // convert string to double and add to list
+        for (String s : stringList) {
+            list.add(Double.parseDouble(s));
+        }
+        
+        return list;
     }
 }

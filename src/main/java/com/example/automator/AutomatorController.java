@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,8 +60,10 @@ public class AutomatorController {
     }
 
     @PostMapping("/resetInput")
-    public void resetInput() {
-        workingDataInput = new DataInput();
+    public ResponseEntity<DataInput> resetInput(){
+        DataInput workingDataInput = new DataInput();
+        System.out.println("DataInput set to default parameters");
+        return ResponseEntity.ok(workingDataInput); // gives back workingDataInput with 200 OK message
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -97,20 +100,20 @@ public class AutomatorController {
             
             switch(optimizationType) {
                 case "maxAdopters":
-                    System.out.println("maximizing adopters");
                     results = maxAdopters(userInput);
+                    System.out.println("maximizing adopters");
                     break;
                 case "maxKnowledge":
-                    System.out.println("maximizing considerers");
                     results = maxKnowledge(userInput);
+                    System.out.println("maximizing considerers");
                     break;
                 case "minCost":
-                    System.out.println("minimizing cost");
                     results = minCost(userInput);
+                    System.out.println("minimizing cost");
                     break;
                 case "test":
-                    System.out.println("returning test results");
                     results = testResults(userInput);
+                    System.out.println("returning test results");
                     break;
             }
 
@@ -233,7 +236,7 @@ public class AutomatorController {
     public OptimizationOutput minCost(UserInput userInput) {
         try {
             //Update Budget
-            XMLUpdater.updateXML("MinCostPerAdopter.bsearch.bsearch", workingDataInput, userInput);
+            XMLUpdater.updateXML("MinCostPerAdopter.bsearch", workingDataInput, userInput);
 
             CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MinCostPerAdopter.bsearch -o optimization-results-go-here/MinCostPerAdopter");

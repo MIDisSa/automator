@@ -1,5 +1,13 @@
 package com.example.automator.helper;
 
+import java.util.ArrayList;
+
+import javax.swing.text.NumberFormatter;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
+
 public class UserInput { //UserInput?
     //Optimization parameters:
     private int numberOfTicks = 360;
@@ -144,5 +152,55 @@ public class UserInput { //UserInput?
 
     public void setVariableCostsTrainChiefs(String variableCostsTrainChiefs) {
         this.variableCostsTrainChiefs = variableCostsTrainChiefs;
+    }
+
+    public boolean isResultsValid(UserInput userInput) { // numberOfTicks, frequencyDirectAd, frequencyChiefTraining, typeDirectAd
+        // nrOfTicks is not zero, not negative
+        try {
+            Assert.isTrue(userInput.getNumberOfTicks() > 0, "numberOfTicks is zero or negative");
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+
+        // frequencyDirectAd is not empty, integer, not negative
+        try {
+            Assert.hasText(userInput.getFrequencyDirectAd(), "frequencyDirectAd is empty");
+            Assert.isTrue(userInput.getFrequencyDirectAd().matches("\\d+"), "getFrequencyDirectAd is not a positive integer");
+            int frequencyDirectAd = Integer.parseInt(userInput.getFrequencyDirectAd());
+            Assert.isTrue(frequencyDirectAd >= 0 && frequencyDirectAd <= 365, "frequencyDirectAd is not within range");
+        } catch (NumberFormatException e) {
+            return false;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+
+        // frequencyChiefTraining is not empty, integer, not negative
+        try {
+            Assert.hasText(userInput.getFrequencyChiefTraining(), "frequencyChiefTraining is empty");
+            Assert.isTrue(userInput.getFrequencyChiefTraining().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            int tempFrequencyChiefTraining = Integer.parseInt(userInput.getFrequencyChiefTraining());
+            Assert.isTrue(tempFrequencyChiefTraining >= 0 && tempFrequencyChiefTraining <= 365, "frequencyChiefTraining is not within range");
+        } catch (NumberFormatException e) {
+            return false;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+
+        // directAdType is not empty and matches one of four possible string
+        try {
+            Assert.hasText(userInput.getDirectAdType(), "directAdType is empty");
+            
+            ArrayList<String> possible_interventions = new ArrayList<String>();
+            possible_interventions.add("\"Direct Ad\"");
+            possible_interventions.add("\"Direct Ad + Discount\"");
+            possible_interventions.add("\"Direct Ad + Delayed Payment\"");
+            possible_interventions.add("\"Direct Ad + Delayed P. + Discount\"");
+            Assert.isTrue(possible_interventions.contains(userInput.getDirectAdType()), "directAdType is not one of the four possible interventions");
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+        
+        System.out.println("parameters are correct");
+        return true;
     }
 }

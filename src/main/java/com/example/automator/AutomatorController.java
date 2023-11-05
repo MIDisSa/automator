@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.automator.helper.ABMRunner;
 import com.example.automator.helper.CLIRunner;
@@ -72,6 +73,11 @@ public class AutomatorController {
     @PostMapping("/results")
     @ResponseStatus(HttpStatus.OK)
     public Object modelResults(@RequestBody UserInput userInput) {
+
+        // check if user input is valid
+        if (!userInput.isResultsValid(userInput)) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, String.format("Wrong input")); // 406 - not acceptable
+        }
 
          try {
             //run netlogo model and receive results

@@ -6,11 +6,13 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,11 +35,13 @@ public class AutomatorController {
     DataInput workingDataInput = new DataInput();
 
     @GetMapping("/")
+    @ResponseStatus(HttpStatus.OK)
     public String index() {
         return "Greetings from Spring Boot!";
     }
 
     @PostMapping("/updateInput")
+    @ResponseStatus(HttpStatus.OK)
     public void updateInput(@RequestBody DataInput input) {
         //Update Model Parameters
         workingDataInput.setTrainChiefInfluence(input.getTrainChiefInfluence());
@@ -59,12 +63,14 @@ public class AutomatorController {
     }
 
     @PostMapping("/resetInput")
+    @ResponseStatus(HttpStatus.OK)
     public void resetInput() {
         workingDataInput = new DataInput();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/results")
+    @ResponseStatus(HttpStatus.OK)
     public Object modelResults(@RequestBody UserInput userInput) {
 
          try {
@@ -89,11 +95,11 @@ public class AutomatorController {
     }
     
     @PostMapping("/optimization") //Optimization
+    @ResponseStatus(HttpStatus.OK)
     public OptimizationOutput optimize(@RequestBody UserInput userInput) {
         try {
             String optimizationType = userInput.getOptimizationType();
             OptimizationOutput results = null;
-            
             
             switch(optimizationType) {
                 case "maxAdopters":
@@ -115,7 +121,6 @@ public class AutomatorController {
             }
 
             //Make Interpreter return results + the nr of ads/trainings and change return type of optimize() to a new type which includes those?
-            
             return results;
 
         } catch(Exception e) {
@@ -123,8 +128,6 @@ public class AutomatorController {
         }
         return null;
     }
-
-
 
     @GetMapping("/testOptimizer") //Starts up optimizer with a test model
     public OptimizationResults testOptimizer() {
@@ -142,6 +145,7 @@ public class AutomatorController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/uploadRawCSV") //uploads CSV, runs it through the data processing script and return parameters
+    @ResponseStatus(HttpStatus.OK)
     public Parameters uploadRawCSV(@RequestParam("file") MultipartFile file) {
 
         if (file.isEmpty()) {

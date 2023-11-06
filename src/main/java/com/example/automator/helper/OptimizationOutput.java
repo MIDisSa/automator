@@ -115,6 +115,7 @@ public class OptimizationOutput {
             possible_interventions.add("\"Direct Ad + Delayed P. + Discount\"");
             Assert.isTrue(possible_interventions.contains(optimizationOutput.getDirectAdType()), "directAdType is not one of the four possible interventions");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -125,8 +126,10 @@ public class OptimizationOutput {
             int directAdFrequency = Integer.parseInt(optimizationOutput.getDirectAdFrequency());
             Assert.isTrue(directAdFrequency >= 0 && directAdFrequency <= 365, "directAdFrequency is not within range");
         } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
             return false;
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -137,8 +140,10 @@ public class OptimizationOutput {
             int tempTrainChiefsFrequency = Integer.parseInt(optimizationOutput.getTrainChiefsFrequency());
             Assert.isTrue(tempTrainChiefsFrequency >= 0 && tempTrainChiefsFrequency <= 365, "trainChiefsFrequency is not within range");
         } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
             return false;
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -149,8 +154,10 @@ public class OptimizationOutput {
             int tempDirectAdNrOfVillages = Integer.parseInt(optimizationOutput.getDirectAdNrOfVillages());
             Assert.isTrue(tempDirectAdNrOfVillages >= 0 && tempDirectAdNrOfVillages <= 100, "directAdNrOfVillages is not within range");
         } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
             return false;
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -161,8 +168,10 @@ public class OptimizationOutput {
             int tempTrainChiefsNumber = Integer.parseInt(optimizationOutput.getTrainChiefsNumber());
             Assert.isTrue(tempTrainChiefsNumber >= 0 && tempTrainChiefsNumber <= 100, "trainChiefsNumber is not within range");
         } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
             return false;
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -171,6 +180,7 @@ public class OptimizationOutput {
             Assert.hasText(optimizationOutput.getAvgAdopters(), "avgAdopters is empty");
             Assert.isTrue(optimizationOutput.getAvgAdopters().matches("\\d+(\\.\\d+)?"), "avgAdopters is not a positive double");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -179,6 +189,7 @@ public class OptimizationOutput {
             Assert.hasText(optimizationOutput.getNrOfDirectAds(), "nrOfDirectAds is empty");
             Assert.isTrue(optimizationOutput.getNrOfDirectAds().matches("\\d+(\\.\\d+)?"), "nrOfDirectAds is not a positive integer");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -187,6 +198,7 @@ public class OptimizationOutput {
             Assert.hasText(optimizationOutput.getNrOfChiefTrainings(), "nrOfChiefTrainings is empty");
             Assert.isTrue(optimizationOutput.getNrOfChiefTrainings().matches("\\d+(\\.\\d+)?"), "nrOfChiefTrainings is not a positive integer");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -195,6 +207,7 @@ public class OptimizationOutput {
             Assert.hasText(optimizationOutput.getTotalCost(), "totalCost is empty");
             Assert.isTrue(optimizationOutput.getTotalCost().matches("\\d+(\\.\\d+)?"), "totalCost is not a positive double");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 

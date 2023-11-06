@@ -147,6 +147,7 @@ public class DataInput {
         Assert.hasText(dataInput.getPercentageNegativeWoM(), "percentageNegativeWoM is empty");
         Assert.hasText(dataInput.getBaseAdoptionProbability(), "baseAdoptionProbability is empty");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -159,14 +160,16 @@ public class DataInput {
         Assert.isTrue(dataInput.getPercentageNegativeWoM().matches("\\d+"), "percentageNegativeWoM is is not a positive integer");
         Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+"), "baseAdoptionProbability is is not a positive integer");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
         // baseAdoptinoProbability and avgIntraMentionPercentage are a double
         try {
             Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability is not a positive double");
-            Assert.isTrue(dataInput.getAvgIntraMentionPercentage().matches("\\\\d+(\\\\.\\\\d+)?"), "avgIntraMentionPercentage is is not a positive double");
+            Assert.isTrue(dataInput.getAvgIntraMentionPercentage().matches("\\d+(\\.\\d+)?"), "avgIntraMentionPercentage is is not a positive double");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -191,8 +194,10 @@ public class DataInput {
             Assert.isTrue(baseAdoptionProbability >= 0.1 && baseAdoptionProbability <= 100.0, "baseAdoptionProbability is not within range");
 
         } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
             return false;
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 

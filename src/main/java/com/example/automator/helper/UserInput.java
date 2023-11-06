@@ -155,6 +155,7 @@ public class UserInput { //UserInput?
         try {
             Assert.isTrue(userInput.getNumberOfTicks() > 0, "numberOfTicks is zero or negative");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -165,8 +166,10 @@ public class UserInput { //UserInput?
             int frequencyDirectAd = Integer.parseInt(userInput.getFrequencyDirectAd());
             Assert.isTrue(frequencyDirectAd >= 0 && frequencyDirectAd <= 365, "frequencyDirectAd is not within range");
         } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
             return false;
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -177,8 +180,10 @@ public class UserInput { //UserInput?
             int tempFrequencyChiefTraining = Integer.parseInt(userInput.getFrequencyChiefTraining());
             Assert.isTrue(tempFrequencyChiefTraining >= 0 && tempFrequencyChiefTraining <= 365, "frequencyChiefTraining is not within range");
         } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
             return false;
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -193,6 +198,7 @@ public class UserInput { //UserInput?
             possible_interventions.add("\"Direct Ad + Delayed P. + Discount\"");
             Assert.isTrue(possible_interventions.contains(userInput.getDirectAdType()), "directAdType is not one of the four possible interventions");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -210,6 +216,7 @@ public class UserInput { //UserInput?
             possible_optimizations.add("\"returning test results\"");
             Assert.isTrue(possible_optimizations.contains(userInput.getDirectAdType()), "optimizationType is not one of the four possible types");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
         
@@ -234,6 +241,7 @@ public class UserInput { //UserInput?
             Assert.isTrue(userInput.getVariableCostsDelayedDiscount().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
             Assert.isTrue(userInput.getVariableCostsTrainChiefs().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 

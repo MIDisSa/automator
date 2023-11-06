@@ -119,6 +119,7 @@ public class ModelResults {
         Assert.hasText(modelResults.getNrOfChiefTrainings(), "nrOfChiefTrainings is empty");
         Assert.hasText(modelResults.getTotalCost(), "totalCost is empty");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -127,6 +128,7 @@ public class ModelResults {
             Assert.isTrue(!modelResults.getAwareFarmersPerTick().isEmpty(), "awareFarmersPerTick is empty");
             Assert.isTrue(!modelResults.getAdoptersPerTick().isEmpty(), "adoptersPerTick is empty");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -138,6 +140,7 @@ public class ModelResults {
             Assert.isTrue(modelResults.getNrOfChiefTrainings().matches("\\d+(\\.\\d+)?"), "nrOfChiefTrainings is not a positive double");
             Assert.isTrue(modelResults.getTotalCost().matches("\\d+(\\.\\d+)?"), "totalCost is not a positive double");
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -149,6 +152,7 @@ public class ModelResults {
                 Assert.isTrue(d >= 0, "adoptersPerTick contains negative numbers");
             }
         } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
             return false;
         }
 

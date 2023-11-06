@@ -44,6 +44,11 @@ public class AutomatorController {
     @PostMapping("/updateInput")
     @ResponseStatus(HttpStatus.OK)
     public void updateInput(@RequestBody DataInput input) {
+        // check if input is valid
+        if (!input.isDataInputValid(input)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("input not valid")); // 400 - bad request
+        }
+
         //Update Model Parameters
         workingDataInput.setTrainChiefInfluence(input.getTrainChiefInfluence());
         workingDataInput.setNrDefaultFriendsInterVillage(input.getNrDefaultFriendsInterVillage());
@@ -75,8 +80,8 @@ public class AutomatorController {
     public Object modelResults(@RequestBody UserInput userInput) {
 
         // check if user input is valid
-        if (!userInput.isResultsValid(userInput)) {
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, String.format("Wrong input")); // 406 - not acceptable
+        if (!userInput.isModelInputValid(userInput)) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, String.format("input not valid")); // 406 - not acceptable
         }
 
          try {

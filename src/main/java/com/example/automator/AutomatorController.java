@@ -92,6 +92,7 @@ public class AutomatorController {
             ModelResults modelResults = new ModelResults();
             modelResults.saveABMRunnerOutput(results);
             
+            // check if model results are valid
             if (!modelResults.isModelResultsValid(modelResults)) {
                 throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("model output not valid")); // 409 - conflict
             }
@@ -112,6 +113,12 @@ public class AutomatorController {
     @PostMapping("/optimization") //Optimization
     @ResponseStatus(HttpStatus.OK)
     public OptimizationOutput optimize(@RequestBody UserInput userInput) {
+
+        // check if user input is valid
+        if (!userInput.isOptimizationInputValid(userInput)) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, String.format("input not valid")); // 406 - not acceptable
+        }
+
         try {
             String optimizationType = userInput.getOptimizationType();
             OptimizationOutput results = null;

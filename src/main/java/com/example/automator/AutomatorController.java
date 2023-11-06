@@ -92,6 +92,10 @@ public class AutomatorController {
             ModelResults modelResults = new ModelResults();
             modelResults.saveABMRunnerOutput(results);
             
+            if (!modelResults.isModelResultsValid(modelResults)) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("model output not valid")); // 409 - conflict
+            }
+
             return modelResults;
          } catch (Exception e) {
              System.out.println(e);

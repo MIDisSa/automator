@@ -142,6 +142,11 @@ public class AutomatorController {
                     break;
             }
 
+            // check if optimization results are valid
+            if (!results.isOptimizationResultValid(results)) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("optimization output not valid")); // 409 - conflict
+            }
+
             //Make Interpreter return results + the nr of ads/trainings and change return type of optimize() to a new type which includes those?
             return results;
 

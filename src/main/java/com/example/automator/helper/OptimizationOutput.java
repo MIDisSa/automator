@@ -109,10 +109,10 @@ public class OptimizationOutput {
             Assert.hasText(optimizationOutput.getDirectAdType(), "directAdType is empty");
             
             ArrayList<String> possible_interventions = new ArrayList<String>();
-            possible_interventions.add("\"Direct Ad\"");
-            possible_interventions.add("\"Direct Ad + Discount\"");
-            possible_interventions.add("\"Direct Ad + Delayed Payment\"");
-            possible_interventions.add("\"Direct Ad + Delayed P. + Discount\"");
+            possible_interventions.add("Direct Ad");
+            possible_interventions.add("Direct Ad + Discount");
+            possible_interventions.add("Direct Ad + Delayed Payment");
+            possible_interventions.add("Direct Ad + Delayed P. + Discount");
             Assert.isTrue(possible_interventions.contains(optimizationOutput.getDirectAdType()), "directAdType is not one of the four possible interventions");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

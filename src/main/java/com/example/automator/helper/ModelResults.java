@@ -131,7 +131,27 @@ public class ModelResults {
         }
 
         // all strings contain positive integers
-        
+        try {
+            Assert.isTrue(modelResults.getAwareFarmers().matches("\\d+(\\.\\d+)?"), "awareFarmers is not a positive double");
+            Assert.isTrue(modelResults.getAdopters().matches("\\d+(\\.\\d+)?"), "adopters is not a positive double");
+            Assert.isTrue(modelResults.getNrOfDirectAds().matches("\\d+(\\.\\d+)?"), "nrOfDirectAds is not a positive double");
+            Assert.isTrue(modelResults.getNrOfChiefTrainings().matches("\\d+(\\.\\d+)?"), "nrOfChiefTrainings is not a positive double");
+            Assert.isTrue(modelResults.getTotalCost().matches("\\d+(\\.\\d+)?"), "totalCost is not a positive double");
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+
+        try {
+            for (Double d : modelResults.getAwareFarmersPerTick()) {
+                Assert.isTrue(d >= 0, "awareFarmersPerTick contains negative numbers");
+            }
+            for (Double d : modelResults.getAdoptersPerTick()) {
+                Assert.isTrue(d >= 0, "adoptersPerTick contains negative numbers");
+            }
+        } catch (IllegalArgumentException e){
+            return false;
+        }
+
         return true;
     }
 }

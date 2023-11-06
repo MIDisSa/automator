@@ -103,9 +103,8 @@ public class AutomatorController {
             return modelResults;
          } catch (Exception e) {
              System.out.println(e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("something went wrong: ", e)); // 400 - bad request
          }
-
-        return null;
     }
 
     @PostMapping("/testUpdateXML") 
@@ -157,8 +156,8 @@ public class AutomatorController {
 
         } catch(Exception e) {
             System.out.println(e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("something went wrong: ", e)); // 400 - bad request
         }
-        return null;
     }
 
     @GetMapping("/testOptimizer") //Starts up optimizer with a test model
@@ -181,7 +180,11 @@ public class AutomatorController {
     public Parameters uploadRawCSV(@RequestParam("file") MultipartFile file) {
 
         if (file.isEmpty()) {
-            System.out.println("Error: file is empty");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("file is empty")); // 400 - bad request
+        }
+
+        if (!file.getOriginalFilename().endsWith(".csv")) {
+            throw new ResponseStatusException(HttpStatus.UNSUPPORTED_MEDIA_TYPE, String.format("file has wrong format")); // 415 - unsupported media type
         }
 
         try {
@@ -199,6 +202,7 @@ public class AutomatorController {
 
         } catch (IOException e) {
             System.out.println(e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("something went wrong when trying to store the file: ", e)); // 400 - bad request
         }
 
         // run python script to process data
@@ -206,6 +210,7 @@ public class AutomatorController {
             Runtime.getRuntime().exec("python3 data-processing/process-survey-data.py");
         } catch (Exception e) {
             System.out.println(e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("something went wrong when trying to run the python script: ", e)); // 400 - bad request
         }
 
         //get csv from folder and parse it as Parameters object

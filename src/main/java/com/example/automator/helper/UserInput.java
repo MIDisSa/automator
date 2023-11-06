@@ -222,7 +222,7 @@ public class UserInput { //UserInput?
         
         // parameters are not empty, not negative
         try {
-            Assert.hasText(userInput.getDirectAdType(), "optimizationType is empty");
+            Assert.hasText(userInput.getOptimizationType(), "optimizationType is empty");
             Assert.hasText(userInput.getBudget(), "budget is empty");
             Assert.hasText(userInput.getFixedCostsDirectAd(), "fixedCostsDirectAd is empty");
             Assert.hasText(userInput.getFixedCostsTrainChiefs(), "fixedCostsTrainChiefs is empty");

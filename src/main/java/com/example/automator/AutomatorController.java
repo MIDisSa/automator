@@ -45,8 +45,9 @@ public class AutomatorController {
     @ResponseStatus(HttpStatus.OK)
     public void updateInput(@RequestBody DataInput input) {
         // check if input is valid
-        if (!input.isDataInputValid(input)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("input not valid")); // 400 - bad request
+        String inputValidation = input.isDataInputValid(input);
+        if (inputValidation != "ok") {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, inputValidation); // 400 - bad request
         }
         System.out.println("input is valid");
 
@@ -81,8 +82,9 @@ public class AutomatorController {
     public Object modelResults(@RequestBody UserInput userInput) {
 
         // check if user input is valid
-        if (!userInput.isModelInputValid(userInput)) {
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, String.format("input not valid")); // 406 - not acceptable
+        String inputValidation = userInput.isModelInputValid(userInput);
+        if (inputValidation != "ok") {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, inputValidation); // 406 - not acceptable
         }
         System.out.println("input is valid");
 
@@ -95,15 +97,16 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
             
             // check if model results are valid
-            if (!modelResults.isModelResultsValid(modelResults)) {
-                throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("model output not valid")); // 409 - conflict
+            String outputValidation = modelResults.isModelResultsValid(modelResults);
+            if (outputValidation != "ok") {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, outputValidation); // 409 - conflict
             }
             System.out.println("output is valid");
 
             return modelResults;
          } catch (Exception e) {
-             System.out.println(e);
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("something went wrong: ", e)); // 400 - bad request
+            System.out.println(e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Something went wrong: ", e)); // 400 - bad request
          }
     }
 
@@ -117,8 +120,9 @@ public class AutomatorController {
     public OptimizationOutput optimize(@RequestBody UserInput userInput) {
 
         // check if user input is valid
-        if (!userInput.isOptimizationInputValid(userInput)) {
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, String.format("input not valid")); // 406 - not acceptable
+        String inputValidation = userInput.isOptimizationInputValid(userInput);
+        if (inputValidation != "ok") {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, inputValidation); // 406 - not acceptable
         }
         System.out.println("input is valid");
 
@@ -146,8 +150,9 @@ public class AutomatorController {
             }
 
             // check if optimization results are valid
-            if (!results.isOptimizationResultValid(results)) {
-                throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("optimization output not valid")); // 409 - conflict
+            String outputValidation = results.isOptimizationResultValid(results);
+            if (outputValidation != "ok") {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, outputValidation); // 409 - conflict
             }
             System.out.println("output is valid");
 
@@ -156,7 +161,7 @@ public class AutomatorController {
 
         } catch(Exception e) {
             System.out.println(e);
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("something went wrong: ", e)); // 400 - bad request
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Something went wrong: ", e)); // 400 - bad request
         }
     }
 
@@ -180,11 +185,11 @@ public class AutomatorController {
     public Parameters uploadRawCSV(@RequestParam("file") MultipartFile file) {
 
         if (file.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("file is empty")); // 400 - bad request
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("The file you uploaded is empty.")); // 400 - bad request
         }
 
         if (!file.getOriginalFilename().endsWith(".csv")) {
-            throw new ResponseStatusException(HttpStatus.UNSUPPORTED_MEDIA_TYPE, String.format("file has wrong format")); // 415 - unsupported media type
+            throw new ResponseStatusException(HttpStatus.UNSUPPORTED_MEDIA_TYPE, String.format("The file you uploaded does not have a .csv ending.")); // 415 - unsupported media type
         }
 
         try {
@@ -202,7 +207,7 @@ public class AutomatorController {
 
         } catch (IOException e) {
             System.out.println(e);
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("something went wrong when trying to store the file: ", e)); // 400 - bad request
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Something went wrong when trying to store the file: ", e)); // 400 - bad request
         }
 
         // run python script to process data
@@ -210,7 +215,7 @@ public class AutomatorController {
             Runtime.getRuntime().exec("python3 data-processing/process-survey-data.py");
         } catch (Exception e) {
             System.out.println(e);
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("something went wrong when trying to run the python script: ", e)); // 400 - bad request
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Something went wrong when trying to run the python script: ", e)); // 400 - bad request
         }
 
         //get csv from folder and parse it as Parameters object

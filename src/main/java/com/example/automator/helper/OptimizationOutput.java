@@ -102,7 +102,7 @@ public class OptimizationOutput {
         this.totalCost = totalCost;
     }
 
-    public boolean isOptimizationResultValid(OptimizationOutput optimizationOutput) { // directAdType, directAdFrequency, trainChiefsFrequency, directAdNrOfVillages, trainChiefsNumber, avgAdopters, nrOfDirectAds, nrOfChiefTrainings, totalCost
+    public String isOptimizationResultValid(OptimizationOutput optimizationOutput) { // directAdType, directAdFrequency, trainChiefsFrequency, directAdNrOfVillages, trainChiefsNumber, avgAdopters, nrOfDirectAds, nrOfChiefTrainings, totalCost
 
         // directAdType is not empty and matches one of four possible string
         try {
@@ -116,7 +116,7 @@ public class OptimizationOutput {
             Assert.isTrue(possible_interventions.contains(optimizationOutput.getDirectAdType()), "directAdType is not one of the four possible interventions");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
         // directAdFrequency is not empty, integer, not negative
@@ -127,10 +127,10 @@ public class OptimizationOutput {
             Assert.isTrue(directAdFrequency >= 0 && directAdFrequency <= 365, "directAdFrequency is not within range");
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
         // trainChiefsFrequency is not empty, integer, not negative
@@ -141,10 +141,10 @@ public class OptimizationOutput {
             Assert.isTrue(tempTrainChiefsFrequency >= 0 && tempTrainChiefsFrequency <= 365, "trainChiefsFrequency is not within range");
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
         // directAdNrOfVillages is not empty, integer, not negative
@@ -155,10 +155,10 @@ public class OptimizationOutput {
             Assert.isTrue(tempDirectAdNrOfVillages >= 0 && tempDirectAdNrOfVillages <= 100, "directAdNrOfVillages is not within range");
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
         // trainChiefsNumber is not empty, integer, not negative
@@ -169,10 +169,10 @@ public class OptimizationOutput {
             Assert.isTrue(tempTrainChiefsNumber >= 0 && tempTrainChiefsNumber <= 100, "trainChiefsNumber is not within range");
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
         // avgAdopters is not empty, double, not negative
@@ -181,7 +181,7 @@ public class OptimizationOutput {
             Assert.isTrue(optimizationOutput.getAvgAdopters().matches("\\d+(\\.\\d+)?"), "avgAdopters is not a positive double");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
         // nrOfDirectAds is not empty, double, not negative
@@ -190,7 +190,7 @@ public class OptimizationOutput {
             Assert.isTrue(optimizationOutput.getNrOfDirectAds().matches("\\d+(\\.\\d+)?"), "nrOfDirectAds is not a positive integer");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
         // nrOfChiefTrainings is not empty, double, not negative
@@ -199,7 +199,7 @@ public class OptimizationOutput {
             Assert.isTrue(optimizationOutput.getNrOfChiefTrainings().matches("\\d+(\\.\\d+)?"), "nrOfChiefTrainings is not a positive integer");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
         // totalCost is not empty, double, not negative
@@ -208,9 +208,9 @@ public class OptimizationOutput {
             Assert.isTrue(optimizationOutput.getTotalCost().matches("\\d+(\\.\\d+)?"), "totalCost is not a positive double");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
-        return true;
+        return "ok";
     }
 }

@@ -110,7 +110,7 @@ public class ModelResults {
         return list;
     }
 
-    public boolean isModelResultsValid(ModelResults modelResults) { // awareFarmers, adopters, nrOfDirectAds, nrOfChiefTrainings, totalCost, awareFarmersPerTick, adoptersPerTick      
+    public String isModelResultsValid(ModelResults modelResults) { // awareFarmers, adopters, nrOfDirectAds, nrOfChiefTrainings, totalCost, awareFarmersPerTick, adoptersPerTick      
         // no empty strings
         try {
         Assert.hasText(modelResults.getAwareFarmers(), "awareFarmers is empty");
@@ -120,7 +120,7 @@ public class ModelResults {
         Assert.hasText(modelResults.getTotalCost(), "totalCost is empty");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
         // no empty arrays
@@ -129,7 +129,7 @@ public class ModelResults {
             Assert.isTrue(!modelResults.getAdoptersPerTick().isEmpty(), "adoptersPerTick is empty");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
         // all strings contain positive integers
@@ -141,7 +141,7 @@ public class ModelResults {
             Assert.isTrue(modelResults.getTotalCost().matches("\\d+(\\.\\d+)?"), "totalCost is not a positive double");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
         try {
@@ -153,9 +153,9 @@ public class ModelResults {
             }
         } catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
-        return true;
+        return "ok";
     }
 }

@@ -135,7 +135,7 @@ public class DataInput {
         this.baseAdoptionProbability = baseAdoptionProbability;
     }
 
-    public boolean isDataInputValid(DataInput dataInput) { // avgIntraMentionPercentage, percentageNegativeWoM, baseAdoptionProbability, nrDefaultFriendsInterVillage, avgIntraVillageInteractionFrequency, avgInterVillageInteractionFrequency, avgChiefFarmerMeetingFrequency
+    public String isDataInputValid(DataInput dataInput) { // avgIntraMentionPercentage, percentageNegativeWoM, baseAdoptionProbability, nrDefaultFriendsInterVillage, avgIntraVillageInteractionFrequency, avgInterVillageInteractionFrequency, avgChiefFarmerMeetingFrequency
 
         // no empty strings
         try {
@@ -148,29 +148,22 @@ public class DataInput {
         Assert.hasText(dataInput.getBaseAdoptionProbability(), "baseAdoptionProbability is empty");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
         // numbers are positive doubles
         try {
-        Assert.isTrue(dataInput.getNrDefaultFriendsInterVillage().matches("\\d+(\\.\\d+)?"), "nrDefaultFriendsInterVillage is is not a positive integer");
-        Assert.isTrue(dataInput.getAvgIntraVillageInteractionFrequency().matches("\\d+(\\.\\d+)?"), "avgIntraVillageInteractionFrequency is is not a positive integer");
-        Assert.isTrue(dataInput.getAvgInterVillageInteractionFrequency().matches("\\d+(\\.\\d+)?"), "avgInterVillageInteractionFrequency is is not a positive integer");
-        Assert.isTrue(dataInput.getAvgChiefFarmerMeetingFrequency().matches("\\d+(\\.\\d+)?"), "avgChiefFarmerMeetingFrequency is is not a positive integer");
-        Assert.isTrue(dataInput.getPercentageNegativeWoM().matches("\\d+(\\.\\d+)?"), "percentageNegativeWoM is is not a positive integer");
-        Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability is is not a positive integer");
+        Assert.isTrue(dataInput.getNrDefaultFriendsInterVillage().matches("\\d+(\\.\\d+)?"), "nrDefaultFriendsInterVillage is is not a positive double");
+        Assert.isTrue(dataInput.getAvgIntraVillageInteractionFrequency().matches("\\d+(\\.\\d+)?"), "avgIntraVillageInteractionFrequency is is not a positive double");
+        Assert.isTrue(dataInput.getAvgInterVillageInteractionFrequency().matches("\\d+(\\.\\d+)?"), "avgInterVillageInteractionFrequency is is not a positive double");
+        Assert.isTrue(dataInput.getAvgChiefFarmerMeetingFrequency().matches("\\d+(\\.\\d+)?"), "avgChiefFarmerMeetingFrequency is is not a positive double");
+        Assert.isTrue(dataInput.getPercentageNegativeWoM().matches("\\d+(\\.\\d+)?"), "percentageNegativeWoM is is not a positive double");
+        Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability is is not a positive double");
+        Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability is not a positive double");
+        Assert.isTrue(dataInput.getAvgIntraMentionPercentage().matches("\\d+(\\.\\d+)?"), "avgIntraMentionPercentage is is not a positive double");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
-        }
-
-        // baseAdoptinoProbability and avgIntraMentionPercentage are a double
-        try {
-            Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability is not a positive double");
-            Assert.isTrue(dataInput.getAvgIntraMentionPercentage().matches("\\d+(\\.\\d+)?"), "avgIntraMentionPercentage is is not a positive double");
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
         // numbers are within range
@@ -195,12 +188,12 @@ public class DataInput {
         
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
-        return true;
+        return "ok";
     }
 }

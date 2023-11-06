@@ -199,4 +199,44 @@ public class UserInput { //UserInput?
         System.out.println("parameters are correct");
         return true;
     }
+
+    public boolean isOptimizationInputValid(UserInput userInput) { // optimizationType, budget, fixedCostsDirectAd, fixedCostsTrainChiefs, variableCostsDirectAd, variableCostsDiscount, variableCostsDelayed, variableCostsDelayedDiscount, variableCostsTrainChiefs
+        // optimizationType matches one of four possible string
+        try {            
+            ArrayList<String> possible_optimizations = new ArrayList<String>();
+            possible_optimizations.add("\"maxAdopters\"");
+            possible_optimizations.add("\"maximizing considerers\"");
+            possible_optimizations.add("\"minimizing cost\"");
+            possible_optimizations.add("\"returning test results\"");
+            Assert.isTrue(possible_optimizations.contains(userInput.getDirectAdType()), "optimizationType is not one of the four possible types");
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+        
+        // parameters are not empty, not negative
+        try {
+            Assert.hasText(userInput.getDirectAdType(), "optimizationType is empty");
+            Assert.hasText(userInput.getBudget(), "budget is empty");
+            Assert.hasText(userInput.getFixedCostsDirectAd(), "fixedCostsDirectAd is empty");
+            Assert.hasText(userInput.getFixedCostsTrainChiefs(), "fixedCostsTrainChiefs is empty");
+            Assert.hasText(userInput.getVariableCostsDirectAd(), "variableCostsDirectAd is empty");
+            Assert.hasText(userInput.getVariableCostsDiscount(), "variableCostsDiscount is empty");
+            Assert.hasText(userInput.getVariableCostsDelayed(), "variableCostsDelayed is empty");
+            Assert.hasText(userInput.getVariableCostsDelayedDiscount(), "variableCostsDelayedDiscount is empty");
+            Assert.hasText(userInput.getVariableCostsTrainChiefs(), "variableCostsTrainChiefs is empty");
+
+            Assert.isTrue(userInput.getBudget().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getFixedCostsDirectAd().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getFixedCostsTrainChiefs().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getVariableCostsDirectAd().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getVariableCostsDiscount().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getVariableCostsDelayed().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getVariableCostsDelayedDiscount().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getVariableCostsTrainChiefs().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -135,11 +135,10 @@ public class DataInput {
         this.baseAdoptionProbability = baseAdoptionProbability;
     }
 
-    public boolean isDataInputValid(DataInput dataInput) { // trainChiefInfluence, avgIntraMentionPercentage, percentageNegativeWoM, baseAdoptionProbability, nrDefaultFriendsInterVillage, avgIntraVillageInteractionFrequency, avgInterVillageInteractionFrequency, avgChiefFarmerMeetingFrequency
+    public boolean isDataInputValid(DataInput dataInput) { // avgIntraMentionPercentage, percentageNegativeWoM, baseAdoptionProbability, nrDefaultFriendsInterVillage, avgIntraVillageInteractionFrequency, avgInterVillageInteractionFrequency, avgChiefFarmerMeetingFrequency
         
         // no empty strings
         try {
-        Assert.hasText(dataInput.getTrainChiefInfluence(), "trainChiefInfluence is empty");
         Assert.hasText(dataInput.getNrDefaultFriendsInterVillage(), "nrDefaultFriendsInterVillage is empty");
         Assert.hasText(dataInput.getAvgIntraVillageInteractionFrequency(), "avgIntraVillageInteractionFrequency is empty");
         Assert.hasText(dataInput.getAvgInterVillageInteractionFrequency(), "avgInterVillageInteractionFrequency is empty");
@@ -153,21 +152,20 @@ public class DataInput {
 
         // no negative numbers except for baseAdoptionProbability
         try {
-        Assert.isTrue(dataInput.getTrainChiefInfluence().matches("\\d+"), "trainChiefInfluence is not a positive integer");
         Assert.isTrue(dataInput.getNrDefaultFriendsInterVillage().matches("\\d+"), "nrDefaultFriendsInterVillage is is not a positive integer");
         Assert.isTrue(dataInput.getAvgIntraVillageInteractionFrequency().matches("\\d+"), "avgIntraVillageInteractionFrequency is is not a positive integer");
         Assert.isTrue(dataInput.getAvgInterVillageInteractionFrequency().matches("\\d+"), "avgInterVillageInteractionFrequency is is not a positive integer");
         Assert.isTrue(dataInput.getAvgChiefFarmerMeetingFrequency().matches("\\d+"), "avgChiefFarmerMeetingFrequency is is not a positive integer");
-        Assert.isTrue(dataInput.getAvgIntraMentionPercentage().matches("\\d+"), "avgIntraMentionPercentage is is not a positive integer");
         Assert.isTrue(dataInput.getPercentageNegativeWoM().matches("\\d+"), "percentageNegativeWoM is is not a positive integer");
         Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+"), "baseAdoptionProbability is is not a positive integer");
         } catch (IllegalArgumentException e) {
             return false;
         }
 
-        // baseAdoptinoProbability is a double
+        // baseAdoptinoProbability and avgIntraMentionPercentage are a double
         try {
             Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability is not a positive double");
+            Assert.isTrue(dataInput.getAvgIntraMentionPercentage().matches("\\\\d+(\\\\.\\\\d+)?"), "avgIntraMentionPercentage is is not a positive double");
         } catch (IllegalArgumentException e) {
             return false;
         }
@@ -180,7 +178,6 @@ public class DataInput {
             int avgInterVillageInteractionFrequency = Integer.parseInt(dataInput.getAvgInterVillageInteractionFrequency());
             int avgChiefFarmerMeetingFrequency = Integer.parseInt(dataInput.getAvgChiefFarmerMeetingFrequency());
             int percentageNegativeWoM = Integer.parseInt(dataInput.getPercentageNegativeWoM());
-            int trainChiefInfluence = Integer.parseInt(dataInput.getTrainChiefInfluence());
             int avgIntraMentionPercentage = Integer.parseInt(dataInput.getAvgIntraMentionPercentage());
             double baseAdoptionProbability = Double.parseDouble(dataInput.getBaseAdoptionProbability());
 
@@ -190,7 +187,7 @@ public class DataInput {
             Assert.isTrue(avgInterVillageInteractionFrequency >= 1 && avgInterVillageInteractionFrequency <= 10, "avgInterVillageInteractionFrequency is not within range");
             Assert.isTrue(avgChiefFarmerMeetingFrequency >= 1 && avgChiefFarmerMeetingFrequency <= 50, "avgChiefFarmerMeetingFrequency is not within range");
             Assert.isTrue(percentageNegativeWoM >= 0 && percentageNegativeWoM <= 100, "percentageNegativeWoM is not within range");
-            //TODO: trainChiefInfluence and avgIntraMentionPercentage
+            Assert.isTrue(avgIntraMentionPercentage >= 0.0 && avgIntraMentionPercentage <= 100.0, "avgIntraMentionPercentage is not within range");
             Assert.isTrue(baseAdoptionProbability >= 0.1 && baseAdoptionProbability <= 100.0, "baseAdoptionProbability is not within range");
 
         } catch (NumberFormatException e) {

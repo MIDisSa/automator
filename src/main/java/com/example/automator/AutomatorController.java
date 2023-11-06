@@ -1,11 +1,14 @@
 package com.example.automator;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -196,7 +199,7 @@ public class AutomatorController {
         }
 
         try {
-            Path filePath = Path.of("CSV-files-go-here/raw-data.csv");
+            Path filePath = Path.of("./CSV-files-go-here/raw-data.csv");
 
             // check if file already exists and delete if it does
             if (Files.exists(filePath)) {
@@ -215,14 +218,32 @@ public class AutomatorController {
 
         // run python script to process data
         try {
-            Runtime.getRuntime().exec("python3 data-processing/process-survey-data.py");
-        } catch (Exception e) {
-            System.out.println(e);
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Something went wrong when trying to run the python script: ", e)); // 400 - bad request
+            ProcessBuilder pb = new ProcessBuilder();
+            if (SystemUtils.IS_OS_WINDOWS) {
+                System.out.println("Building process for Windows...");
+                pb.command("python3", "./data-processing/process-survey-data.py");
+            } else if (SystemUtils.IS_OS_UNIX) {
+                System.out.println("Building process for UNIX-System...");
+                pb.command("/bin/bash", "-c", "python3 ./data-processing/process-survey-data.py");
+
+            } else {
+                throw new IOException("OS not compatible.");
+            }
+
+            Process process = pb.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         //get csv from folder and parse it as Parameters object
-        String CSV_FILE_PATH_DATA = "CSV-files-go-here/data-processed.csv";
+        String CSV_FILE_PATH_DATA = "./CSV-files-go-here/data-processed.csv";
         Parameters parameters = new CSVReader().parseDataCSV(CSV_FILE_PATH_DATA);
 
         return parameters;

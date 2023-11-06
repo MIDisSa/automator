@@ -14,16 +14,16 @@
 <fitnessInfo>
 <fitnessMinimized>true</fitnessMinimized>
 <fitnessCollecting>AT_FINAL_STEP</fitnessCollecting>
-<fitnessSamplingReplications>5</fitnessSamplingReplications>
+<fitnessSamplingReplications>10</fitnessSamplingReplications>
 <fitnessCombineReplications>MEAN</fitnessCombineReplications>
 </fitnessInfo>
 <searchSpace>
 <paramSpec>["direct_ad_type" "Direct Ad" "Direct Ad + Discount" "Direct Ad + Delayed Payment" "Direct Ad + Delayed P. + Discount"]</paramSpec>
 <paramSpec>["direct_ad_frequency" 30 60 90 120 180 360]</paramSpec>
 <paramSpec>["train_chiefs_frequency" 30 60 90 120 180 360]</paramSpec>
-<paramSpec>["direct_ad_nr_of_villages" [0 10 100]]</paramSpec>
+<paramSpec>["direct_ad_nr_of_villages" [10 10 100]]</paramSpec>
 <paramSpec>["percentage_of_villagers_addressed" 50]</paramSpec>
-<paramSpec>["train_chiefs_nr" [0 10 100]]</paramSpec>
+<paramSpec>["train_chiefs_nr" [10 10 100]]</paramSpec>
 <paramSpec>["run_until_day_x" 360]</paramSpec>
 <paramSpec>["nr_default_friends_inter_village" 5]</paramSpec>
 <paramSpec>["avg_intra_village_interaction_frequency" 4]</paramSpec>
@@ -41,11 +41,11 @@
 <paramSpec>["variable_costs_train_chiefs" 400]</paramSpec>
 </searchSpace>
 <searchMethod type="MutationHillClimber">
-<searchMethodParameter name="mutation-rate" value="0.05"/>
-<searchMethodParameter name="restart-after-stall-count" value="0"/>
+<searchMethodParameter name="mutation-rate" value="0.2"/>
+<searchMethodParameter name="restart-after-stall-count" value="10"/>
 </searchMethod>
 <chromosomeRepresentation type="GrayBinaryChromosome"/>
 <caching>true</caching>
-<evaluationLimit>300</evaluationLimit>
+<evaluationLimit>400</evaluationLimit>
 <bestCheckingNumReplications>10</bestCheckingNumReplications>
 </search>

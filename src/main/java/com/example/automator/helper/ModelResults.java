@@ -1,6 +1,11 @@
 package com.example.automator.helper;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import org.springframework.util.Assert;
+
+import ch.qos.logback.core.model.Model;
 
 
 public class ModelResults {
@@ -103,5 +108,54 @@ public class ModelResults {
         }
         
         return list;
+    }
+
+    public String isModelResultsValid(ModelResults modelResults) { // awareFarmers, adopters, nrOfDirectAds, nrOfChiefTrainings, totalCost, awareFarmersPerTick, adoptersPerTick      
+        // no empty strings
+        try {
+        Assert.hasText(modelResults.getAwareFarmers(), "awareFarmers is empty");
+        Assert.hasText(modelResults.getAdopters(), "adopters is empty");
+        Assert.hasText(modelResults.getNrOfDirectAds(), "nrOfdirectAds is empty");
+        Assert.hasText(modelResults.getNrOfChiefTrainings(), "nrOfChiefTrainings is empty");
+        Assert.hasText(modelResults.getTotalCost(), "totalCost is empty");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+
+        // no empty arrays
+        try {
+            Assert.isTrue(!modelResults.getAwareFarmersPerTick().isEmpty(), "awareFarmersPerTick is empty");
+            Assert.isTrue(!modelResults.getAdoptersPerTick().isEmpty(), "adoptersPerTick is empty");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+
+        // all strings contain positive integers
+        try {
+            Assert.isTrue(modelResults.getAwareFarmers().matches("\\d+(\\.\\d+)?"), "awareFarmers is not a positive double");
+            Assert.isTrue(modelResults.getAdopters().matches("\\d+(\\.\\d+)?"), "adopters is not a positive double");
+            Assert.isTrue(modelResults.getNrOfDirectAds().matches("\\d+(\\.\\d+)?"), "nrOfDirectAds is not a positive double");
+            Assert.isTrue(modelResults.getNrOfChiefTrainings().matches("\\d+(\\.\\d+)?"), "nrOfChiefTrainings is not a positive double");
+            Assert.isTrue(modelResults.getTotalCost().matches("\\d+(\\.\\d+)?"), "totalCost is not a positive double");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+
+        try {
+            for (Double d : modelResults.getAwareFarmersPerTick()) {
+                Assert.isTrue(d >= 0, "awareFarmersPerTick contains negative numbers");
+            }
+            for (Double d : modelResults.getAdoptersPerTick()) {
+                Assert.isTrue(d >= 0, "adoptersPerTick contains negative numbers");
+            }
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+
+        return "ok";
     }
 }

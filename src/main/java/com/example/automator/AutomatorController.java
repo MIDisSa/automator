@@ -6,14 +6,17 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.automator.helper.ABMRunner;
 import com.example.automator.helper.CLIRunner;
@@ -34,12 +37,21 @@ public class AutomatorController {
     DataInput workingDataInput = new DataInput();
 
     @GetMapping("/")
+    @ResponseStatus(HttpStatus.OK)
     public String index() {
         return "Greetings from Spring Boot!";
     }
 
     @PostMapping("/updateInput")
+    @ResponseStatus(HttpStatus.OK)
     public void updateInput(@RequestBody DataInput input) {
+        // check if input is valid
+        String inputValidation = input.isDataInputValid(input);
+        if (inputValidation != "ok") {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, inputValidation); // 400 - bad request
+        }
+        System.out.println("input is valid");
+
         //Update Model Parameters
         workingDataInput.setTrainChiefInfluence(input.getTrainChiefInfluence());
         workingDataInput.setNrDefaultFriendsInterVillage(input.getNrDefaultFriendsInterVillage());
@@ -60,6 +72,7 @@ public class AutomatorController {
     }
 
     @PostMapping("/resetInput")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<DataInput> resetInput(){
         DataInput workingDataInput = new DataInput();
         System.out.println("DataInput set to default parameters");
@@ -68,7 +81,15 @@ public class AutomatorController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/results")
+    @ResponseStatus(HttpStatus.OK)
     public Object modelResults(@RequestBody UserInput userInput) {
+
+        // check if user input is valid
+        String inputValidation = userInput.isModelInputValid(userInput);
+        if (inputValidation != "ok") {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, inputValidation); // 406 - not acceptable
+        }
+        System.out.println("input is valid");
 
          try {
             //run netlogo model and receive results
@@ -78,12 +99,18 @@ public class AutomatorController {
             ModelResults modelResults = new ModelResults();
             modelResults.saveABMRunnerOutput(results);
             
+            // check if model results are valid
+            String outputValidation = modelResults.isModelResultsValid(modelResults);
+            if (outputValidation != "ok") {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, outputValidation); // 409 - conflict
+            }
+            System.out.println("output is valid");
+
             return modelResults;
          } catch (Exception e) {
-             System.out.println(e);
+            System.out.println(e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Something went wrong: ", e)); // 400 - bad request
          }
-
-        return null;
     }
 
     @PostMapping("/testUpdateXML") 
@@ -92,11 +119,19 @@ public class AutomatorController {
     }
     
     @PostMapping("/optimization") //Optimization
+    @ResponseStatus(HttpStatus.OK)
     public OptimizationOutput optimize(@RequestBody UserInput userInput) {
+
+        // check if user input is valid
+        String inputValidation = userInput.isOptimizationInputValid(userInput);
+        if (inputValidation != "ok") {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, inputValidation); // 406 - not acceptable
+        }
+        System.out.println("input is valid");
+
         try {
             String optimizationType = userInput.getOptimizationType();
             OptimizationOutput results = null;
-            
             
             switch(optimizationType) {
                 case "maxAdopters":
@@ -117,17 +152,21 @@ public class AutomatorController {
                     break;
             }
 
+            // check if optimization results are valid
+            String outputValidation = results.isOptimizationResultValid(results);
+            if (outputValidation != "ok") {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, outputValidation); // 409 - conflict
+            }
+            System.out.println("output is valid");
+
             //Make Interpreter return results + the nr of ads/trainings and change return type of optimize() to a new type which includes those?
-            
             return results;
 
         } catch(Exception e) {
             System.out.println(e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Something went wrong: ", e)); // 400 - bad request
         }
-        return null;
     }
-
-
 
     @GetMapping("/testOptimizer") //Starts up optimizer with a test model
     public OptimizationResults testOptimizer() {
@@ -145,10 +184,15 @@ public class AutomatorController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/uploadRawCSV") //uploads CSV, runs it through the data processing script and return parameters
+    @ResponseStatus(HttpStatus.OK)
     public Parameters uploadRawCSV(@RequestParam("file") MultipartFile file) {
 
         if (file.isEmpty()) {
-            System.out.println("Error: file is empty");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("The file you uploaded is empty.")); // 400 - bad request
+        }
+
+        if (!file.getOriginalFilename().endsWith(".csv")) {
+            throw new ResponseStatusException(HttpStatus.UNSUPPORTED_MEDIA_TYPE, String.format("The file you uploaded does not have a .csv ending.")); // 415 - unsupported media type
         }
 
         try {
@@ -166,6 +210,7 @@ public class AutomatorController {
 
         } catch (IOException e) {
             System.out.println(e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Something went wrong when trying to store the file: ", e)); // 400 - bad request
         }
 
         // run python script to process data
@@ -173,6 +218,7 @@ public class AutomatorController {
             Runtime.getRuntime().exec("python3 data-processing/process-survey-data.py");
         } catch (Exception e) {
             System.out.println(e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Something went wrong when trying to run the python script: ", e)); // 400 - bad request
         }
 
         //get csv from folder and parse it as Parameters object

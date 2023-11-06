@@ -1,5 +1,9 @@
 package com.example.automator.helper;
 
+import java.util.ArrayList;
+
+import org.springframework.util.Assert;
+
 public class UserInput { //UserInput?
     //Optimization parameters:
     private int numberOfTicks = 360;
@@ -144,5 +148,103 @@ public class UserInput { //UserInput?
 
     public void setVariableCostsTrainChiefs(String variableCostsTrainChiefs) {
         this.variableCostsTrainChiefs = variableCostsTrainChiefs;
+    }
+
+    public String isModelInputValid(UserInput userInput) { // numberOfTicks, frequencyDirectAd, frequencyChiefTraining, typeDirectAd
+        // nrOfTicks is not zero, not negative
+        try {
+            Assert.isTrue(userInput.getNumberOfTicks() > 0, "numberOfTicks is zero or negative");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+
+        // frequencyDirectAd is not empty, integer, not negative
+        try {
+            Assert.hasText(userInput.getFrequencyDirectAd(), "frequencyDirectAd is empty");
+            Assert.isTrue(userInput.getFrequencyDirectAd().matches("\\d+"), "getFrequencyDirectAd is not a positive integer");
+            int frequencyDirectAd = Integer.parseInt(userInput.getFrequencyDirectAd());
+            Assert.isTrue(frequencyDirectAd >= 0 && frequencyDirectAd <= 365, "frequencyDirectAd is not within range");
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+
+        // frequencyChiefTraining is not empty, integer, not negative
+        try {
+            Assert.hasText(userInput.getFrequencyChiefTraining(), "frequencyChiefTraining is empty");
+            Assert.isTrue(userInput.getFrequencyChiefTraining().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            int tempFrequencyChiefTraining = Integer.parseInt(userInput.getFrequencyChiefTraining());
+            Assert.isTrue(tempFrequencyChiefTraining >= 0 && tempFrequencyChiefTraining <= 365, "frequencyChiefTraining is not within range");
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+
+        // directAdType is not empty and matches one of four possible string
+        try {
+            Assert.hasText(userInput.getDirectAdType(), "directAdType is empty");
+            
+            ArrayList<String> possible_interventions = new ArrayList<String>();
+            possible_interventions.add("\"Direct Ad\"");
+            possible_interventions.add("\"Direct Ad + Discount\"");
+            possible_interventions.add("\"Direct Ad + Delayed Payment\"");
+            possible_interventions.add("\"Direct Ad + Delayed P. + Discount\"");
+            Assert.isTrue(possible_interventions.contains(userInput.getDirectAdType()), "directAdType is not one of the four possible interventions");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+
+        System.out.println("parameters are correct");
+        return "ok";
+    }
+
+    public String isOptimizationInputValid(UserInput userInput) { // optimizationType, budget, fixedCostsDirectAd, fixedCostsTrainChiefs, variableCostsDirectAd, variableCostsDiscount, variableCostsDelayed, variableCostsDelayedDiscount, variableCostsTrainChiefs
+        // optimizationType matches one of four possible string
+        try {            
+            ArrayList<String> possible_optimizations = new ArrayList<String>();
+            possible_optimizations.add("maxAdopters");
+            possible_optimizations.add("maxKnowledge");
+            possible_optimizations.add("minCost");
+            possible_optimizations.add("test");
+            Assert.isTrue(possible_optimizations.contains(userInput.getOptimizationType()), "optimizationType is not one of the four possible types");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+        
+        // parameters are not empty, not negative
+        try {
+            Assert.hasText(userInput.getOptimizationType(), "optimizationType is empty");
+            Assert.hasText(userInput.getBudget(), "budget is empty");
+            Assert.hasText(userInput.getFixedCostsDirectAd(), "fixedCostsDirectAd is empty");
+            Assert.hasText(userInput.getFixedCostsTrainChiefs(), "fixedCostsTrainChiefs is empty");
+            Assert.hasText(userInput.getVariableCostsDirectAd(), "variableCostsDirectAd is empty");
+            Assert.hasText(userInput.getVariableCostsDiscount(), "variableCostsDiscount is empty");
+            Assert.hasText(userInput.getVariableCostsDelayed(), "variableCostsDelayed is empty");
+            Assert.hasText(userInput.getVariableCostsDelayedDiscount(), "variableCostsDelayedDiscount is empty");
+            Assert.hasText(userInput.getVariableCostsTrainChiefs(), "variableCostsTrainChiefs is empty");
+
+            Assert.isTrue(userInput.getBudget().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getFixedCostsDirectAd().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getFixedCostsTrainChiefs().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getVariableCostsDirectAd().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getVariableCostsDiscount().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getVariableCostsDelayed().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getVariableCostsDelayedDiscount().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getVariableCostsTrainChiefs().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+
+        return "ok";
     }
 }

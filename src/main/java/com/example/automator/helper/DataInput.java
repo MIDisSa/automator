@@ -136,7 +136,7 @@ public class DataInput {
     }
 
     public boolean isDataInputValid(DataInput dataInput) { // avgIntraMentionPercentage, percentageNegativeWoM, baseAdoptionProbability, nrDefaultFriendsInterVillage, avgIntraVillageInteractionFrequency, avgInterVillageInteractionFrequency, avgChiefFarmerMeetingFrequency
-        
+
         // no empty strings
         try {
         Assert.hasText(dataInput.getNrDefaultFriendsInterVillage(), "nrDefaultFriendsInterVillage is empty");
@@ -151,14 +151,14 @@ public class DataInput {
             return false;
         }
 
-        // no negative numbers except for baseAdoptionProbability
+        // numbers are positive doubles
         try {
-        Assert.isTrue(dataInput.getNrDefaultFriendsInterVillage().matches("\\d+"), "nrDefaultFriendsInterVillage is is not a positive integer");
-        Assert.isTrue(dataInput.getAvgIntraVillageInteractionFrequency().matches("\\d+"), "avgIntraVillageInteractionFrequency is is not a positive integer");
-        Assert.isTrue(dataInput.getAvgInterVillageInteractionFrequency().matches("\\d+"), "avgInterVillageInteractionFrequency is is not a positive integer");
-        Assert.isTrue(dataInput.getAvgChiefFarmerMeetingFrequency().matches("\\d+"), "avgChiefFarmerMeetingFrequency is is not a positive integer");
-        Assert.isTrue(dataInput.getPercentageNegativeWoM().matches("\\d+"), "percentageNegativeWoM is is not a positive integer");
-        Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+"), "baseAdoptionProbability is is not a positive integer");
+        Assert.isTrue(dataInput.getNrDefaultFriendsInterVillage().matches("\\d+(\\.\\d+)?"), "nrDefaultFriendsInterVillage is is not a positive integer");
+        Assert.isTrue(dataInput.getAvgIntraVillageInteractionFrequency().matches("\\d+(\\.\\d+)?"), "avgIntraVillageInteractionFrequency is is not a positive integer");
+        Assert.isTrue(dataInput.getAvgInterVillageInteractionFrequency().matches("\\d+(\\.\\d+)?"), "avgInterVillageInteractionFrequency is is not a positive integer");
+        Assert.isTrue(dataInput.getAvgChiefFarmerMeetingFrequency().matches("\\d+(\\.\\d+)?"), "avgChiefFarmerMeetingFrequency is is not a positive integer");
+        Assert.isTrue(dataInput.getPercentageNegativeWoM().matches("\\d+(\\.\\d+)?"), "percentageNegativeWoM is is not a positive integer");
+        Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability is is not a positive integer");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return false;
@@ -176,23 +176,23 @@ public class DataInput {
         // numbers are within range
         try {
             // convert strings to integers
-            int nrDefaultFriendsInterVillage = Integer.parseInt(dataInput.getNrDefaultFriendsInterVillage());
-            int avgIntraVillageInteractionFrequency = Integer.parseInt(dataInput.getAvgIntraVillageInteractionFrequency());
-            int avgInterVillageInteractionFrequency = Integer.parseInt(dataInput.getAvgInterVillageInteractionFrequency());
-            int avgChiefFarmerMeetingFrequency = Integer.parseInt(dataInput.getAvgChiefFarmerMeetingFrequency());
-            int percentageNegativeWoM = Integer.parseInt(dataInput.getPercentageNegativeWoM());
-            int avgIntraMentionPercentage = Integer.parseInt(dataInput.getAvgIntraMentionPercentage());
+            //double nrDefaultFriendsInterVillage = Double.parseDouble(dataInput.getNrDefaultFriendsInterVillage());
+            //double avgIntraVillageInteractionFrequency = Double.parseDouble(dataInput.getAvgIntraVillageInteractionFrequency());
+            //double avgInterVillageInteractionFrequency = Double.parseDouble(dataInput.getAvgInterVillageInteractionFrequency());
+            //double avgChiefFarmerMeetingFrequency = Double.parseDouble(dataInput.getAvgChiefFarmerMeetingFrequency());
+            double percentageNegativeWoM = Double.parseDouble(dataInput.getPercentageNegativeWoM());
+            double avgIntraMentionPercentage = Double.parseDouble(dataInput.getAvgIntraMentionPercentage());
             double baseAdoptionProbability = Double.parseDouble(dataInput.getBaseAdoptionProbability());
 
             // assert that numbers are within range
-            Assert.isTrue(nrDefaultFriendsInterVillage >= 1 && nrDefaultFriendsInterVillage <= 10, "nrDefaultFriendsInterVillage is not within range");
-            Assert.isTrue(avgIntraVillageInteractionFrequency >= 1 && avgIntraVillageInteractionFrequency <= 10, "avgIntraVillageInteractionFrequency is not within range");
-            Assert.isTrue(avgInterVillageInteractionFrequency >= 1 && avgInterVillageInteractionFrequency <= 10, "avgInterVillageInteractionFrequency is not within range");
-            Assert.isTrue(avgChiefFarmerMeetingFrequency >= 1 && avgChiefFarmerMeetingFrequency <= 50, "avgChiefFarmerMeetingFrequency is not within range");
-            Assert.isTrue(percentageNegativeWoM >= 0 && percentageNegativeWoM <= 100, "percentageNegativeWoM is not within range");
+            //Assert.isTrue(nrDefaultFriendsInterVillage >= 1.0 && nrDefaultFriendsInterVillage <= 10.0, "nrDefaultFriendsInterVillage is not within range");
+            //Assert.isTrue(avgIntraVillageInteractionFrequency >= 1.0 && avgIntraVillageInteractionFrequency <= 10.0, "avgIntraVillageInteractionFrequency is not within range");
+            //Assert.isTrue(avgInterVillageInteractionFrequency >= 1.0 && avgInterVillageInteractionFrequency <= 10.0, "avgInterVillageInteractionFrequency is not within range");
+            //Assert.isTrue(avgChiefFarmerMeetingFrequency >= 1.0 && avgChiefFarmerMeetingFrequency <= 50.0, "avgChiefFarmerMeetingFrequency is not within range");
+            Assert.isTrue(percentageNegativeWoM >= 0.0 && percentageNegativeWoM <= 100.0, "percentageNegativeWoM is not within range");
             Assert.isTrue(avgIntraMentionPercentage >= 0.0 && avgIntraMentionPercentage <= 100.0, "avgIntraMentionPercentage is not within range");
-            Assert.isTrue(baseAdoptionProbability >= 0.1 && baseAdoptionProbability <= 100.0, "baseAdoptionProbability is not within range");
-
+            Assert.isTrue(baseAdoptionProbability >= 0.001 && baseAdoptionProbability <= 100.0, "baseAdoptionProbability is not within range");
+        
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
             return false;

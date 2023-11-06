@@ -2,10 +2,6 @@ package com.example.automator.helper;
 
 import java.util.ArrayList;
 
-import javax.swing.text.NumberFormatter;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 
 public class UserInput { //UserInput?
@@ -154,7 +150,7 @@ public class UserInput { //UserInput?
         this.variableCostsTrainChiefs = variableCostsTrainChiefs;
     }
 
-    public boolean isResultsValid(UserInput userInput) { // numberOfTicks, frequencyDirectAd, frequencyChiefTraining, typeDirectAd
+    public boolean isModelInputValid(UserInput userInput) { // numberOfTicks, frequencyDirectAd, frequencyChiefTraining, typeDirectAd
         // nrOfTicks is not zero, not negative
         try {
             Assert.isTrue(userInput.getNumberOfTicks() > 0, "numberOfTicks is zero or negative");
@@ -199,7 +195,7 @@ public class UserInput { //UserInput?
         } catch (IllegalArgumentException e) {
             return false;
         }
-        
+
         System.out.println("parameters are correct");
         return true;
     }

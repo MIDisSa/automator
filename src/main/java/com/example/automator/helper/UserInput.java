@@ -210,11 +210,11 @@ public class UserInput { //UserInput?
         // optimizationType matches one of four possible string
         try {            
             ArrayList<String> possible_optimizations = new ArrayList<String>();
-            possible_optimizations.add("\"maxAdopters\"");
-            possible_optimizations.add("\"maximizing considerers\"");
-            possible_optimizations.add("\"minimizing cost\"");
-            possible_optimizations.add("\"returning test results\"");
-            Assert.isTrue(possible_optimizations.contains(userInput.getDirectAdType()), "optimizationType is not one of the four possible types");
+            possible_optimizations.add("maxAdopters");
+            possible_optimizations.add("maxKnowledge");
+            possible_optimizations.add("minCost");
+            possible_optimizations.add("test");
+            Assert.isTrue(possible_optimizations.contains(userInput.getOptimizationType()), "optimizationType is not one of the four possible types");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return false;

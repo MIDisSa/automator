@@ -48,6 +48,7 @@ public class AutomatorController {
         if (!input.isDataInputValid(input)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("input not valid")); // 400 - bad request
         }
+        System.out.println("input is valid");
 
         //Update Model Parameters
         workingDataInput.setTrainChiefInfluence(input.getTrainChiefInfluence());
@@ -83,6 +84,7 @@ public class AutomatorController {
         if (!userInput.isModelInputValid(userInput)) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, String.format("input not valid")); // 406 - not acceptable
         }
+        System.out.println("input is valid");
 
          try {
             //run netlogo model and receive results
@@ -96,6 +98,7 @@ public class AutomatorController {
             if (!modelResults.isModelResultsValid(modelResults)) {
                 throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("model output not valid")); // 409 - conflict
             }
+            System.out.println("output is valid");
 
             return modelResults;
          } catch (Exception e) {
@@ -118,6 +121,7 @@ public class AutomatorController {
         if (!userInput.isOptimizationInputValid(userInput)) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, String.format("input not valid")); // 406 - not acceptable
         }
+        System.out.println("input is valid");
 
         try {
             String optimizationType = userInput.getOptimizationType();
@@ -146,6 +150,7 @@ public class AutomatorController {
             if (!results.isOptimizationResultValid(results)) {
                 throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("optimization output not valid")); // 409 - conflict
             }
+            System.out.println("output is valid");
 
             //Make Interpreter return results + the nr of ads/trainings and change return type of optimize() to a new type which includes those?
             return results;

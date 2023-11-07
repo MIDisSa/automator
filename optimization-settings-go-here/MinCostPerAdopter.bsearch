@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="us-ascii"?>
-<!DOCTYPE search SYSTEM "behaviorsearch.dtd">
-<search>
+<?xml version="1.0" encoding="us-ascii" standalone="no"?><search>
 <bsearchVersionNumber>1.10</bsearchVersionNumber>
 <modelInfo>
 <modelFile>../netlogo-model-goes-here/ABM_innovation_diffusion_tanzania.nlogo</modelFile>
 <modelSetupCommands>setup</modelSetupCommands>
 <modelStepCommands>go</modelStepCommands>
-<modelStopCondition/>
+<modelStopCondition>ticks &amp;gt;= 360</modelStopCondition>
 <modelStepLimit>360</modelStepLimit>
 <modelMetricReporter>cost_per_adopter</modelMetricReporter>
 <modelMeasureIf>true</modelMeasureIf>

@@ -35,7 +35,14 @@ public class XMLUpdater {
                 //Update XML
                 System.out.println("updating XML");
                 XPath xPath = XPathFactory.newInstance().newXPath();
-                Node node = (Node) xPath.compile("/search/searchSpace/paramSpec[7]").evaluate(doc, XPathConstants.NODE);
+                
+                Node node = (Node) xPath.compile("/search/modelInfo/modelStopCondition").evaluate(doc, XPathConstants.NODE);
+                node.setTextContent(String.format("ticks &gt;= %s", userInput.getNumberOfTicks()));
+
+                node = (Node) xPath.compile("/search/modelInfo/modelStepLimit").evaluate(doc, XPathConstants.NODE);
+                node.setTextContent(String.format("%d", userInput.getNumberOfTicks()));
+
+                node = (Node) xPath.compile("/search/searchSpace/paramSpec[7]").evaluate(doc, XPathConstants.NODE);
                 node.setTextContent(String.format("[\"run_until_day_x\" %s]", userInput.getNumberOfTicks()));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[8]").evaluate(doc, XPathConstants.NODE);

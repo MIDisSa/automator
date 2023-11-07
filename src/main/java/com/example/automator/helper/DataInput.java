@@ -13,7 +13,7 @@ public class DataInput {
     private String avgInterVillageInteractionFrequency = "5";
     private String stdevInterVillageInteractionFrequency = "1";
     private String avgChiefFarmerMeetingFrequency = "30";
-    private String avgIntraMentionPercentage = "1";
+    private String avgIntraMentionPercentage = "2";
     private String stdevIntraMentionPercentage = "1";
     private String avgInterMentionPercentage = "1";
     private String stdevInterMentionPercentage = "1";

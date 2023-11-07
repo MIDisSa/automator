@@ -4,8 +4,8 @@
 <modelFile>../netlogo-model-goes-here/ABM_innovation_diffusion_tanzania.nlogo</modelFile>
 <modelSetupCommands>setup</modelSetupCommands>
 <modelStepCommands>go</modelStepCommands>
-<modelStopCondition>ticks &gt;= 360</modelStopCondition>
-<modelStepLimit>360</modelStepLimit>
+<modelStopCondition>ticks &amp;gt;= 365</modelStopCondition>
+<modelStepLimit>365</modelStepLimit>
 <modelMetricReporter>count turtles with [adoption_state = 2]</modelMetricReporter>
 <modelMeasureIf>true</modelMeasureIf>
 </modelInfo>
@@ -22,13 +22,15 @@
 <paramSpec>["direct_ad_nr_of_villages" [0 10 100]]</paramSpec>
 <paramSpec>["percentage_of_villagers_addressed" 50]</paramSpec>
 <paramSpec>["train_chiefs_nr" [0 10 100]]</paramSpec>
-<paramSpec>["run_until_day_x" 360]</paramSpec>
+<paramSpec>["run_until_day_x" 365]</paramSpec>
 <paramSpec>["nr_default_friends_inter_village" 5]</paramSpec>
 <paramSpec>["avg_intra_village_interaction_frequency" 4]</paramSpec>
 <paramSpec>["avg_inter_village_interaction_frequency" 5]</paramSpec>
 <paramSpec>["avg_chief_farmer_meeting_frequency" 30]</paramSpec>
 <paramSpec>["percentage_negative_WoM" 10]</paramSpec>
 <paramSpec>["base_adoption_probability" 1]</paramSpec>
+<paramSpec>["avg_inter_mention_percentage" 1]</paramSpec>
+<paramSpec>["avg_intra_mention_percentage" 2]</paramSpec>
 <paramSpec>["max_budget" 100000]</paramSpec>
 <paramSpec>["fixed_costs_direct_ad" 6000]</paramSpec>
 <paramSpec>["fixed_costs_train_chiefs" 5000]</paramSpec>

@@ -29,6 +29,8 @@
 <paramSpec>["avg_chief_farmer_meeting_frequency" 30]</paramSpec>
 <paramSpec>["percentage_negative_WoM" 10]</paramSpec>
 <paramSpec>["base_adoption_probability" 1]</paramSpec>
+<paramSpec>["avg_inter_mention_percentage" 1]</paramSpec>
+<paramSpec>["avg_intra_mention_percentage" 2]</paramSpec>
 <paramSpec>["max_budget" 100000]</paramSpec>
 <paramSpec>["fixed_costs_direct_ad" 6000]</paramSpec>
 <paramSpec>["fixed_costs_train_chiefs" 5000]</paramSpec>

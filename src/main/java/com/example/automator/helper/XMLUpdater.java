@@ -37,7 +37,7 @@ public class XMLUpdater {
                 XPath xPath = XPathFactory.newInstance().newXPath();
                 
                 Node node = (Node) xPath.compile("/search/modelInfo/modelStopCondition").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("ticks &gt;= %s", userInput.getNumberOfTicks()));
+                node.setTextContent(String.format("ticks >= %s", userInput.getNumberOfTicks()));
 
                 node = (Node) xPath.compile("/search/modelInfo/modelStepLimit").evaluate(doc, XPathConstants.NODE);
                 node.setTextContent(String.format("%d", userInput.getNumberOfTicks()));

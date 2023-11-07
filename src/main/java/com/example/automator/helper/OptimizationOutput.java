@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.util.Assert;
 
 public class OptimizationOutput {
+    private String optimizationType;
     private String directAdType;
     private String directAdFrequency;
     private String trainChiefsFrequency;
@@ -29,6 +30,10 @@ public class OptimizationOutput {
             this.totalCost = modRes.getTotalCost();
     }
     
+    public String getOptimizationType() {
+        return optimizationType;
+    }
+
     public String getDirectAdType() {
         return directAdType;
     }
@@ -65,6 +70,10 @@ public class OptimizationOutput {
         return totalCost;
     }
 
+    
+    public void setOptimizationType(String optimizationType) {
+        this.optimizationType = optimizationType;
+    }
 
     public void setDirectAdType(String directAdType) {
         this.directAdType = directAdType;

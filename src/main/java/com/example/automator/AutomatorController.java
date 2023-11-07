@@ -247,6 +247,7 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            output.setOptimizationType("Max Adopters");
             return output;
 
         } catch (Exception e) {
@@ -271,6 +272,7 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            output.setOptimizationType("Max Knowledge");
             return output;
 
         } catch (Exception e) {
@@ -295,6 +297,8 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            output.setOptimizationType("Min Cost per Adopter");
+
             return output;
 
         } catch (Exception e) {
@@ -314,6 +318,7 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            output.setOptimizationType("Test Results");
             return output;
 
         } catch (Exception e) {

@@ -106,14 +106,14 @@ public class OptimizationOutput {
 
         // directAdType is not empty and matches one of four possible string
         try {
-            Assert.hasText(optimizationOutput.getDirectAdType(), "directAdType is empty");
+            Assert.hasText(optimizationOutput.getDirectAdType(), "directAdType must not be empty");
             
             ArrayList<String> possible_interventions = new ArrayList<String>();
             possible_interventions.add("Direct Ad");
             possible_interventions.add("Direct Ad + Discount");
             possible_interventions.add("Direct Ad + Delayed Payment");
             possible_interventions.add("Direct Ad + Delayed P. + Discount");
-            Assert.isTrue(possible_interventions.contains(optimizationOutput.getDirectAdType()), "directAdType is not one of the four possible interventions");
+            Assert.isTrue(possible_interventions.contains(optimizationOutput.getDirectAdType()), "directAdType must be one of the four possible interventions");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -121,10 +121,10 @@ public class OptimizationOutput {
 
         // directAdFrequency is not empty, integer, not negative
         try {
-            Assert.hasText(optimizationOutput.getDirectAdFrequency(), "directAdFrequency is empty");
-            Assert.isTrue(optimizationOutput.getDirectAdFrequency().matches("\\d+"), "directAdFrequency is not a positive integer");
+            Assert.hasText(optimizationOutput.getDirectAdFrequency(), "directAdFrequency must not be empty");
+            Assert.isTrue(optimizationOutput.getDirectAdFrequency().matches("\\d+"), "directAdFrequency must be a whole number greater than or equal to 0");
             int directAdFrequency = Integer.parseInt(optimizationOutput.getDirectAdFrequency());
-            Assert.isTrue(directAdFrequency >= 0 && directAdFrequency <= 365, "directAdFrequency is not within range");
+            Assert.isTrue(directAdFrequency >= 0 && directAdFrequency <= 365, "directAdFrequency must lie between 0 and 365");
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -135,10 +135,10 @@ public class OptimizationOutput {
 
         // trainChiefsFrequency is not empty, integer, not negative
         try {
-            Assert.hasText(optimizationOutput.getTrainChiefsFrequency(), "trainChiefsFrequency is empty");
-            Assert.isTrue(optimizationOutput.getTrainChiefsFrequency().matches("\\d+"), "trainChiefsFrequency is not a positive integer");
+            Assert.hasText(optimizationOutput.getTrainChiefsFrequency(), "trainChiefsFrequency must not be empty");
+            Assert.isTrue(optimizationOutput.getTrainChiefsFrequency().matches("\\d+"), "trainChiefsFrequency must be a whole number greater than or equal to 0");
             int tempTrainChiefsFrequency = Integer.parseInt(optimizationOutput.getTrainChiefsFrequency());
-            Assert.isTrue(tempTrainChiefsFrequency >= 0 && tempTrainChiefsFrequency <= 365, "trainChiefsFrequency is not within range");
+            Assert.isTrue(tempTrainChiefsFrequency >= 0 && tempTrainChiefsFrequency <= 365, "trainChiefsFrequency must lie between 0 and 365");
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -149,10 +149,10 @@ public class OptimizationOutput {
 
         // directAdNrOfVillages is not empty, integer, not negative
         try {
-            Assert.hasText(optimizationOutput.getDirectAdNrOfVillages(), "directAdNrOfVillages is empty");
-            Assert.isTrue(optimizationOutput.getDirectAdNrOfVillages().matches("\\d+"), "directAdNrOfVillages is not a positive integer");
+            Assert.hasText(optimizationOutput.getDirectAdNrOfVillages(), "directAdNrOfVillages must not be empty");
+            Assert.isTrue(optimizationOutput.getDirectAdNrOfVillages().matches("\\d+"), "directAdNrOfVillages must be a whole number greater than or equal to 0");
             int tempDirectAdNrOfVillages = Integer.parseInt(optimizationOutput.getDirectAdNrOfVillages());
-            Assert.isTrue(tempDirectAdNrOfVillages >= 0 && tempDirectAdNrOfVillages <= 100, "directAdNrOfVillages is not within range");
+            Assert.isTrue(tempDirectAdNrOfVillages >= 0 && tempDirectAdNrOfVillages <= 100, "directAdNrOfVillages must lie between 0 and 100");
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -163,10 +163,10 @@ public class OptimizationOutput {
 
         // trainChiefsNumber is not empty, integer, not negative
         try {
-            Assert.hasText(optimizationOutput.getTrainChiefsNumber(), "trainChiefsNumber is empty");
-            Assert.isTrue(optimizationOutput.getTrainChiefsNumber().matches("\\d+"), "trainChiefsNumber is not a positive integer");
+            Assert.hasText(optimizationOutput.getTrainChiefsNumber(), "trainChiefsNumber must not be empty");
+            Assert.isTrue(optimizationOutput.getTrainChiefsNumber().matches("\\d+"), "trainChiefsNumber must be a whole number greater than or equal to 0");
             int tempTrainChiefsNumber = Integer.parseInt(optimizationOutput.getTrainChiefsNumber());
-            Assert.isTrue(tempTrainChiefsNumber >= 0 && tempTrainChiefsNumber <= 100, "trainChiefsNumber is not within range");
+            Assert.isTrue(tempTrainChiefsNumber >= 0 && tempTrainChiefsNumber <= 100, "trainChiefsNumber must lie between 0 and 100");
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -177,8 +177,8 @@ public class OptimizationOutput {
 
         // avgAdopters is not empty, double, not negative
         try {
-            Assert.hasText(optimizationOutput.getAvgAdopters(), "avgAdopters is empty");
-            Assert.isTrue(optimizationOutput.getAvgAdopters().matches("\\d+(\\.\\d+)?"), "avgAdopters is not a positive double");
+            Assert.hasText(optimizationOutput.getAvgAdopters(), "avgAdopters must not be empty");
+            Assert.isTrue(optimizationOutput.getAvgAdopters().matches("\\d+(\\.\\d+)?"), "avgAdopters must be a number greater than or equal to 0");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -186,8 +186,8 @@ public class OptimizationOutput {
 
         // nrOfDirectAds is not empty, double, not negative
         try {
-            Assert.hasText(optimizationOutput.getNrOfDirectAds(), "nrOfDirectAds is empty");
-            Assert.isTrue(optimizationOutput.getNrOfDirectAds().matches("\\d+(\\.\\d+)?"), "nrOfDirectAds is not a positive integer");
+            Assert.hasText(optimizationOutput.getNrOfDirectAds(), "nrOfDirectAds must not be empty");
+            Assert.isTrue(optimizationOutput.getNrOfDirectAds().matches("\\d+(\\.\\d+)?"), "nrOfDirectAds must be a number greater than or equal to 0");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -195,8 +195,8 @@ public class OptimizationOutput {
 
         // nrOfChiefTrainings is not empty, double, not negative
         try {
-            Assert.hasText(optimizationOutput.getNrOfChiefTrainings(), "nrOfChiefTrainings is empty");
-            Assert.isTrue(optimizationOutput.getNrOfChiefTrainings().matches("\\d+(\\.\\d+)?"), "nrOfChiefTrainings is not a positive integer");
+            Assert.hasText(optimizationOutput.getNrOfChiefTrainings(), "nrOfChiefTrainings must not be empty");
+            Assert.isTrue(optimizationOutput.getNrOfChiefTrainings().matches("\\d+(\\.\\d+)?"), "nrOfChiefTrainings must be a number greater than or equal to 0");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -204,8 +204,8 @@ public class OptimizationOutput {
 
         // totalCost is not empty, double, not negative
         try {
-            Assert.hasText(optimizationOutput.getTotalCost(), "totalCost is empty");
-            Assert.isTrue(optimizationOutput.getTotalCost().matches("\\d+(\\.\\d+)?"), "totalCost is not a positive double");
+            Assert.hasText(optimizationOutput.getTotalCost(), "totalCost must not be empty");
+            Assert.isTrue(optimizationOutput.getTotalCost().matches("\\d+(\\.\\d+)?"), "totalCost must be a number greater than or equal to 0");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();

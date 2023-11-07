@@ -139,13 +139,13 @@ public class DataInput {
 
         // no empty strings
         try {
-        Assert.hasText(dataInput.getNrDefaultFriendsInterVillage(), "nrDefaultFriendsInterVillage is empty");
-        Assert.hasText(dataInput.getAvgIntraVillageInteractionFrequency(), "avgIntraVillageInteractionFrequency is empty");
-        Assert.hasText(dataInput.getAvgInterVillageInteractionFrequency(), "avgInterVillageInteractionFrequency is empty");
-        Assert.hasText(dataInput.getAvgChiefFarmerMeetingFrequency(), "avgChiefFarmerMeetingFrequency is empty");
-        Assert.hasText(dataInput.getAvgIntraMentionPercentage(), "avgIntraMentionPercentage is empty");
-        Assert.hasText(dataInput.getPercentageNegativeWoM(), "percentageNegativeWoM is empty");
-        Assert.hasText(dataInput.getBaseAdoptionProbability(), "baseAdoptionProbability is empty");
+        Assert.hasText(dataInput.getNrDefaultFriendsInterVillage(), "nrDefaultFriendsInterVillage must not be empty");
+        Assert.hasText(dataInput.getAvgIntraVillageInteractionFrequency(), "avgIntraVillageInteractionFrequency must not be empty");
+        Assert.hasText(dataInput.getAvgInterVillageInteractionFrequency(), "avgInterVillageInteractionFrequency must not be empty");
+        Assert.hasText(dataInput.getAvgChiefFarmerMeetingFrequency(), "avgChiefFarmerMeetingFrequency must not be empty");
+        Assert.hasText(dataInput.getAvgIntraMentionPercentage(), "avgIntraMentionPercentage must not be empty");
+        Assert.hasText(dataInput.getPercentageNegativeWoM(), "percentageNegativeWoM must not be empty");
+        Assert.hasText(dataInput.getBaseAdoptionProbability(), "baseAdoptionProbability must not be empty");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -153,14 +153,14 @@ public class DataInput {
 
         // numbers are positive doubles
         try {
-        Assert.isTrue(dataInput.getNrDefaultFriendsInterVillage().matches("\\d+(\\.\\d+)?"), "nrDefaultFriendsInterVillage is is not a positive double");
-        Assert.isTrue(dataInput.getAvgIntraVillageInteractionFrequency().matches("\\d+(\\.\\d+)?"), "avgIntraVillageInteractionFrequency is is not a positive double");
-        Assert.isTrue(dataInput.getAvgInterVillageInteractionFrequency().matches("\\d+(\\.\\d+)?"), "avgInterVillageInteractionFrequency is is not a positive double");
-        Assert.isTrue(dataInput.getAvgChiefFarmerMeetingFrequency().matches("\\d+(\\.\\d+)?"), "avgChiefFarmerMeetingFrequency is is not a positive double");
-        Assert.isTrue(dataInput.getPercentageNegativeWoM().matches("\\d+(\\.\\d+)?"), "percentageNegativeWoM is is not a positive double");
-        Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability is is not a positive double");
-        Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability is not a positive double");
-        Assert.isTrue(dataInput.getAvgIntraMentionPercentage().matches("\\d+(\\.\\d+)?"), "avgIntraMentionPercentage is is not a positive double");
+        Assert.isTrue(dataInput.getNrDefaultFriendsInterVillage().matches("\\d+(\\.\\d+)?"), "nrDefaultFriendsInterVillage must be a number greater or equal to 0");
+        Assert.isTrue(dataInput.getAvgIntraVillageInteractionFrequency().matches("\\d+(\\.\\d+)?"), "avgIntraVillageInteractionFrequency must be a number greater or equal to 0");
+        Assert.isTrue(dataInput.getAvgInterVillageInteractionFrequency().matches("\\d+(\\.\\d+)?"), "avgInterVillageInteractionFrequency must be a number greater or equal to 0");
+        Assert.isTrue(dataInput.getAvgChiefFarmerMeetingFrequency().matches("\\d+(\\.\\d+)?"), "avgChiefFarmerMeetingFrequency must be a number greater or equal to 0");
+        Assert.isTrue(dataInput.getPercentageNegativeWoM().matches("\\d+(\\.\\d+)?"), "percentageNegativeWoM must be a number greater or equal to 0");
+        Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability must be a number greater or equal to 0");
+        Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability must be a number greater or equal to 0");
+        Assert.isTrue(dataInput.getAvgIntraMentionPercentage().matches("\\d+(\\.\\d+)?"), "avgIntraMentionPercentage must be a number greater or equal to 0");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -182,9 +182,9 @@ public class DataInput {
             //Assert.isTrue(avgIntraVillageInteractionFrequency >= 1.0 && avgIntraVillageInteractionFrequency <= 10.0, "avgIntraVillageInteractionFrequency is not within range");
             //Assert.isTrue(avgInterVillageInteractionFrequency >= 1.0 && avgInterVillageInteractionFrequency <= 10.0, "avgInterVillageInteractionFrequency is not within range");
             //Assert.isTrue(avgChiefFarmerMeetingFrequency >= 1.0 && avgChiefFarmerMeetingFrequency <= 50.0, "avgChiefFarmerMeetingFrequency is not within range");
-            Assert.isTrue(percentageNegativeWoM >= 0.0 && percentageNegativeWoM <= 100.0, "percentageNegativeWoM is not within range");
-            Assert.isTrue(avgIntraMentionPercentage >= 0.0 && avgIntraMentionPercentage <= 100.0, "avgIntraMentionPercentage is not within range");
-            Assert.isTrue(baseAdoptionProbability >= 0.001 && baseAdoptionProbability <= 100.0, "baseAdoptionProbability is not within range");
+            Assert.isTrue(percentageNegativeWoM >= 0.0 && percentageNegativeWoM <= 100.0, "percentageNegativeWoM must be a number between 0 and 100");
+            Assert.isTrue(avgIntraMentionPercentage >= 0.0 && avgIntraMentionPercentage <= 100.0, "avgIntraMentionPercentage must be a number between 0 and 100");
+            Assert.isTrue(baseAdoptionProbability >= 0.001 && baseAdoptionProbability <= 100.0, "baseAdoptionProbability must be a number between 0.1 and 100");
         
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());

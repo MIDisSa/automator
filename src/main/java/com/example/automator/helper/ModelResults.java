@@ -113,11 +113,11 @@ public class ModelResults {
     public String isModelResultsValid(ModelResults modelResults) { // awareFarmers, adopters, nrOfDirectAds, nrOfChiefTrainings, totalCost, awareFarmersPerTick, adoptersPerTick      
         // no empty strings
         try {
-        Assert.hasText(modelResults.getAwareFarmers(), "awareFarmers is empty");
-        Assert.hasText(modelResults.getAdopters(), "adopters is empty");
-        Assert.hasText(modelResults.getNrOfDirectAds(), "nrOfdirectAds is empty");
-        Assert.hasText(modelResults.getNrOfChiefTrainings(), "nrOfChiefTrainings is empty");
-        Assert.hasText(modelResults.getTotalCost(), "totalCost is empty");
+        Assert.hasText(modelResults.getAwareFarmers(), "awareFarmers must not be empty");
+        Assert.hasText(modelResults.getAdopters(), "adopters must not be empty");
+        Assert.hasText(modelResults.getNrOfDirectAds(), "nrOfdirectAds must not be empty");
+        Assert.hasText(modelResults.getNrOfChiefTrainings(), "nrOfChiefTrainings must not be empty");
+        Assert.hasText(modelResults.getTotalCost(), "totalCost must not be empty");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -125,8 +125,8 @@ public class ModelResults {
 
         // no empty arrays
         try {
-            Assert.isTrue(!modelResults.getAwareFarmersPerTick().isEmpty(), "awareFarmersPerTick is empty");
-            Assert.isTrue(!modelResults.getAdoptersPerTick().isEmpty(), "adoptersPerTick is empty");
+            Assert.isTrue(!modelResults.getAwareFarmersPerTick().isEmpty(), "awareFarmersPerTick must not be empty");
+            Assert.isTrue(!modelResults.getAdoptersPerTick().isEmpty(), "adoptersPerTick must not be empty");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -134,11 +134,11 @@ public class ModelResults {
 
         // all strings contain positive integers
         try {
-            Assert.isTrue(modelResults.getAwareFarmers().matches("\\d+(\\.\\d+)?"), "awareFarmers is not a positive double");
-            Assert.isTrue(modelResults.getAdopters().matches("\\d+(\\.\\d+)?"), "adopters is not a positive double");
-            Assert.isTrue(modelResults.getNrOfDirectAds().matches("\\d+(\\.\\d+)?"), "nrOfDirectAds is not a positive double");
-            Assert.isTrue(modelResults.getNrOfChiefTrainings().matches("\\d+(\\.\\d+)?"), "nrOfChiefTrainings is not a positive double");
-            Assert.isTrue(modelResults.getTotalCost().matches("\\d+(\\.\\d+)?"), "totalCost is not a positive double");
+            Assert.isTrue(modelResults.getAwareFarmers().matches("\\d+(\\.\\d+)?"), "awareFarmers must be a number greater or equal to 0");
+            Assert.isTrue(modelResults.getAdopters().matches("\\d+(\\.\\d+)?"), "adopters must be a number greater or equal to 0");
+            Assert.isTrue(modelResults.getNrOfDirectAds().matches("\\d+(\\.\\d+)?"), "nrOfDirectAds must be a number greater or equal to 0");
+            Assert.isTrue(modelResults.getNrOfChiefTrainings().matches("\\d+(\\.\\d+)?"), "nrOfChiefTrainings must be a number greater or equal to 0");
+            Assert.isTrue(modelResults.getTotalCost().matches("\\d+(\\.\\d+)?"), "totalCost must be a number greater or equal to 0");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -146,10 +146,10 @@ public class ModelResults {
 
         try {
             for (Double d : modelResults.getAwareFarmersPerTick()) {
-                Assert.isTrue(d >= 0, "awareFarmersPerTick contains negative numbers");
+                Assert.isTrue(d >= 0, "every item in awareFarmersPerTick must be a number larger or equal to 0");
             }
             for (Double d : modelResults.getAdoptersPerTick()) {
-                Assert.isTrue(d >= 0, "adoptersPerTick contains negative numbers");
+                Assert.isTrue(d >= 0, "every item in adoptersPerTick must be a number greater or equal to 0");
             }
         } catch (IllegalArgumentException e){
             System.out.println(e.getMessage());

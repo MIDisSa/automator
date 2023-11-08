@@ -75,10 +75,6 @@ public class OptimizationOutput {
         this.optimizationType = optimizationType;
     }
 
-    public void setOptimizationType(String optimizationType) {
-        this.optimizationType = optimizationType;
-    }
-
     public void setDirectAdType(String directAdType) {
         this.directAdType = directAdType;
     }

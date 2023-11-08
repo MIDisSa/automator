@@ -70,6 +70,10 @@ public class OptimizationOutput {
         return totalCost;
     }
 
+    
+    public void setOptimizationType(String optimizationType) {
+        this.optimizationType = optimizationType;
+    }
 
     public void setOptimizationType(String optimizationType) {
         this.optimizationType = optimizationType;

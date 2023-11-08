@@ -32,6 +32,9 @@ public class ABMRunner {
             workspace.command(String.format("set avg_chief_farmer_meeting_frequency %s", dataInput.getAvgChiefFarmerMeetingFrequency()));
             workspace.command(String.format("set percentage_negative_WoM %s", dataInput.getPercentageNegativeWoM()));
             workspace.command(String.format("set base_adoption_probability %s", dataInput.getBaseAdoptionProbability()));
+            workspace.command(String.format("set avg_inter_mention_percentage %s", dataInput.getAvgInterMentionPercentage()));
+            workspace.command(String.format("set avg_intra_mention_percentage %s", dataInput.getAvgIntraMentionPercentage()));
+            
 
             // SET INTERVENTION PARAMETERS
             workspace.command(String.format("set direct_ad_type %s", userInput.getDirectAdType()));

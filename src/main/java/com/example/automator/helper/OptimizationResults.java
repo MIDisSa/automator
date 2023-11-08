@@ -2,8 +2,7 @@ package com.example.automator.helper;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class OptimizationResults {
-    private String 
+public class OptimizationResults { 
 
     @CsvBindByName(column = "direct_ad_type*")
     private String direct_ad_type;

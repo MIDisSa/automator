@@ -37,6 +37,7 @@ public class ABMRunner {
             
 
             // SET INTERVENTION PARAMETERS
+            workspace.command(String.format("set run_until_day_x %s", userInput.getNumberOfTicks()));
             workspace.command(String.format("set direct_ad_type %s", userInput.getDirectAdType()));
             workspace.command(String.format("set direct_ad_frequency %s", userInput.getFrequencyDirectAd()));
             workspace.command(String.format("set train_chiefs_frequency %s", userInput.getFrequencyChiefTraining()));

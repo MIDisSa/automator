@@ -269,7 +269,6 @@ public class AutomatorController {
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
             output.setOptimizationType("Max Adopters");
-            output.setOptimizationType("Max Adopters");
             return output;
 
         } catch (Exception e) {
@@ -294,7 +293,6 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
-            output.setOptimizationType("Max Knowledge");
             output.setOptimizationType("Max Knowledge");
             return output;
 

@@ -97,6 +97,12 @@ public class ABMRunner {
             results.add(totalCost);
             results.add(awareFarmersPerTickString);
             results.add(adoptersPerTickString);
+            
+            ArrayList<String> numbers = userInput.calculateNrOfInterventions();
+            System.out.println("real nr DirAds: " + nrOfDirectAds);
+            System.out.println("calc nr DirAds: " + numbers.get(0));
+            System.out.println("real nr ToT: " + nrOfChiefTrainings);
+            System.out.println("calc nr ToT: " + numbers.get(1));
 
         } catch(Exception e) {
             e.printStackTrace();

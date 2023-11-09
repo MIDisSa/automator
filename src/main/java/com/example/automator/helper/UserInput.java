@@ -1,7 +1,6 @@
 package com.example.automator.helper;
 
 import java.util.ArrayList;
-
 import org.springframework.util.Assert;
 
 public class UserInput { //UserInput?
@@ -148,6 +147,68 @@ public class UserInput { //UserInput?
 
     public void setVariableCostsTrainChiefs(String variableCostsTrainChiefs) {
         this.variableCostsTrainChiefs = variableCostsTrainChiefs;
+    }
+
+    public int calculateDirAdCost() {
+        int result = 0;
+        switch(directAdType) {
+            case "\"Direct Ad\"":
+                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDirectAd) * Integer.valueOf(directAdNrOfVillages));
+                break;
+            case "\"Direct Ad + Discount\"":
+                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDiscount) * Integer.valueOf(directAdNrOfVillages));
+                break;
+            case "\"Direct Ad + Delayed Payment\"":
+                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDelayed) * Integer.valueOf(directAdNrOfVillages));
+                break;
+            case "\"Direct Ad + Delayed P. + Discount\"":
+                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDelayedDiscount) * Integer.valueOf(directAdNrOfVillages));
+                break; 
+            }
+        System.out.println(result);
+        return result;
+    }
+
+    public int calculateToTCost() {
+        int result = Integer.valueOf(fixedCostsTrainChiefs) + (Integer.valueOf(variableCostsTrainChiefs) * Integer.valueOf(trainChiefsNr));
+        System.out.println(result);
+        return result;
+    }
+
+    public ArrayList<String> calculateNrOfInterventions() {
+        ArrayList<String> results = new ArrayList<String>();
+        int i = 0;
+        int tmpBudget = Integer.valueOf(budget);
+        int dirAdCounter = 0;
+        int ToTCounter = 0;
+        int dirAdCost = calculateDirAdCost();
+        int ToTCost = calculateToTCost();
+
+
+        while (i <= numberOfTicks) {
+            if (Integer.valueOf(frequencyDirectAd) > 0 && i != numberOfTicks && i % Integer.valueOf(frequencyDirectAd) == 0) {
+                if (dirAdCost <= tmpBudget) {
+                    tmpBudget = tmpBudget - dirAdCost;
+                    dirAdCounter++;
+                }
+            }
+
+            if (Integer.valueOf(frequencyChiefTraining) > 0 && i != numberOfTicks && i % Integer.valueOf(frequencyChiefTraining) == 0) {
+                if (ToTCost <= tmpBudget) {
+                    tmpBudget = tmpBudget - ToTCost;
+                    ToTCounter++;
+                }
+
+            if (dirAdCost > tmpBudget && ToTCost > tmpBudget) {
+                break;
+                }
+            }
+            i++;
+        }
+        results.add(String.valueOf(dirAdCounter));
+        results.add(String.valueOf(ToTCounter));
+
+        return results;
     }
 
     public String isModelInputValid(UserInput userInput) { // numberOfTicks, frequencyDirectAd, frequencyChiefTraining, typeDirectAd

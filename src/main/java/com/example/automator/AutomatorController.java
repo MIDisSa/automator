@@ -268,7 +268,9 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
-            output.setOptimizationType("Max Adopters");
+            ArrayList<String> nrOfInterventions = optimalInput.calculateNrOfInterventions();
+            output.setNrOfDirectAds(nrOfInterventions.get(0));
+            output.setNrOfChiefTrainings(nrOfInterventions.get(0));
             output.setOptimizationType("Max Adopters");
             return output;
 
@@ -294,7 +296,6 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
-            output.setOptimizationType("Max Knowledge");
             output.setOptimizationType("Max Knowledge");
             return output;
 

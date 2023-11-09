@@ -158,10 +158,10 @@ public class UserInput { //UserInput?
             case "\"Direct Ad + Discount\"":
                 result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDiscount) * Integer.valueOf(directAdNrOfVillages));
                 break;
-            case "\"Direct Ad + Delayed Payment\"":
+            case "\"Direct Ad + Deferred Payment\"":
                 result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDelayed) * Integer.valueOf(directAdNrOfVillages));
                 break;
-            case "\"Direct Ad + Delayed P. + Discount\"":
+            case "\"Direct Ad + Deferred P. + Discount\"":
                 result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDelayedDiscount) * Integer.valueOf(directAdNrOfVillages));
                 break; 
             }
@@ -255,8 +255,8 @@ public class UserInput { //UserInput?
             ArrayList<String> possible_interventions = new ArrayList<String>();
             possible_interventions.add("\"Direct Ad\"");
             possible_interventions.add("\"Direct Ad + Discount\"");
-            possible_interventions.add("\"Direct Ad + Delayed Payment\"");
-            possible_interventions.add("\"Direct Ad + Delayed P. + Discount\"");
+            possible_interventions.add("\"Direct Ad + Deferred Payment\"");
+            possible_interventions.add("\"Direct Ad + Deferred P. + Discount\"");
             Assert.isTrue(possible_interventions.contains(userInput.getDirectAdType()), "directAdType is not one of the four possible interventions");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

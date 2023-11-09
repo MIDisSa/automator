@@ -12,14 +12,14 @@ import org.mockito.Mockito;
 import org.nlogo.headless.HeadlessWorkspace;
 
 import com.example.automator.helper.DataInput;
-import com.example.automator.helper.UserInput;
+import com.example.automator.helper.ModelInput;
 import com.example.automator.helper.Parameters;
 import com.example.automator.helper.ABMRunner;
 
 public class ABMRunnerTest {
 
     private DataInput mockDataInput;
-    private UserInput mockUserInput;
+    private ModelInput mockUserInput;
 
     @BeforeEach
     public void setUpDataInputParameters() {
@@ -45,7 +45,7 @@ public class ABMRunnerTest {
 
     @BeforeEach
     public void setUpUserInputParameters() {
-        mockUserInput = new UserInput();
+        mockUserInput = new ModelInput();
     }
     
     @Test

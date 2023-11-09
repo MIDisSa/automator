@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.util.Assert;
 
-public class UserInput { //UserInput?
+public class ModelInput {
     //Optimization parameters:
     private int numberOfTicks = 360;
     private String frequencyDirectAd;
@@ -24,7 +24,7 @@ public class UserInput { //UserInput?
     private String variableCostsTrainChiefs = "400";
 
 
-    public UserInput() {
+    public ModelInput() {
     }
 
     //GETTER (Optimization Parameters)
@@ -150,7 +150,7 @@ public class UserInput { //UserInput?
         this.variableCostsTrainChiefs = variableCostsTrainChiefs;
     }
 
-    public String isModelInputValid(UserInput userInput) { // numberOfTicks, frequencyDirectAd, frequencyChiefTraining, typeDirectAd
+    public String isModelInputValid(ModelInput userInput) { // numberOfTicks, frequencyDirectAd, frequencyChiefTraining, typeDirectAd
         // nrOfTicks is not zero, not negative
         try {
             Assert.isTrue(userInput.getNumberOfTicks() > 0, "numberOfTicks is zero or negative");
@@ -206,7 +206,7 @@ public class UserInput { //UserInput?
         return "ok";
     }
 
-    public String isOptimizationInputValid(UserInput userInput) { // optimizationType, budget, fixedCostsDirectAd, fixedCostsTrainChiefs, variableCostsDirectAd, variableCostsDiscount, variableCostsDelayed, variableCostsDelayedDiscount, variableCostsTrainChiefs
+    public String isOptimizationInputValid(ModelInput userInput) { // optimizationType, budget, fixedCostsDirectAd, fixedCostsTrainChiefs, variableCostsDirectAd, variableCostsDiscount, variableCostsDelayed, variableCostsDelayedDiscount, variableCostsTrainChiefs
         // optimizationType matches one of four possible string
         try {            
             ArrayList<String> possible_optimizations = new ArrayList<String>();

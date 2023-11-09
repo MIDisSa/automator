@@ -17,7 +17,7 @@ import org.w3c.dom.Node;
 import java.io.File;  
 
 public class XMLUpdater {
-    public static void updateXML(String fileName, DataInput dataInput, UserInput userInput) {
+    public static void updateXML(String fileName, DataInput dataInput, ModelInput modelInput) {
             try {
                 //Load XML
                 System.out.println("loading XML");
@@ -37,13 +37,13 @@ public class XMLUpdater {
                 XPath xPath = XPathFactory.newInstance().newXPath();
                 
                 Node node = (Node) xPath.compile("/search/modelInfo/modelStopCondition").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("ticks >= %s", userInput.getNumberOfTicks()));
+                node.setTextContent(String.format("ticks >= %s", modelInput.getNumberOfTicks()));
 
                 node = (Node) xPath.compile("/search/modelInfo/modelStepLimit").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("%d", userInput.getNumberOfTicks()));
+                node.setTextContent(String.format("%d", modelInput.getNumberOfTicks()));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[7]").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("[\"run_until_day_x\" %s]", userInput.getNumberOfTicks()));
+                node.setTextContent(String.format("[\"run_until_day_x\" %s]", modelInput.getNumberOfTicks()));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[8]").evaluate(doc, XPathConstants.NODE);
                 node.setTextContent(String.format("[\"nr_default_friends_inter_village\" %s]", dataInput.getNrDefaultFriendsInterVillage()));
@@ -70,28 +70,28 @@ public class XMLUpdater {
                 node.setTextContent(String.format("[\"avg_intra_mention_percentage\" %s]", dataInput.getAvgIntraMentionPercentage())); 
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[16]").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("[\"max_budget\" %s]", userInput.getBudget()));
+                node.setTextContent(String.format("[\"max_budget\" %s]", modelInput.getBudget()));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[17]").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("[\"fixed_costs_direct_ad\" %s]", userInput.getFixedCostsDirectAd()));
+                node.setTextContent(String.format("[\"fixed_costs_direct_ad\" %s]", modelInput.getFixedCostsDirectAd()));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[18]").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("[\"fixed_costs_train_chiefs\" %s]", userInput.getFixedCostsTrainChiefs()));
+                node.setTextContent(String.format("[\"fixed_costs_train_chiefs\" %s]", modelInput.getFixedCostsTrainChiefs()));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[19]").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("[\"variable_costs_direct_ad\" %s]", userInput.getVariableCostsDirectAd()));
+                node.setTextContent(String.format("[\"variable_costs_direct_ad\" %s]", modelInput.getVariableCostsDirectAd()));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[20]").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("[\"variable_costs_discount\" %s]", userInput.getVariableCostsDiscount()));   
+                node.setTextContent(String.format("[\"variable_costs_discount\" %s]", modelInput.getVariableCostsDiscount()));   
                 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[21]").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("[\"variable_costs_delayed\" %s]", userInput.getVariableCostsDelayed()));
+                node.setTextContent(String.format("[\"variable_costs_delayed\" %s]", modelInput.getVariableCostsDelayed()));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[22]").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("[\"variable_costs_delayed_discount\" %s]", userInput.getVariableCostsDelayedDiscount()));
+                node.setTextContent(String.format("[\"variable_costs_delayed_discount\" %s]", modelInput.getVariableCostsDelayedDiscount()));
                 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[23]").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("[\"variable_costs_train_chiefs\" %s]", userInput.getVariableCostsTrainChiefs())); 
+                node.setTextContent(String.format("[\"variable_costs_train_chiefs\" %s]", modelInput.getVariableCostsTrainChiefs())); 
 
               
 

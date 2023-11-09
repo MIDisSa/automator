@@ -6,15 +6,14 @@ import org.nlogo.headless.HeadlessWorkspace;
 
 public class ABMRunner {
 
-    public static ArrayList<String> runABM(DataInput dataInput, UserInput userInput) {
+    public static ArrayList<String> runABM(DataInput dataInput, ModelInput modelInput) {
         // create workspace
         HeadlessWorkspace workspace = HeadlessWorkspace.newInstance();
         System.out.println("workspace created");
 
-        return runABM(dataInput, userInput, workspace);
+        return runABM(dataInput, modelInput, workspace);
     }
-
-    public static ArrayList<String> runABM(DataInput dataInput, UserInput userInput, HeadlessWorkspace workspace) {
+    public static ArrayList<String> runABM(DataInput dataInput, ModelInput modelInput, HeadlessWorkspace workspace) {
 
         // establish return variable
         ArrayList<String> results = new ArrayList<String>();
@@ -37,23 +36,23 @@ public class ABMRunner {
             
 
             // SET INTERVENTION PARAMETERS
-            workspace.command(String.format("set direct_ad_type %s", userInput.getDirectAdType()));
-            workspace.command(String.format("set direct_ad_frequency %s", userInput.getFrequencyDirectAd()));
-            workspace.command(String.format("set train_chiefs_frequency %s", userInput.getFrequencyChiefTraining()));
-            workspace.command(String.format("set max_budget %s", userInput.getBudget()));
-            workspace.command(String.format("set direct_ad_nr_of_villages %s", userInput.getDirectAdNrOfVillages()));
+            workspace.command(String.format("set direct_ad_type %s", modelInput.getDirectAdType()));
+            workspace.command(String.format("set direct_ad_frequency %s", modelInput.getFrequencyDirectAd()));
+            workspace.command(String.format("set train_chiefs_frequency %s", modelInput.getFrequencyChiefTraining()));
+            workspace.command(String.format("set max_budget %s", modelInput.getBudget()));
+            workspace.command(String.format("set direct_ad_nr_of_villages %s", modelInput.getDirectAdNrOfVillages()));
             workspace.command("set percentage_of_villagers_addressed 50"); //not part of optimization atm
-            workspace.command(String.format("set train_chiefs_nr %s", userInput.getTrainChiefsNr())); 
-            workspace.command(String.format("set max_budget %s", userInput.getBudget()));
+            workspace.command(String.format("set train_chiefs_nr %s", modelInput.getTrainChiefsNr())); 
+            workspace.command(String.format("set max_budget %s", modelInput.getBudget()));
 
             // SET FIXED AND VARIABLE COST
-            workspace.command(String.format("set fixed_costs_direct_ad %s", userInput.getFixedCostsDirectAd()));
-            workspace.command(String.format("set fixed_costs_train_chiefs %s", userInput.getFixedCostsTrainChiefs()));
-            workspace.command(String.format("set variable_costs_direct_ad %s", userInput.getVariableCostsDirectAd()));
-            workspace.command(String.format("set variable_costs_discount %s", userInput.getVariableCostsDiscount()));
-            workspace.command(String.format("set variable_costs_delayed %s", userInput.getVariableCostsDelayed()));
-            workspace.command(String.format("set variable_costs_delayed_discount %s", userInput.getVariableCostsDelayedDiscount()));
-            workspace.command(String.format("set variable_costs_train_chiefs %s", userInput.getVariableCostsTrainChiefs()));
+            workspace.command(String.format("set fixed_costs_direct_ad %s", modelInput.getFixedCostsDirectAd()));
+            workspace.command(String.format("set fixed_costs_train_chiefs %s", modelInput.getFixedCostsTrainChiefs()));
+            workspace.command(String.format("set variable_costs_direct_ad %s", modelInput.getVariableCostsDirectAd()));
+            workspace.command(String.format("set variable_costs_discount %s", modelInput.getVariableCostsDiscount()));
+            workspace.command(String.format("set variable_costs_delayed %s", modelInput.getVariableCostsDelayed()));
+            workspace.command(String.format("set variable_costs_delayed_discount %s", modelInput.getVariableCostsDelayedDiscount()));
+            workspace.command(String.format("set variable_costs_train_chiefs %s", modelInput.getVariableCostsTrainChiefs()));
 
 
 
@@ -66,7 +65,7 @@ public class ABMRunner {
             ArrayList<Double> adoptersPerTick = new ArrayList<Double>();
 
             // run model for set number of ticks
-            int ticks = userInput.getNumberOfTicks();
+            int ticks = modelInput.getNumberOfTicks();
             int counter = 0;
             while (counter < ticks) {
                 workspace.command("go");

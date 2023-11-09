@@ -29,7 +29,7 @@ import com.example.automator.helper.OptimizationResults;
 import com.example.automator.helper.OptimizationResultsConverter;
 import com.example.automator.helper.XMLUpdater;
 import com.example.automator.helper.DataInput;
-import com.example.automator.helper.UserInput;
+import com.example.automator.helper.ModelInput;
 import com.example.automator.helper.OptimizationOutput;
 import com.example.automator.helper.Parameters;
 
@@ -85,10 +85,10 @@ public class AutomatorController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/results")
     @ResponseStatus(HttpStatus.OK)
-    public Object modelResults(@RequestBody UserInput userInput) {
+    public Object modelResults(@RequestBody ModelInput modelInput) {
 
         // check if user input is valid
-        String inputValidation = userInput.isModelInputValid(userInput);
+        String inputValidation = modelInput.isModelInputValid(modelInput);
         if (inputValidation != "ok") {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, inputValidation); // 406 - not acceptable
         }
@@ -96,7 +96,7 @@ public class AutomatorController {
 
          try {
             //run netlogo model and receive results
-            ArrayList<String> results = ABMRunner.runABM(workingDataInput, userInput);
+            ArrayList<String> results = ABMRunner.runABM(workingDataInput, modelInput);
 
             // create ModelResults from results
             ModelResults modelResults = new ModelResults();
@@ -117,40 +117,40 @@ public class AutomatorController {
     }
 
     @PostMapping("/testUpdateXML") 
-    public void updateXML(@RequestBody UserInput input) {
+    public void updateXML(@RequestBody ModelInput input) {
         XMLUpdater.updateXML("MaxAdoptersTest.bsearch", workingDataInput, input);
     }
     
     @PostMapping("/optimization") //Optimization
     @ResponseStatus(HttpStatus.OK)
-    public OptimizationOutput optimize(@RequestBody UserInput userInput) {
+    public OptimizationOutput optimize(@RequestBody ModelInput modelInput) {
 
         // check if user input is valid
-        String inputValidation = userInput.isOptimizationInputValid(userInput);
+        String inputValidation = modelInput.isOptimizationInputValid(modelInput);
         if (inputValidation != "ok") {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, inputValidation); // 406 - not acceptable
         }
         System.out.println("input is valid");
 
         try {
-            String optimizationType = userInput.getOptimizationType();
+            String optimizationType = modelInput.getOptimizationType();
             OptimizationOutput results = null;
             
             switch(optimizationType) {
                 case "maxAdopters":
-                    results = maxAdopters(userInput);
+                    results = maxAdopters(modelInput);
                     System.out.println("maximizing adopters");
                     break;
                 case "maxKnowledge":
-                    results = maxKnowledge(userInput);
+                    results = maxKnowledge(modelInput);
                     System.out.println("maximizing considerers");
                     break;
                 case "minCost":
-                    results = minCost(userInput);
+                    results = minCost(modelInput);
                     System.out.println("minimizing cost");
                     break;
                 case "test":
-                    results = testResults(userInput);
+                    results = testResults(modelInput);
                     System.out.println("returning test results");
                     break;
             }
@@ -252,16 +252,16 @@ public class AutomatorController {
 
     //Helper methods:
 
-    public OptimizationOutput maxAdopters(UserInput userInput) {
+    public OptimizationOutput maxAdopters(ModelInput modelInput) {
         try {
             //Update Budget
-            XMLUpdater.updateXML("MaxAdopters.bsearch", workingDataInput, userInput);
+            XMLUpdater.updateXML("MaxAdopters.bsearch", workingDataInput, modelInput);
 
             CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MaxAdopters.bsearch -o optimization-results-go-here/MaxAdopters");
 
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("MaxAdopters.finalCheckedBests.csv");
-            UserInput optimalInput = OptimizationResultsConverter.convertResultsToUserInput(OptimizationResults, userInput);
+            ModelInput optimalInput = OptimizationResultsConverter.convertResultsToModelInput(OptimizationResults, modelInput);
             
             ArrayList<String> results = ABMRunner.runABM(workingDataInput, optimalInput);
             ModelResults modelResults = new ModelResults();
@@ -278,16 +278,16 @@ public class AutomatorController {
         return null;
     }
 
-    public OptimizationOutput maxKnowledge(UserInput userInput) {
+    public OptimizationOutput maxKnowledge(ModelInput modelInput) {
         try {
             //Update Budget
-            XMLUpdater.updateXML("MaxKnowledge.bsearch", workingDataInput, userInput);
+            XMLUpdater.updateXML("MaxKnowledge.bsearch", workingDataInput, modelInput);
 
             CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MaxKnowledge.bsearch -o optimization-results-go-here/MaxKnowledge");
 
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("MaxKnowledge.finalCheckedBests.csv");
-            UserInput optimalInput = OptimizationResultsConverter.convertResultsToUserInput(OptimizationResults, userInput);
+            ModelInput optimalInput = OptimizationResultsConverter.convertResultsToModelInput(OptimizationResults, modelInput);
             
             ArrayList<String> results = ABMRunner.runABM(workingDataInput, optimalInput);
             ModelResults modelResults = new ModelResults();
@@ -304,16 +304,16 @@ public class AutomatorController {
         return null;
     }
 
-    public OptimizationOutput minCost(UserInput userInput) {
+    public OptimizationOutput minCost(ModelInput modelInput) {
         try {
             //Update Budget
-            XMLUpdater.updateXML("MinCostPerAdopter.bsearch", workingDataInput, userInput);
+            XMLUpdater.updateXML("MinCostPerAdopter.bsearch", workingDataInput, modelInput);
 
             CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MinCostPerAdopter.bsearch -o optimization-results-go-here/MinCostPerAdopter");
             
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("MinCostPerAdopter.finalCheckedBests.csv");
-            UserInput optimalInput = OptimizationResultsConverter.convertResultsToUserInput(OptimizationResults, userInput);
+            ModelInput optimalInput = OptimizationResultsConverter.convertResultsToModelInput(OptimizationResults, modelInput);
             
             ArrayList<String> results = ABMRunner.runABM(workingDataInput, optimalInput);
             ModelResults modelResults = new ModelResults();
@@ -330,10 +330,10 @@ public class AutomatorController {
         return null;
     }
 
-    public OptimizationOutput testResults(UserInput userInput) {
+    public OptimizationOutput testResults(ModelInput modelInput) {
         try {
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("testResults.csv");
-            UserInput optimalInput = OptimizationResultsConverter.convertResultsToUserInput(OptimizationResults, userInput);
+            ModelInput optimalInput = OptimizationResultsConverter.convertResultsToModelInput(OptimizationResults, modelInput);
             
             
             ArrayList<String> results = ABMRunner.runABM(workingDataInput, optimalInput);

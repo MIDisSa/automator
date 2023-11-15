@@ -247,6 +247,34 @@ public class UserInput { //UserInput?
             return e.getMessage();
         }
 
+        // directAdCoverage is not empty, integer, between 0 and 100
+        try {
+            Assert.hasText(userInput.getDirectAdCoverage(), "directAdCoverage is empty");
+            Assert.isTrue(userInput.getDirectAdCoverage().matches("\\d+"), "directAdCoverage is not a positive integer");
+            int directAdCoverage = Integer.parseInt(userInput.getDirectAdCoverage());
+            Assert.isTrue(directAdCoverage >= 0 && directAdCoverage <= 100, "directAdCoverage must be between 0 and 100");
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+
+        // trainingOfChiefsCoverage is not empty, integer, between 0 and 100
+        try {
+            Assert.hasText(userInput.getTrainChiefsCoverage(), "trainChiefsCoverage is empty");
+            Assert.isTrue(userInput.getTrainChiefsCoverage().matches("\\d+"), "trainChiefsCoverage is not a positive integer");
+            int frequencyDirectAd = Integer.parseInt(userInput.getTrainChiefsCoverage());
+            Assert.isTrue(frequencyDirectAd >= 0 && frequencyDirectAd <= 100, "trainChiefsCoverage must lie between 0 and 100");
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+
         System.out.println("parameters are correct");
         return "ok";
     }

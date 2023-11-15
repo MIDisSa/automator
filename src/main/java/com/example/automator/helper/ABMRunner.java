@@ -55,10 +55,10 @@ public class ABMRunner {
             workspace.command(String.format("set variable_costs_train_chiefs %s", userInput.getVariableCostsTrainChiefs()));
 
             // SET VILLAGE PARAMETERS
-            workspace.command(String.format("set avg_nr_of_farmers_per_village %s", userInput.getFarmersPerVillage()));
-            workspace.command(String.format("set nr_of_villages %s", userInput.getNrOfVillages()));
-            workspace.command(String.format("set nr_of_neighborhoods %s", userInput.getNrOfNeighborhoods()));
-            workspace.command(String.format("set percentage_of_farmers_in_farmgroup %s", userInput.getPercentageOfFarmersInFarmgroup()));
+            //workspace.command(String.format("set avg_nr_of_farmers_per_village %s", userInput.getFarmersPerVillage()));
+            //workspace.command(String.format("set nr_of_villages %s", userInput.getNrOfVillages()));
+            //workspace.command(String.format("set nr_of_neighborhoods %s", userInput.getNrOfNeighborhoods()));
+            //workspace.command(String.format("set percentage_of_farmers_in_farmgroup %s", userInput.getPercentageOfFarmersInFarmgroup()));
 
             // SETUP SIMULATIO
             //workspace.command("random-seed 0");

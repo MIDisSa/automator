@@ -301,9 +301,9 @@ public class UserInput { //UserInput?
             Assert.isTrue(userInput.getFarmersPerVillage().matches("\\d+"), "farmersPerVillage is not a positive integer");
             Assert.isTrue(userInput.getNrOfVillages().matches("\\d+"), "nrOfVillages is not a positive integer");
             Assert.isTrue(userInput.getNrOfNeighborhoods().matches("\\d+"), "nrOfNeighborhoods is not a positive integer");
-            Assert.isTrue(userInput.getPercentageOfNumbersInFarmgroup().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getPercentageOfFarmersInFarmgroup().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
             
-            int farmersInFarmgroup = Integer.parseInt(userInput.getPercentageOfNumbersInFarmgroup());
+            int farmersInFarmgroup = Integer.parseInt(userInput.getPercentageOfFarmersInFarmgroup());
             Assert.isTrue(farmersInFarmgroup >= 0 && farmersInFarmgroup <= 100, "farmersInFarmgroup must lie between 0 and 100");
 
         } catch (IllegalArgumentException e) {

@@ -36,8 +36,8 @@ import com.example.automator.helper.Parameters;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class AutomatorController { 
-    DataInput defaultDataInput = new DataInput();
     DataInput workingDataInput = new DataInput();
+    UserInput workingUserInput = new UserInput();
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
@@ -80,6 +80,47 @@ public class AutomatorController {
         DataInput workingDataInput = new DataInput();
         System.out.println("DataInput set to default parameters");
         return ResponseEntity.ok(workingDataInput); // gives back workingDataInput with 200 OK message
+    }
+
+    @PostMapping("/updateGlobalInput") 
+    @ResponseStatus(HttpStatus.OK)
+    public void updateGlobalInput(@RequestBody UserInput userInput) {
+        //check if input is valid
+
+        //Update Global Parameters
+        workingUserInput.setNumberOfTicks(userInput.getNumberOfTicks());
+        workingUserInput.setBudget(userInput.getBudget());
+        workingUserInput.setFixedCostsDirectAd(userInput.getFixedCostsDirectAd());
+        workingUserInput.setFixedCostsTrainChiefs(userInput.getFixedCostsTrainChiefs());
+        workingUserInput.setVariableCostsDirectAd(userInput.getVariableCostsDirectAd());
+        workingUserInput.setVariableCostsDiscount(userInput.getVariableCostsDiscount());
+        workingUserInput.setVariableCostsDelayed(userInput.getVariableCostsDelayed());
+        workingUserInput.setVariableCostsDelayedDiscount(userInput.getVariableCostsDelayedDiscount());
+        workingUserInput.setVariableCostsTrainChiefs(userInput.getVariableCostsTrainChiefs());
+
+        workingUserInput.setFrequencyDirectAd(userInput.getFrequencyDirectAd());
+        workingUserInput.setFrequencyChiefTraining(userInput.getFrequencyChiefTraining());
+        workingUserInput.setDirectAdType(userInput.getDirectAdType());
+        workingUserInput.setDirectAdCoverage(userInput.getDirectAdCoverage());
+        workingUserInput.setTrainChiefsCoverage(userInput.getTrainChiefsCoverage());
+        workingUserInput.setPercentageOfVillagersAddressed(userInput.getPercentageOfVillagersAddressed());
+
+        //add later maybe:
+        /*workingUserInput.setFarmersPerVillage(userInput.getFarmersPerVillage());
+        workingUserInput.setNrOfVillages(userInput.getNrOfVillages());
+        workingUserInput.setNrOfNeighborhoods(userInput.getNrOfNeighborhoods());
+        workingUserInput.setPercentageOfNumbersInFarmgroup(userInput.getPercentageOfNumbersInFarmgroup());
+
+        workingUserInput.setOptimizationType(userInput.getOptimizationType());*/
+
+    }
+
+    @PostMapping("/resetGlobalInput")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<UserInput> resetGlobalInput(){
+        UserInput workingUserInput = new UserInput();
+        System.out.println("UserInput set to default parameters");
+        return ResponseEntity.ok(workingUserInput); // gives back workingDataInput with 200 OK message
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

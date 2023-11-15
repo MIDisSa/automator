@@ -7,8 +7,8 @@ public class OptimizationResultsConverter {
         userInput.setFrequencyDirectAd(optRes.getDirectAdFrequency());
         userInput.setFrequencyChiefTraining(optRes.getTrainChiefsFrequency());
         userInput.setDirectAdType(optRes.getDirectAdType());
-        userInput.setDirectAdNrOfVillages(optRes.getDirectAdNrOfVillages());
-        userInput.setTrainChiefsNr(optRes.getTrainChiefsNumber());
+        userInput.setDirectAdCoverage(optRes.getDirectAdNrOfVillages());
+        userInput.setTrainChiefsCoverage(optRes.getTrainChiefsNumber());
 
         return userInput;
     }

@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 
 import com.opencsv.CSVWriter;
 import java.io.InputStream;
@@ -60,44 +59,6 @@ public class AutomatorController {
     
     @GetMapping(value="/downloadResultsCSV", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public @ResponseBody byte[] downloadResultsCSV() throws IOException {
-        File file = new File("CSV-files-go-here/modelResults.csv");
-
-            //Build row for ResultsCSV
-            FileWriter outputfile = new FileWriter(file, true);
-            CSVWriter writer = new CSVWriter(outputfile);
-            String[] newRow = {};
-            List<String> row = new ArrayList<String>(Arrays.asList(newRow));
-            row.add(String.format("%s", LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).toString()));
-            row.add(String.valueOf(workingUserInput.getNumberOfTicks()));
-            row.add(workingUserInput.getBudget());
-            row.add(workingUserInput.getFixedCostsDirectAd());
-            row.add(workingUserInput.getFixedCostsTrainChiefs());
-            row.add(workingUserInput.getVariableCostsDirectAd());
-            row.add(workingUserInput.getVariableCostsDiscount());
-            row.add(workingUserInput.getVariableCostsDelayed());
-            row.add(workingUserInput.getVariableCostsDelayedDiscount());
-            row.add(workingUserInput.getVariableCostsTrainChiefs());
-            row.add(workingUserInput.getFrequencyDirectAd());
-            row.add(workingUserInput.getDirectAdType());
-            row.add(workingUserInput.getFrequencyChiefTraining());
-            row.add(workingUserInput.getDirectAdCoverage());
-            row.add(workingUserInput.getTrainChiefsCoverage());
-            row.add(workingUserInput.getPercentageOfVillagersAddressed());
-            row.add(workingDataInput.getAvgIntraMentionPercentage());
-            row.add(workingDataInput.getPercentageNegativeWoM());
-            row.add(workingDataInput.getBaseAdoptionProbability());
-            row.add(workingDataInput.getNrDefaultFriendsInterVillage());
-            row.add(workingDataInput.getAvgInterVillageInteractionFrequency());
-            row.add(workingDataInput.getAvgIntraVillageInteractionFrequency());
-            row.add(workingDataInput.getAvgChiefFarmerMeetingFrequency());
-            row.add(workingDataInput.getTrainChiefInfluence());
-
-            newRow = row.toArray(newRow);
-
-            //Update ResultsCSV
-            writer.writeNext(newRow);
-            writer.close();
-
         String path = "CSV-files-go-here/modelResults.csv";
         InputStream in = Files.newInputStream(Path.of(path));
         return IOUtils.toByteArray(in);
@@ -200,6 +161,7 @@ public class AutomatorController {
         }
         System.out.println("input is valid");
 
+        //Path to output CSV
         File file = new File("CSV-files-go-here/modelResults.csv");
 
          try {
@@ -219,16 +181,10 @@ public class AutomatorController {
             //Build row for ResultsCSV
             FileWriter outputfile = new FileWriter(file, true);
             CSVWriter writer = new CSVWriter(outputfile);
-            String[] newRow = {};
-            List<String> row = new ArrayList<String>(Arrays.asList(newRow));
-            row.add(String.format("%s", LocalDateTime.now()));
-
-
-
-            String[] testentry = {"entry4", "entry5", "entry6"};
+            String[] newRow = buildCsvEntry(modelResults);
 
             //Update ResultsCSV
-            writer.writeNext(testentry);
+            writer.writeNext(newRow);
             writer.close();
             
             // check if model results are valid
@@ -474,5 +430,41 @@ public class AutomatorController {
             System.out.println(e);
         }
         return null;
+    }
+
+    public String[] buildCsvEntry(ModelResults modelResults) {
+            String[] newRow = {};
+            List<String> row = new ArrayList<String>(Arrays.asList(newRow));
+            row.add(String.format("%s", LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).toString()));
+            row.add(modelResults.getAdopters());
+            row.add(modelResults.getAwareFarmers());
+            row.add(modelResults.getTotalCost());
+            row.add(String.valueOf(workingUserInput.getNumberOfTicks()));
+            row.add(workingUserInput.getBudget());
+            row.add(workingUserInput.getFixedCostsDirectAd());
+            row.add(workingUserInput.getFixedCostsTrainChiefs());
+            row.add(workingUserInput.getVariableCostsDirectAd());
+            row.add(workingUserInput.getVariableCostsDiscount());
+            row.add(workingUserInput.getVariableCostsDelayed());
+            row.add(workingUserInput.getVariableCostsDelayedDiscount());
+            row.add(workingUserInput.getVariableCostsTrainChiefs());
+            row.add(workingUserInput.getFrequencyDirectAd());
+            String type = workingUserInput.getDirectAdType();
+            row.add(type.substring(2, type.length() - 2));
+            row.add(workingUserInput.getFrequencyChiefTraining());
+            row.add(workingUserInput.getDirectAdCoverage());
+            row.add(workingUserInput.getTrainChiefsCoverage());
+            row.add(workingUserInput.getPercentageOfVillagersAddressed());
+            row.add(workingDataInput.getAvgIntraMentionPercentage());
+            row.add(workingDataInput.getPercentageNegativeWoM());
+            row.add(workingDataInput.getBaseAdoptionProbability());
+            row.add(workingDataInput.getNrDefaultFriendsInterVillage());
+            row.add(workingDataInput.getAvgInterVillageInteractionFrequency());
+            row.add(workingDataInput.getAvgIntraVillageInteractionFrequency());
+            row.add(workingDataInput.getAvgChiefFarmerMeetingFrequency());
+            row.add(workingDataInput.getTrainChiefInfluence());
+
+            newRow = row.toArray(newRow);
+            return newRow;
     }
 }

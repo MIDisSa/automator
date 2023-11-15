@@ -16,9 +16,9 @@ public class UserInput { //UserInput?
     private String variableCostsDelayedDiscount = "800"; //discount + deferred payment
     private String variableCostsTrainChiefs = "400";
 
-    private String frequencyDirectAd;
-    private String frequencyChiefTraining;
-    private String directAdType;
+    private String frequencyDirectAd = "360";
+    private String frequencyChiefTraining = "360";
+    private String directAdType = "Direct Ad";
     private String directAdCoverage = "50";
     private String trainChiefsCoverage = "50";
     private String optimizationType = "test";

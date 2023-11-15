@@ -196,13 +196,6 @@ public class UserInput { //UserInput?
     }
 
     public String isModelInputValid(UserInput userInput) { // numberOfTicks, frequencyDirectAd, frequencyChiefTraining, typeDirectAd
-        // nrOfTicks is not zero, not negative
-        try {
-            Assert.isTrue(userInput.getNumberOfTicks() > 0, "numberOfTicks is zero or negative");
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return e.getMessage();
-        }
 
         // frequencyDirectAd is not empty, integer, not negative
         try {
@@ -251,23 +244,10 @@ public class UserInput { //UserInput?
         return "ok";
     }
 
-    public String isOptimizationInputValid(UserInput userInput) { // optimizationType, budget, fixedCostsDirectAd, fixedCostsTrainChiefs, variableCostsDirectAd, variableCostsDiscount, variableCostsDelayed, variableCostsDelayedDiscount, variableCostsTrainChiefs
-        // optimizationType matches one of four possible string
-        try {            
-            ArrayList<String> possible_optimizations = new ArrayList<String>();
-            possible_optimizations.add("maxAdopters");
-            possible_optimizations.add("maxKnowledge");
-            possible_optimizations.add("minCost");
-            possible_optimizations.add("test");
-            Assert.isTrue(possible_optimizations.contains(userInput.getOptimizationType()), "optimizationType is not one of the four possible types");
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return e.getMessage();
-        }
-        
+    public String isGlobalInputValid(UserInput userInput) { //  budget, fixedCostsDirectAd, fixedCostsTrainChiefs, variableCostsDirectAd, variableCostsDiscount, variableCostsDelayed, variableCostsDelayedDiscount, variableCostsTrainChiefs
+
         // parameters are not empty, not negative
         try {
-            Assert.hasText(userInput.getOptimizationType(), "optimizationType is empty");
             Assert.hasText(userInput.getBudget(), "budget is empty");
             Assert.hasText(userInput.getFixedCostsDirectAd(), "fixedCostsDirectAd is empty");
             Assert.hasText(userInput.getFixedCostsTrainChiefs(), "fixedCostsTrainChiefs is empty");
@@ -276,7 +256,12 @@ public class UserInput { //UserInput?
             Assert.hasText(userInput.getVariableCostsDelayed(), "variableCostsDelayed is empty");
             Assert.hasText(userInput.getVariableCostsDelayedDiscount(), "variableCostsDelayedDiscount is empty");
             Assert.hasText(userInput.getVariableCostsTrainChiefs(), "variableCostsTrainChiefs is empty");
+            //Assert.hasText(userInput.getFarmersPerVillage(), "farmersPerVillage is empty");
+            //Assert.hasText(userInput.getNrOfVillages(), "nrOfVillages is empty");
+            //Assert.hasText(userInput.getNrOfNeighborhoods(), "nrOfNeighborhoods is empty");
+            //Assert.hasText(userInput.getPercentageOfNumbersInFarmgroup(), "percentageOfNumbersInFarmgroup is empty");
 
+            Assert.isTrue(userInput.getNumberOfTicks() > 0, "numberOfTicks must be larger than 0");
             Assert.isTrue(userInput.getBudget().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
             Assert.isTrue(userInput.getFixedCostsDirectAd().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
             Assert.isTrue(userInput.getFixedCostsTrainChiefs().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
@@ -285,6 +270,33 @@ public class UserInput { //UserInput?
             Assert.isTrue(userInput.getVariableCostsDelayed().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
             Assert.isTrue(userInput.getVariableCostsDelayedDiscount().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
             Assert.isTrue(userInput.getVariableCostsTrainChiefs().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getFarmersPerVillage().matches("\\d+"), "farmersPerVillage is not a positive integer");
+            Assert.isTrue(userInput.getNrOfVillages().matches("\\d+"), "nrOfVillages is not a positive integer");
+            Assert.isTrue(userInput.getNrOfNeighborhoods().matches("\\d+"), "nrOfNeighborhoods is not a positive integer");
+            Assert.isTrue(userInput.getPercentageOfNumbersInFarmgroup().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            
+            int farmersInFarmgroup = Integer.parseInt(userInput.getPercentageOfNumbersInFarmgroup());
+            Assert.isTrue(farmersInFarmgroup >= 0 && farmersInFarmgroup <= 100, "farmersInFarmgroup must lie between 0 and 100");
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+        
+        return "ok";
+    }
+
+    public String isOptimizationInputValid(String optimizationInput) { // optimizationType
+        
+        // optimizationType is not empty and matches one of four possible string
+        try {       
+            Assert.hasText(optimizationInput, "optimizationType is empty");     
+            ArrayList<String> possible_optimizations = new ArrayList<String>();
+            possible_optimizations.add("maxAdopters");
+            possible_optimizations.add("maxKnowledge");
+            possible_optimizations.add("minCost");
+            possible_optimizations.add("test");
+            Assert.isTrue(possible_optimizations.contains(optimizationInput), "optimizationType is not one of the four possible types");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();

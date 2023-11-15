@@ -113,6 +113,12 @@ public class AutomatorController {
 
         workingUserInput.setOptimizationType(userInput.getOptimizationType());*/
 
+        // check if input is valid
+        String inputValidation = userInput.isGlobalInputValid(userInput);
+        if (inputValidation != "ok") {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, inputValidation); // 406 - not acceptable
+        }
+        System.out.println("input is valid");
     }
 
     @PostMapping("/resetGlobalInput")

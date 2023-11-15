@@ -50,7 +50,7 @@ public class AutomatorController {
         return "Greetings from Spring Boot!";
     }
     
-    @GetMapping(value="/downloadCSV", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @GetMapping(value="/downloadResultsCSV", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public @ResponseBody byte[] downloadResultsCSV() throws IOException {
         String path = "optimization-results-go-here/testResults.csv";
         InputStream in = Files.newInputStream(Path.of(path));

@@ -86,11 +86,11 @@ public class UserInput { //UserInput?
         return budget;
     }
 
-    public String getDirectAdNrOfVillages() {
+    public String getDirectAdCoverage() {
         return directAdCoverage;
     }
 
-    public String getTrainChiefsNr() {
+    public String getTrainChiefsCoverage() {
         return trainChiefsCoverage;
     }
 
@@ -151,11 +151,11 @@ public class UserInput { //UserInput?
         this.budget = budget;
     }
 
-    public void setDirectAdNrOfVillages(String directAdCoverage) {
+    public void setDirectAdCoverage(String directAdCoverage) {
         this.directAdCoverage = directAdCoverage;
     }
 
-    public void setTrainChiefsNr(String trainChiefsCoverage) {
+    public void setTrainChiefsCoverage(String trainChiefsCoverage) {
         this.trainChiefsCoverage = trainChiefsCoverage;
     }
 

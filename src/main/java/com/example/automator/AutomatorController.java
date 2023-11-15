@@ -36,9 +36,7 @@ import com.example.automator.helper.Parameters;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class AutomatorController { 
-    DataInput defaultDataInput = new DataInput();
     DataInput workingDataInput = new DataInput();
-    UserInput defaultUserInput = new UserInput();
     UserInput workingUserInput = new UserInput();
 
     @GetMapping("/")

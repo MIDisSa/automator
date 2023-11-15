@@ -113,6 +113,12 @@ public class AutomatorController {
 
         workingUserInput.setOptimizationType(userInput.getOptimizationType());*/
 
+        // check if input is valid
+        String inputValidation = userInput.isGlobalInputValid(userInput);
+        if (inputValidation != "ok") {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, inputValidation); // 406 - not acceptable
+        }
+        System.out.println("input is valid");
     }
 
     @PostMapping("/resetGlobalInput")
@@ -170,34 +176,33 @@ public class AutomatorController {
     
     @PostMapping("/optimization") //Optimization
     @ResponseStatus(HttpStatus.OK)
-    public OptimizationOutput optimize(@RequestBody UserInput userInput) {
+    public OptimizationOutput optimize(@RequestBody String optimizationType) {
 
         // check if user input is valid
-        String inputValidation = userInput.isOptimizationInputValid(userInput);
+       /*  String inputValidation = userInput.isOptimizationInputValid(optimizationType);
         if (inputValidation != "ok") {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, inputValidation); // 406 - not acceptable
         }
-        System.out.println("input is valid");
+        System.out.println("input is valid");*/
 
         try {
-            String optimizationType = userInput.getOptimizationType();
+            workingUserInput.setOptimizationType(optimizationType);
             OptimizationOutput results = null;
             
             switch(optimizationType) {
                 case "maxAdopters":
-                    results = maxAdopters(userInput);
+                    results = maxAdopters(workingUserInput);
                     System.out.println("maximizing adopters");
                     break;
                 case "maxKnowledge":
-                    results = maxKnowledge(userInput);
-                    System.out.println("maximizing considerers");
+                    results = maxKnowledge(workingUserInput);
                     break;
                 case "minCost":
-                    results = minCost(userInput);
+                    results = minCost(workingUserInput);
                     System.out.println("minimizing cost");
                     break;
                 case "test":
-                    results = testResults(userInput);
+                    results = testResults(workingUserInput);
                     System.out.println("returning test results");
                     break;
             }

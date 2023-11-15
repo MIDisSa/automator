@@ -34,7 +34,6 @@ public class ABMRunner {
             workspace.command(String.format("set base_adoption_probability %s", dataInput.getBaseAdoptionProbability()));
             workspace.command(String.format("set avg_inter_mention_percentage %s", dataInput.getAvgInterMentionPercentage()));
             workspace.command(String.format("set avg_intra_mention_percentage %s", dataInput.getAvgIntraMentionPercentage()));
-            
 
             // SET INTERVENTION PARAMETERS
             workspace.command(String.format("set run_until_day_x %s", userInput.getNumberOfTicks()));
@@ -45,7 +44,6 @@ public class ABMRunner {
             workspace.command(String.format("set direct_ad_nr_of_villages %s", userInput.getDirectAdCoverage()));
             workspace.command("set percentage_of_villagers_addressed 50"); //not part of optimization atm
             workspace.command(String.format("set train_chiefs_nr %s", userInput.getTrainChiefsCoverage())); 
-            workspace.command(String.format("set max_budget %s", userInput.getBudget()));
 
             // SET FIXED AND VARIABLE COST
             workspace.command(String.format("set fixed_costs_direct_ad %s", userInput.getFixedCostsDirectAd()));
@@ -56,7 +54,11 @@ public class ABMRunner {
             workspace.command(String.format("set variable_costs_delayed_discount %s", userInput.getVariableCostsDelayedDiscount()));
             workspace.command(String.format("set variable_costs_train_chiefs %s", userInput.getVariableCostsTrainChiefs()));
 
-
+            // SET VILLAGE PARAMETERS
+            //workspace.command(String.format("set avg_nr_of_farmers_per_village %s", userInput.getFarmersPerVillage()));
+            //workspace.command(String.format("set nr_of_villages %s", userInput.getNrOfVillages()));
+            //workspace.command(String.format("set nr_of_neighborhoods %s", userInput.getNrOfNeighborhoods()));
+            //workspace.command(String.format("set percentage_of_farmers_in_farmgroup %s", userInput.getPercentageOfFarmersInFarmgroup()));
 
             // SETUP SIMULATIO
             //workspace.command("random-seed 0");

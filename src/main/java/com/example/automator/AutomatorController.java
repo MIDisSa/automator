@@ -4,10 +4,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.io.File;
+import java.io.FileWriter;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 
+import com.opencsv.CSVWriter;
 import java.io.InputStream;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.MediaType;
@@ -52,7 +60,45 @@ public class AutomatorController {
     
     @GetMapping(value="/downloadResultsCSV", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public @ResponseBody byte[] downloadResultsCSV() throws IOException {
-        String path = "optimization-results-go-here/testResults.csv";
+        File file = new File("CSV-files-go-here/modelResults.csv");
+
+            //Build row for ResultsCSV
+            FileWriter outputfile = new FileWriter(file, true);
+            CSVWriter writer = new CSVWriter(outputfile);
+            String[] newRow = {};
+            List<String> row = new ArrayList<String>(Arrays.asList(newRow));
+            row.add(String.format("%s", LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).toString()));
+            row.add(String.valueOf(workingUserInput.getNumberOfTicks()));
+            row.add(workingUserInput.getBudget());
+            row.add(workingUserInput.getFixedCostsDirectAd());
+            row.add(workingUserInput.getFixedCostsTrainChiefs());
+            row.add(workingUserInput.getVariableCostsDirectAd());
+            row.add(workingUserInput.getVariableCostsDiscount());
+            row.add(workingUserInput.getVariableCostsDelayed());
+            row.add(workingUserInput.getVariableCostsDelayedDiscount());
+            row.add(workingUserInput.getVariableCostsTrainChiefs());
+            row.add(workingUserInput.getFrequencyDirectAd());
+            row.add(workingUserInput.getDirectAdType());
+            row.add(workingUserInput.getFrequencyChiefTraining());
+            row.add(workingUserInput.getDirectAdCoverage());
+            row.add(workingUserInput.getTrainChiefsCoverage());
+            row.add(workingUserInput.getPercentageOfVillagersAddressed());
+            row.add(workingDataInput.getAvgIntraMentionPercentage());
+            row.add(workingDataInput.getPercentageNegativeWoM());
+            row.add(workingDataInput.getBaseAdoptionProbability());
+            row.add(workingDataInput.getNrDefaultFriendsInterVillage());
+            row.add(workingDataInput.getAvgInterVillageInteractionFrequency());
+            row.add(workingDataInput.getAvgIntraVillageInteractionFrequency());
+            row.add(workingDataInput.getAvgChiefFarmerMeetingFrequency());
+            row.add(workingDataInput.getTrainChiefInfluence());
+
+            newRow = row.toArray(newRow);
+
+            //Update ResultsCSV
+            writer.writeNext(newRow);
+            writer.close();
+
+        String path = "CSV-files-go-here/modelResults.csv";
         InputStream in = Files.newInputStream(Path.of(path));
         return IOUtils.toByteArray(in);
     }
@@ -154,6 +200,8 @@ public class AutomatorController {
         }
         System.out.println("input is valid");
 
+        File file = new File("CSV-files-go-here/modelResults.csv");
+
          try {
             //run netlogo model and receive results
             workingUserInput.setFrequencyDirectAd(userInput.getFrequencyDirectAd());
@@ -167,6 +215,21 @@ public class AutomatorController {
             // create ModelResults from results
             ModelResults modelResults = new ModelResults();
             modelResults.saveABMRunnerOutput(results);
+            
+            //Build row for ResultsCSV
+            FileWriter outputfile = new FileWriter(file, true);
+            CSVWriter writer = new CSVWriter(outputfile);
+            String[] newRow = {};
+            List<String> row = new ArrayList<String>(Arrays.asList(newRow));
+            row.add(String.format("%s", LocalDateTime.now()));
+
+
+
+            String[] testentry = {"entry4", "entry5", "entry6"};
+
+            //Update ResultsCSV
+            writer.writeNext(testentry);
+            writer.close();
             
             // check if model results are valid
             String outputValidation = modelResults.isModelResultsValid(modelResults);

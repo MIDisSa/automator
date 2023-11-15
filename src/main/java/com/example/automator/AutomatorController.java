@@ -108,12 +108,12 @@ public class AutomatorController {
         workingUserInput.setPercentageOfVillagersAddressed(userInput.getPercentageOfVillagersAddressed());
 
         //add later maybe:
-        workingUserInput.setFarmersPerVillage(userInput.getFarmersPerVillage());
+        /*workingUserInput.setFarmersPerVillage(userInput.getFarmersPerVillage());
         workingUserInput.setNrOfVillages(userInput.getNrOfVillages());
         workingUserInput.setNrOfNeighborhoods(userInput.getNrOfNeighborhoods());
         workingUserInput.setPercentageOfNumbersInFarmgroup(userInput.getPercentageOfNumbersInFarmgroup());
 
-        workingUserInput.setOptimizationType(userInput.getOptimizationType());
+        workingUserInput.setOptimizationType(userInput.getOptimizationType());*/
 
     }
 

@@ -27,7 +27,7 @@ public class UserInput { //UserInput?
     private String farmersPerVillage = "10";
     private String nrOfVillages = "100";
     private String nrOfNeighborhoods = "20";
-    private String percentageOfNumbersInFarmgroup = "50";
+    private String percentageOfFarmersInFarmgroup = "50";
 
     public String getFarmersPerVillage() {
         return farmersPerVillage;
@@ -53,12 +53,12 @@ public class UserInput { //UserInput?
         this.nrOfNeighborhoods = nrOfNeighborhoods;
     }
 
-    public String getPercentageOfNumbersInFarmgroup() {
-        return percentageOfNumbersInFarmgroup;
+    public String getPercentageOfFarmersInFarmgroup() {
+        return percentageOfFarmersInFarmgroup;
     }
 
-    public void setPercentageOfNumbersInFarmgroup(String percentageOfNumbersInFarmgroup) {
-        this.percentageOfNumbersInFarmgroup = percentageOfNumbersInFarmgroup;
+    public void setPercentageOfFarmersInFarmgroup(String percentageOfNumbersInFarmgroup) {
+        this.percentageOfFarmersInFarmgroup = percentageOfNumbersInFarmgroup;
     }
 
 

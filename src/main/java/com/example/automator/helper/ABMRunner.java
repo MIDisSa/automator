@@ -42,9 +42,9 @@ public class ABMRunner {
             workspace.command(String.format("set direct_ad_frequency %s", userInput.getFrequencyDirectAd()));
             workspace.command(String.format("set train_chiefs_frequency %s", userInput.getFrequencyChiefTraining()));
             workspace.command(String.format("set max_budget %s", userInput.getBudget()));
-            workspace.command(String.format("set direct_ad_nr_of_villages %s", userInput.getDirectAdNrOfVillages()));
+            workspace.command(String.format("set direct_ad_nr_of_villages %s", userInput.getDirectAdCoverage()));
             workspace.command("set percentage_of_villagers_addressed 50"); //not part of optimization atm
-            workspace.command(String.format("set train_chiefs_nr %s", userInput.getTrainChiefsNr())); 
+            workspace.command(String.format("set train_chiefs_nr %s", userInput.getTrainChiefsCoverage())); 
             workspace.command(String.format("set max_budget %s", userInput.getBudget()));
 
             // SET FIXED AND VARIABLE COST

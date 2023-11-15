@@ -1985,23 +1985,6 @@ NIL
 NIL
 1
 
-BUTTON
-29
-968
-287
-1001
-Direct Ad + Deferred Payment + Discount
-direct_ad_with_delay_and_discount
-NIL
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
 SLIDER
 1485
 612

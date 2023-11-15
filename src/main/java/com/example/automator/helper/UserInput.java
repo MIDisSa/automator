@@ -7,14 +7,7 @@ import org.springframework.util.Assert;
 public class UserInput { //UserInput?
     //Optimization parameters:
     private int numberOfTicks = 360;
-    private String frequencyDirectAd;
-    private String frequencyChiefTraining;
-    private String directAdType;
     private String budget = "100000";
-    private String directAdNrOfVillages = "50";
-    private String trainChiefsNr = "50";
-    private String optimizationType = "test";
-    
     private String fixedCostsDirectAd = "6000";
     private String fixedCostsTrainChiefs = "5000";
     private String variableCostsDirectAd = "400";
@@ -22,6 +15,51 @@ public class UserInput { //UserInput?
     private String variableCostsDelayed = "700"; //deferred payment only
     private String variableCostsDelayedDiscount = "800"; //discount + deferred payment
     private String variableCostsTrainChiefs = "400";
+
+    private String frequencyDirectAd;
+    private String frequencyChiefTraining;
+    private String directAdType;
+    private String directAdCoverage = "50";
+    private String trainChiefsCoverage = "50";
+    private String optimizationType = "test";
+    private String percentageOfVillagersAddressed = "50";
+    
+    private String farmersPerVillage = "10";
+    private String nrOfVillages = "100";
+    private String nrOfNeighborhoods = "20";
+    private String percentageOfNumbersInFarmgroup = "50";
+
+    public String getFarmersPerVillage() {
+        return farmersPerVillage;
+    }
+
+    public void setFarmersPerVillage(String farmersPerVillage) {
+        this.farmersPerVillage = farmersPerVillage;
+    }
+
+    public String getNrOfVillages() {
+        return nrOfVillages;
+    }
+
+    public void setNrOfVillages(String nrOfVillages) {
+        this.nrOfVillages = nrOfVillages;
+    }
+
+    public String getNrOfNeighborhoods() {
+        return nrOfNeighborhoods;
+    }
+
+    public void setNrOfNeighborhoods(String nrOfNeighborhoods) {
+        this.nrOfNeighborhoods = nrOfNeighborhoods;
+    }
+
+    public String getPercentageOfNumbersInFarmgroup() {
+        return percentageOfNumbersInFarmgroup;
+    }
+
+    public void setPercentageOfNumbersInFarmgroup(String percentageOfNumbersInFarmgroup) {
+        this.percentageOfNumbersInFarmgroup = percentageOfNumbersInFarmgroup;
+    }
 
 
     public UserInput() {
@@ -49,11 +87,11 @@ public class UserInput { //UserInput?
     }
 
     public String getDirectAdNrOfVillages() {
-        return directAdNrOfVillages;
+        return directAdCoverage;
     }
 
     public String getTrainChiefsNr() {
-        return trainChiefsNr;
+        return trainChiefsCoverage;
     }
 
     public String getOptimizationType() {
@@ -88,6 +126,9 @@ public class UserInput { //UserInput?
         return variableCostsTrainChiefs;
     }
 
+    public String getPercentageOfVillagersAddressed() {
+        return percentageOfVillagersAddressed;
+    }
     
     //SETTER (Optimization Parameters)
         public void setNumberOfTicks(int numberOfTicks) {
@@ -110,12 +151,12 @@ public class UserInput { //UserInput?
         this.budget = budget;
     }
 
-    public void setDirectAdNrOfVillages(String directAdNrOfVillages) {
-        this.directAdNrOfVillages = directAdNrOfVillages;
+    public void setDirectAdNrOfVillages(String directAdCoverage) {
+        this.directAdCoverage = directAdCoverage;
     }
 
-    public void setTrainChiefsNr(String trainChiefsNr) {
-        this.trainChiefsNr = trainChiefsNr;
+    public void setTrainChiefsNr(String trainChiefsCoverage) {
+        this.trainChiefsCoverage = trainChiefsCoverage;
     }
 
     public void setOptimizationType(String optimizationType) {
@@ -148,6 +189,10 @@ public class UserInput { //UserInput?
 
     public void setVariableCostsTrainChiefs(String variableCostsTrainChiefs) {
         this.variableCostsTrainChiefs = variableCostsTrainChiefs;
+    }
+
+    public void setPercentageOfVillagersAddressed(String percentageOfVillagersAddressed) {
+        this.percentageOfVillagersAddressed = percentageOfVillagersAddressed;
     }
 
     public String isModelInputValid(UserInput userInput) { // numberOfTicks, frequencyDirectAd, frequencyChiefTraining, typeDirectAd

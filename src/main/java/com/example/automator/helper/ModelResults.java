@@ -84,10 +84,12 @@ public class ModelResults {
         this.totalCost = list.get(4);
 
         ArrayList<Double> awareFarmersPerTickArray = convertToArrayList(list.get(5));
-        this.awareFarmersPerTick = awareFarmersPerTickArray;
 
         ArrayList<Double> adoptersPerTickArray = convertToArrayList(list.get(6));
         this.adoptersPerTick = adoptersPerTickArray;
+
+        ArrayList<Double> addedAwareFarmersPerTick = addAdoptersToAwareFarmers(awareFarmersPerTickArray, adoptersPerTickArray);
+        this.awareFarmersPerTick = addedAwareFarmersPerTick;
 
         return this;
     }
@@ -108,6 +110,16 @@ public class ModelResults {
         }
         
         return list;
+    }
+
+    public ArrayList<Double> addAdoptersToAwareFarmers(ArrayList<Double> awareFarmersPerTick, ArrayList<Double> adoptersPerTick) {
+        ArrayList<Double> addedList = new ArrayList<Double>();
+
+        for (int i = 0; i < awareFarmersPerTick.size(); i++) {
+            addedList.add(awareFarmersPerTick.get(i) + adoptersPerTick.get(i));
+        }
+
+        return addedList;
     }
 
     public String isModelResultsValid(ModelResults modelResults) { // awareFarmers, adopters, nrOfDirectAds, nrOfChiefTrainings, totalCost, awareFarmersPerTick, adoptersPerTick      

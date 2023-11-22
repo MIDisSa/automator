@@ -273,6 +273,10 @@ public class AutomatorController {
         if(validHeader != "ok") {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, validHeader); // 400 - bad request
         }
+        String validValues = csvReader.checkDataCSVValues("./CSV-files-go-here/raw-data.csv");
+        if(validValues != "ok") {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, validValues); // 400 - bad request
+        }
 
         // run python script to process data
         try {

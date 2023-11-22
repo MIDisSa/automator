@@ -11,7 +11,7 @@ public class OptimizationOutput {
     private String trainChiefsFrequency;
     private String directAdNrOfVillages;
     private String trainChiefsNumber;
-    private String avgAdopters;
+    private String bestFitness;
 
     private String nrOfDirectAds;
     private String nrOfChiefTrainings;
@@ -24,7 +24,7 @@ public class OptimizationOutput {
             this.trainChiefsFrequency = optRes.getTrainChiefsFrequency();
             this.directAdNrOfVillages = optRes.getDirectAdNrOfVillages();
             this.trainChiefsNumber = optRes.getTrainChiefsNumber();
-            this.avgAdopters = optRes.getBestFitness();
+            this.bestFitness = optRes.getBestFitness();
             this.nrOfDirectAds = modRes.getNrOfDirectAds();
             this.nrOfChiefTrainings = modRes.getNrOfChiefTrainings();
             this.totalCost = modRes.getTotalCost();
@@ -54,8 +54,8 @@ public class OptimizationOutput {
         return trainChiefsNumber;
     }
 
-    public String getAvgAdopters() {
-        return avgAdopters;
+    public String getBestFitness() {
+        return bestFitness;
     }
 
     public String getNrOfDirectAds() {
@@ -95,8 +95,8 @@ public class OptimizationOutput {
         this.trainChiefsNumber = trainChiefsNumber;
     }
 
-    public void setAvgAdopters(String avgAdopters) {
-        this.avgAdopters = avgAdopters;
+    public void setBestFitness(String bestFitness) {
+        this.bestFitness = bestFitness;
     }
 
     public void setNrOfDirectAds(String nrOfDirectAds) {
@@ -186,8 +186,8 @@ public class OptimizationOutput {
 
         // avgAdopters is not empty, double, not negative
         try {
-            Assert.hasText(optimizationOutput.getAvgAdopters(), "avgAdopters must not be empty");
-            Assert.isTrue(optimizationOutput.getAvgAdopters().matches("\\d+(\\.\\d+)?"), "avgAdopters must be a number greater than or equal to 0");
+            Assert.hasText(optimizationOutput.getBestFitness(), "avgAdopters must not be empty");
+            Assert.isTrue(optimizationOutput.getBestFitness().matches("\\d+(\\.\\d+)?"), "avgAdopters must be a number greater than or equal to 0");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();

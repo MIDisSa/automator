@@ -5,8 +5,6 @@ import java.util.Arrays;
 
 import org.springframework.util.Assert;
 
-import ch.qos.logback.core.model.Model;
-
 
 public class ModelResults {
     private String awareFarmers;

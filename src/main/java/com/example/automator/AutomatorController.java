@@ -4,9 +4,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.io.File;
+import java.io.FileWriter;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+
+import com.opencsv.CSVWriter;
+import java.io.InputStream;
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.MediaType;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.springframework.http.HttpStatus;
@@ -16,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,6 +40,7 @@ import com.example.automator.helper.DataInput;
 import com.example.automator.helper.UserInput;
 import com.example.automator.helper.OptimizationOutput;
 import com.example.automator.helper.Parameters;
+import com.example.automator.helper.CSVBuilder;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -43,6 +52,20 @@ public class AutomatorController {
     @ResponseStatus(HttpStatus.OK)
     public String index() {
         return "Greetings from Spring Boot!";
+    }
+    
+    @GetMapping(value="/downloadModelResultsCSV", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public @ResponseBody byte[] downloadModelResultsCSV() throws IOException {
+        String path = "model-results-go-here/modelResults.csv";
+        InputStream in = Files.newInputStream(Path.of(path));
+        return IOUtils.toByteArray(in);
+    }
+
+    @GetMapping(value="/downloadOptimizationResultsCSV", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public @ResponseBody byte[] downloadOptimizationResultsCSV() throws IOException {
+        String path = "optimization-results-go-here/optimizationResults.csv";
+        InputStream in = Files.newInputStream(Path.of(path));
+        return IOUtils.toByteArray(in);
     }
 
     @PostMapping("/updateInput")
@@ -141,6 +164,9 @@ public class AutomatorController {
         }
         System.out.println("input is valid");
 
+        //Path to output CSV
+        File file = new File("model-results-go-here/modelResults.csv");
+
          try {
             //run netlogo model and receive results
             workingUserInput.setFrequencyDirectAd(userInput.getFrequencyDirectAd());
@@ -154,6 +180,15 @@ public class AutomatorController {
             // create ModelResults from results
             ModelResults modelResults = new ModelResults();
             modelResults.saveABMRunnerOutput(results);
+            
+            //Build row for ResultsCSV
+            FileWriter outputfile = new FileWriter(file, true);
+            CSVWriter writer = new CSVWriter(outputfile);
+            String[] newRow = CSVBuilder.buildCsvEntryForModelResults(modelResults, workingDataInput, workingUserInput);
+
+            //Update ResultsCSV
+            writer.writeNext(newRow);
+            writer.close();
             
             // check if model results are valid
             String outputValidation = modelResults.isModelResultsValid(modelResults);

@@ -356,6 +356,19 @@ public class AutomatorController {
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
             output.setOptimizationType("Max Adopters");
+
+            //Path to output CSV
+            File file = new File("optimization-results-go-here/optimizationResults.csv");
+
+            //Build row for ResultsCSV
+            FileWriter outputfile = new FileWriter(file, true);
+            CSVWriter writer = new CSVWriter(outputfile);
+            String[] newRow = CSVBuilder.buildCSVEntryForOptimizationResults(output, workingDataInput, workingUserInput);
+
+            //Update ResultsCSV
+            writer.writeNext(newRow);
+            writer.close();
+            
             return output;
 
         } catch (Exception e) {
@@ -381,6 +394,19 @@ public class AutomatorController {
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
             output.setOptimizationType("Max Knowledge");
+
+            //Path to output CSV
+            File file = new File("optimization-results-go-here/optimizationResults.csv");
+
+            //Build row for ResultsCSV
+            FileWriter outputfile = new FileWriter(file, true);
+            CSVWriter writer = new CSVWriter(outputfile);
+            String[] newRow = CSVBuilder.buildCSVEntryForOptimizationResults(output, workingDataInput, workingUserInput);
+
+            //Update ResultsCSV
+            writer.writeNext(newRow);
+            writer.close();
+
             return output;
 
         } catch (Exception e) {
@@ -407,6 +433,18 @@ public class AutomatorController {
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
             output.setOptimizationType("Min Cost per Adopter");
 
+            //Path to output CSV
+            File file = new File("optimization-results-go-here/optimizationResults.csv");
+
+            //Build row for ResultsCSV
+            FileWriter outputfile = new FileWriter(file, true);
+            CSVWriter writer = new CSVWriter(outputfile);
+            String[] newRow = CSVBuilder.buildCSVEntryForOptimizationResults(output, workingDataInput, workingUserInput);
+
+            //Update ResultsCSV
+            writer.writeNext(newRow);
+            writer.close();
+
             return output;
 
         } catch (Exception e) {
@@ -427,6 +465,19 @@ public class AutomatorController {
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
             output.setOptimizationType("Test Results");
+
+            //Path to output CSV
+            File file = new File("optimization-results-go-here/optimizationResults.csv");
+
+            //Build row for ResultsCSV
+            FileWriter outputfile = new FileWriter(file, true);
+            CSVWriter writer = new CSVWriter(outputfile);
+            String[] newRow = CSVBuilder.buildCSVEntryForOptimizationResults(output, workingDataInput, workingUserInput);
+
+            //Update ResultsCSV
+            writer.writeNext(newRow);
+            writer.close();
+
             return output;
 
         } catch (Exception e) {

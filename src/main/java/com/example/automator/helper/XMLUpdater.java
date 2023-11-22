@@ -42,6 +42,9 @@ public class XMLUpdater {
                 node = (Node) xPath.compile("/search/modelInfo/modelStepLimit").evaluate(doc, XPathConstants.NODE);
                 node.setTextContent(String.format("%d", userInput.getNumberOfTicks()));
 
+                node = (Node) xPath.compile("/search/searchSpace/paramSpec[5]").evaluate(doc, XPathConstants.NODE);
+                node.setTextContent(String.format("[\"percentage_of_villagers_addressed\" %s]", userInput.getPercentageOfVillagersAddressed()));
+
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[7]").evaluate(doc, XPathConstants.NODE);
                 node.setTextContent(String.format("[\"run_until_day_x\" %s]", userInput.getNumberOfTicks()));
 

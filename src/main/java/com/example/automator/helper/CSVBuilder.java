@@ -57,6 +57,7 @@ public class CSVBuilder {
         row.add(optimizationOutput.getTrainChiefsFrequency());
         row.add(optimizationOutput.getDirectAdNrOfVillages());
         row.add(optimizationOutput.getTrainChiefsNumber());
+        row.add(workingUserInput.getPercentageOfVillagersAddressed());
         row.add(optimizationOutput.getNrOfDirectAds());
         row.add(optimizationOutput.getNrOfChiefTrainings());
         row.add(optimizationOutput.getTotalCost());

@@ -296,6 +296,9 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            ArrayList<String> nrOfInterventions = optimalInput.calculateNrOfInterventions();
+            output.setNrOfDirectAds(nrOfInterventions.get(0));
+            output.setNrOfChiefTrainings(nrOfInterventions.get(0));
             output.setOptimizationType("Max Knowledge");
             return output;
 
@@ -321,6 +324,9 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            ArrayList<String> nrOfInterventions = optimalInput.calculateNrOfInterventions();
+            output.setNrOfDirectAds(nrOfInterventions.get(0));
+            output.setNrOfChiefTrainings(nrOfInterventions.get(0));
             output.setOptimizationType("Min Cost per Adopter");
 
             return output;
@@ -342,6 +348,9 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            ArrayList<String> nrOfInterventions = optimalInput.calculateNrOfInterventions();
+            output.setNrOfDirectAds(nrOfInterventions.get(0));
+            output.setNrOfChiefTrainings(nrOfInterventions.get(0));
             output.setOptimizationType("Test Results");
             return output;
 

@@ -16,7 +16,7 @@
 <fitnessCombineReplications>MEAN</fitnessCombineReplications>
 </fitnessInfo>
 <searchSpace>
-<paramSpec>["direct_ad_type" "Direct Ad" "Direct Ad + Discount" "Direct Ad + Delayed Payment" "Direct Ad + Delayed P. + Discount"]</paramSpec>
+<paramSpec>["direct_ad_type" "Direct Ad" "Direct Ad + Discount" "Direct Ad + Deferred Payment" "Direct Ad + Deferred P. + Discount"]</paramSpec>
 <paramSpec>["direct_ad_frequency" 0 30 60 90 120 180 360]</paramSpec>
 <paramSpec>["train_chiefs_frequency" 0 30 60 90 120 180 360]</paramSpec>
 <paramSpec>["direct_ad_nr_of_villages" [0 10 100]]</paramSpec>

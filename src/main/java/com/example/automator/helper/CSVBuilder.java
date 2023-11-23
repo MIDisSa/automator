@@ -27,7 +27,7 @@ public class CSVBuilder {
         row.add(workingUserInput.getVariableCostsTrainChiefs());
         row.add(workingUserInput.getFrequencyDirectAd());
         String type = workingUserInput.getDirectAdType();
-        row.add(type.substring(2, type.length() - 2)); //removes " at the start and end of the string for better legibility
+        row.add(type.substring(1, type.length() - 1)); //removes " at the start and end of the string for better legibility
         row.add(workingUserInput.getFrequencyChiefTraining());
         row.add(workingUserInput.getDirectAdCoverage());
         row.add(workingUserInput.getTrainChiefsCoverage());

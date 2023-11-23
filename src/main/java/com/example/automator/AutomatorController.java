@@ -171,11 +171,12 @@ public class AutomatorController {
             //run netlogo model and receive results
             workingUserInput.setFrequencyDirectAd(userInput.getFrequencyDirectAd());
             workingUserInput.setFrequencyChiefTraining(userInput.getFrequencyChiefTraining());
-            workingUserInput.setDirectAdType(userInput.getDirectAdType());
+            String directAdType = userInput.getDirectAdType();
+            workingUserInput.setDirectAdType(userInput.getDirectAdType().substring(1, directAdType.length() - 1));
             workingUserInput.setDirectAdCoverage(userInput.getDirectAdCoverage());
             workingUserInput.setTrainChiefsCoverage(userInput.getTrainChiefsCoverage());
 
-            ArrayList<String> results = ABMRunner.runABM(workingDataInput, userInput);
+            ArrayList<String> results = ABMRunner.runABM(workingDataInput, workingUserInput);
 
             // create ModelResults from results
             ModelResults modelResults = new ModelResults();

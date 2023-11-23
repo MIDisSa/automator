@@ -139,13 +139,16 @@ public class CSVReader {
                 return "column '%s' not found".formatted(column);
             }
 
-            // check if all values in column are of type int
-            for(int i = 1; i < rows.size(); i++) {
+            // check if all values in column are of correct type
+            for(int i = 1; i < rows.size(); i++) { 
                 String value = rows.get(i)[coluumnIndex];
-                if(valueType == "int") {
-                    try {
-                        Integer.parseInt(value);
-                    } catch (Exception e) {
+
+                if(valueType == "int") { // we only check type integer because those could break python script. other type checks can be added if necessary
+                    if(value == "") { // empty elements are allowed
+                        // ok
+                    } else if(value.matches("-?\\d+")) {
+                        // ok
+                    } else {
                         return "value '%s' in column '%s' is not an integer".formatted(value, column);
                     }
                 }

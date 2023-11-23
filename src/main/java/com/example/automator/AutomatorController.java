@@ -277,6 +277,7 @@ public class AutomatorController {
         if(validValues != "ok") {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, validValues); // 400 - bad request
         }
+        System.out.println("File is valid CSV");
 
         // run python script to process data
         try {

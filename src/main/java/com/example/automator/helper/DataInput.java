@@ -1,7 +1,5 @@
 package com.example.automator.helper;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 
 public class DataInput {

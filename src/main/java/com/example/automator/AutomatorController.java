@@ -9,12 +9,10 @@ import java.io.FileWriter;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-
 import com.opencsv.CSVWriter;
 import java.io.InputStream;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.MediaType;
-
 import org.apache.commons.lang3.SystemUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -303,6 +301,18 @@ public class AutomatorController {
             System.out.println(e);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Something went wrong when trying to store the file: ", e)); // 400 - bad request
         }
+
+        // check if file is valid CSV
+        CSVReader csvReader = new CSVReader();
+        String validHeader = csvReader.checkDataCSVHeader("./CSV-files-go-here/raw-data.csv");
+        if(validHeader != "ok") {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, validHeader); // 400 - bad request
+        }
+        String validValues = csvReader.checkDataCSVValues("./CSV-files-go-here/raw-data.csv");
+        if(validValues != "ok") {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, validValues); // 400 - bad request
+        }
+        System.out.println("File is valid CSV");
 
         // run python script to process data
         try {

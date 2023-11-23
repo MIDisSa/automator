@@ -17,10 +17,6 @@ public class OptimizationOutput {
     private String nrOfChiefTrainings;
     private String totalCost;
 
-    //for Testing:
-    private String nrDirAdsTest;
-    private String nrTrainChiefTest;
-
 
     public OptimizationOutput(OptimizationResults optRes, ModelResults modRes) {
             this.directAdType = optRes.getDirectAdType();
@@ -30,20 +26,7 @@ public class OptimizationOutput {
             this.trainChiefsNumber = optRes.getTrainChiefsNumber();
             this.avgAdopters = optRes.getBestFitness();
             this.totalCost = modRes.getTotalCost();
-            //for Testing:
-            this.nrDirAdsTest = modRes.getNrOfDirectAds();
-            this.nrTrainChiefTest = modRes.getNrOfChiefTrainings();
     }
-    
-
-    public String getNrDirAdsTest() {
-        return nrDirAdsTest;
-    }
-
-    public String getNrTrainChiefTest() {
-        return nrTrainChiefTest;
-    }
-
     
 
     public String getOptimizationType() {

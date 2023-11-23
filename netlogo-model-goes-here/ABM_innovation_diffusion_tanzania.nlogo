@@ -1090,8 +1090,8 @@ end
 to direct_village_intervention
   (ifelse direct_ad_type = "Direct Ad" [direct_ad]
           direct_ad_type = "Direct Ad + Discount" [direct_ad_with_discount]
-          direct_ad_type = "Direct Ad + Delayed Payment" [direct_ad_with_delayed_payment]
-          direct_ad_type = "Direct Ad + Delayed P. + Discount" [direct_ad_with_delay_and_discount])
+          direct_ad_type = "Direct Ad + Deferred Payment" [direct_ad_with_delayed_payment]
+          direct_ad_type = "Direct Ad + Deferred P. + Discount" [direct_ad_with_delay_and_discount])
 end
 
 to direct_ad
@@ -1201,10 +1201,10 @@ end
 
 
 to intervention_strategy_sample
-  if direct_ad_frequency > 0 and ticks mod (direct_ad_frequency + 1) = 0 [     ;; +1 because if frequency is set to 365 (once a year) there is a second intervention happening on day 365 which increases costs without positive effects
+  if direct_ad_frequency > 0 and ticks != run_until_day_x and ticks mod (direct_ad_frequency) = 0 [     ;; +1 because if frequency is set to 365 (once a year) there is a second intervention happening on day 365 which increases costs without positive effects
     direct_village_intervention]
 
-  if train_chiefs_frequency > 0 and ticks mod (train_chiefs_frequency + 1) = 0 [
+  if train_chiefs_frequency > 0 and ticks != run_until_day_x and ticks mod (train_chiefs_frequency) = 0 [
     train_chiefs]
 end
 
@@ -1692,7 +1692,7 @@ INPUTBOX
 336
 108
 run_until_day_x
-360.0
+365.0
 1
 0
 Number
@@ -1832,7 +1832,7 @@ BUTTON
 931
 222
 964
-Direct Ad + Delayed Payment
+Direct Ad + Deferred Payment
 direct_ad_with_delayed_payment
 NIL
 1
@@ -1933,7 +1933,7 @@ CHOOSER
 525
 direct_ad_type
 direct_ad_type
-"Direct Ad" "Direct Ad + Discount" "Direct Ad + Delayed Payment" "Direct Ad + Delayed P. + Discount"
+"Direct Ad" "Direct Ad + Discount" "Direct Ad + Deferred Payment" "Direct Ad + Deferred P. + Discount"
 0
 
 MONITOR
@@ -1973,24 +1973,7 @@ BUTTON
 968
 287
 1001
-Direct Ad + Delayed Payment + Discount
-direct_ad_with_delay_and_discount
-NIL
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
-BUTTON
-29
-968
-287
-1001
-Direct Ad + Delayed Payment + Discount
+Direct Ad + Deferred Payment + Discount
 direct_ad_with_delay_and_discount
 NIL
 1

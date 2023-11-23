@@ -1,11 +1,9 @@
 package com.example.automator.helper;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.util.Assert;
 
-import ch.qos.logback.core.model.Model;
 
 
 public class ModelResults {

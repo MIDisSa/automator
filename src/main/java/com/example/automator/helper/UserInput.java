@@ -165,13 +165,11 @@ public class UserInput { //UserInput?
                 result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDelayedDiscount) * Integer.valueOf(directAdNrOfVillages));
                 break; 
             }
-        System.out.println(result);
         return result;
     }
 
     public int calculateToTCost() {
         int result = Integer.valueOf(fixedCostsTrainChiefs) + (Integer.valueOf(variableCostsTrainChiefs) * Integer.valueOf(trainChiefsNr));
-        System.out.println(result);
         return result;
     }
 

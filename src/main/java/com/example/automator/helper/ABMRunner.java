@@ -25,6 +25,10 @@ public class ABMRunner {
             workspace.open("netlogo-model-goes-here/ABM_innovation_diffusion_tanzania.nlogo");
             System.out.println("model opened");
    
+            // SETUP SIMULATION
+            //workspace.command("random-seed 0");
+            workspace.command("setup");
+        
             // SET MODEL PARAMETERS
             workspace.command(String.format("set nr_default_friends_inter_village %s", dataInput.getNrDefaultFriendsInterVillage()));
             workspace.command(String.format("set avg_intra_village_interaction_frequency %s", dataInput.getAvgIntraVillageInteractionFrequency()));
@@ -56,11 +60,6 @@ public class ABMRunner {
             workspace.command(String.format("set variable_costs_delayed_discount %s", userInput.getVariableCostsDelayedDiscount()));
             workspace.command(String.format("set variable_costs_train_chiefs %s", userInput.getVariableCostsTrainChiefs()));
 
-
-
-            // SETUP SIMULATIO
-            //workspace.command("random-seed 0");
-            workspace.command("setup");
 
             // keep track of number of aware farmers and adopters per tick (needed for graph)
             ArrayList<Double> awareFarmersPerTick = new ArrayList<Double>();
@@ -98,11 +97,12 @@ public class ABMRunner {
             results.add(awareFarmersPerTickString);
             results.add(adoptersPerTickString);
             
-            ArrayList<String> numbers = userInput.calculateNrOfInterventions();
+            //To test calculation of actual number of interventions
+            /*ArrayList<String> numbers = userInput.calculateNrOfInterventions();
             System.out.println("real nr DirAds: " + nrOfDirectAds);
             System.out.println("calc nr DirAds: " + numbers.get(0));
             System.out.println("real nr ToT: " + nrOfChiefTrainings);
-            System.out.println("calc nr ToT: " + numbers.get(1));
+            System.out.println("calc nr ToT: " + numbers.get(1))*/
 
         } catch(Exception e) {
             e.printStackTrace();

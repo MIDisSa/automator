@@ -1201,10 +1201,10 @@ end
 
 
 to intervention_strategy_sample
-  if direct_ad_frequency > 0 and ticks != run_until_day_x and ticks mod (direct_ad_frequency) = 0 [     ;; +1 because if frequency is set to 365 (once a year) there is a second intervention happening on day 365 which increases costs without positive effects
-    direct_village_intervention]
+    direct_village_intervention]  if direct_ad_frequency > 0 and ticks != run_until_day_x and ticks mod (direct_ad_frequency) = 0 [
 
-  if train_chiefs_frequency > 0 and ticks != run_until_day_x and ticks mod (train_chiefs_frequency + 1) = 0 [
+
+  if train_chiefs_frequency > 0 and ticks != run_until_day_x and ticks mod (train_chiefs_frequency) = 0 [
     train_chiefs]
 end
 
@@ -1692,7 +1692,7 @@ INPUTBOX
 336
 108
 run_until_day_x
-360.0
+365.0
 1
 0
 Number

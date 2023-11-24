@@ -1,7 +1,6 @@
 package com.example.automator.helper;
 
 import java.util.ArrayList;
-
 import org.springframework.util.Assert;
 
 public class UserInput { //UserInput?
@@ -195,6 +194,66 @@ public class UserInput { //UserInput?
         this.percentageOfVillagersAddressed = percentageOfVillagersAddressed;
     }
 
+    public int calculateDirAdCost() {
+        int result = 0;
+        switch(directAdType) {
+            case "\"Direct Ad\"":
+                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDirectAd) * Integer.valueOf(directAdNrOfVillages));
+                break;
+            case "\"Direct Ad + Discount\"":
+                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDiscount) * Integer.valueOf(directAdNrOfVillages));
+                break;
+            case "\"Direct Ad + Deferred Payment\"":
+                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDelayed) * Integer.valueOf(directAdNrOfVillages));
+                break;
+            case "\"Direct Ad + Deferred P. + Discount\"":
+                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDelayedDiscount) * Integer.valueOf(directAdNrOfVillages));
+                break; 
+            }
+        return result;
+    }
+
+    public int calculateToTCost() {
+        int result = Integer.valueOf(fixedCostsTrainChiefs) + (Integer.valueOf(variableCostsTrainChiefs) * Integer.valueOf(trainChiefsNr));
+        return result;
+    }
+
+    public ArrayList<String> calculateNrOfInterventions() {
+        ArrayList<String> results = new ArrayList<String>();
+        int i = 0;
+        int tmpBudget = Integer.valueOf(budget);
+        int dirAdCounter = 0;
+        int ToTCounter = 0;
+        int dirAdCost = calculateDirAdCost();
+        int ToTCost = calculateToTCost();
+
+
+        while (i <= numberOfTicks) {
+            if (Integer.valueOf(frequencyDirectAd) > 0 && i != numberOfTicks && i % Integer.valueOf(frequencyDirectAd) == 0) {
+                if (dirAdCost <= tmpBudget) {
+                    tmpBudget = tmpBudget - dirAdCost;
+                    dirAdCounter++;
+                }
+            }
+
+            if (Integer.valueOf(frequencyChiefTraining) > 0 && i != numberOfTicks && i % Integer.valueOf(frequencyChiefTraining) == 0) {
+                if (ToTCost <= tmpBudget) {
+                    tmpBudget = tmpBudget - ToTCost;
+                    ToTCounter++;
+                }
+
+            if (dirAdCost > tmpBudget && ToTCost > tmpBudget) {
+                break;
+                }
+            }
+            i++;
+        }
+        results.add(String.valueOf(dirAdCounter));
+        results.add(String.valueOf(ToTCounter));
+
+        return results;
+    }
+
     public String isModelInputValid(UserInput userInput) { // numberOfTicks, frequencyDirectAd, frequencyChiefTraining, typeDirectAd
 
         // frequencyDirectAd is not empty, integer, not negative
@@ -232,8 +291,8 @@ public class UserInput { //UserInput?
             ArrayList<String> possible_interventions = new ArrayList<String>();
             possible_interventions.add("\"Direct Ad\"");
             possible_interventions.add("\"Direct Ad + Discount\"");
-            possible_interventions.add("\"Direct Ad + Delayed Payment\"");
-            possible_interventions.add("\"Direct Ad + Delayed P. + Discount\"");
+            possible_interventions.add("\"Direct Ad + Deferred Payment\"");
+            possible_interventions.add("\"Direct Ad + Deferred P. + Discount\"");
             Assert.isTrue(possible_interventions.contains(userInput.getDirectAdType()), "directAdType is not one of the four possible interventions");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

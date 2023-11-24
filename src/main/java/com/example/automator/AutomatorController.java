@@ -356,6 +356,9 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            ArrayList<String> nrOfInterventions = optimalInput.calculateNrOfInterventions();
+            output.setNrOfDirectAds(nrOfInterventions.get(0));
+            output.setNrOfChiefTrainings(nrOfInterventions.get(0));
             output.setOptimizationType("Max Adopters");
 
             //Path to output CSV
@@ -368,8 +371,8 @@ public class AutomatorController {
 
             //Update ResultsCSV
             writer.writeNext(newRow);
-            writer.close();
-            
+            writer.close();            
+
             return output;
 
         } catch (Exception e) {
@@ -394,7 +397,10 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
-            output.setOptimizationType("Max Knowledge");
+            ArrayList<String> nrOfInterventions = optimalInput.calculateNrOfInterventions();
+            output.setNrOfDirectAds(nrOfInterventions.get(0));
+            output.setNrOfChiefTrainings(nrOfInterventions.get(0));
+            output.setOptimizationType("Max Knowledge")
 
             //Path to output CSV
             File file = new File("optimization-results-go-here/optimizationResults.csv");
@@ -432,6 +438,9 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            ArrayList<String> nrOfInterventions = optimalInput.calculateNrOfInterventions();
+            output.setNrOfDirectAds(nrOfInterventions.get(0));
+            output.setNrOfChiefTrainings(nrOfInterventions.get(0));
             output.setOptimizationType("Min Cost per Adopter");
 
             //Path to output CSV
@@ -465,6 +474,9 @@ public class AutomatorController {
             modelResults.saveABMRunnerOutput(results);
 
             OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            ArrayList<String> nrOfInterventions = optimalInput.calculateNrOfInterventions();
+            output.setNrOfDirectAds(nrOfInterventions.get(0));
+            output.setNrOfChiefTrainings(nrOfInterventions.get(0));
             output.setOptimizationType("Test Results");
 
             //Path to output CSV

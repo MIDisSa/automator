@@ -30,6 +30,7 @@ public class OptimizationOutput {
             this.totalCost = modRes.getTotalCost();
     }
     
+
     public String getOptimizationType() {
         return optimizationType;
     }

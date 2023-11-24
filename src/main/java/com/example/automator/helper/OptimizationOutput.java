@@ -18,16 +18,18 @@ public class OptimizationOutput {
     private String totalCost;
 
 
-    public OptimizationOutput(OptimizationResults optRes, ModelResults modRes) {
+    public OptimizationOutput(OptimizationResults optRes, UserInput userInput) {
             this.directAdType = optRes.getDirectAdType();
             this.directAdFrequency = optRes.getDirectAdFrequency();
             this.trainChiefsFrequency = optRes.getTrainChiefsFrequency();
             this.directAdNrOfVillages = optRes.getDirectAdNrOfVillages();
             this.trainChiefsNumber = optRes.getTrainChiefsNumber();
             this.bestFitness = optRes.getBestFitness();
-            this.nrOfDirectAds = modRes.getNrOfDirectAds();
-            this.nrOfChiefTrainings = modRes.getNrOfChiefTrainings();
-            this.totalCost = modRes.getTotalCost();
+
+            ArrayList<String> nrOfInterventions = userInput.calculateNrOfInterventions();
+            this.nrOfDirectAds = nrOfInterventions.get(0);
+            this.nrOfChiefTrainings = nrOfInterventions.get(1);
+            this.totalCost = userInput.calculateTotalCost();
     }
     
 

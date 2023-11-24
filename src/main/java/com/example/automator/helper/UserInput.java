@@ -255,6 +255,18 @@ public class UserInput { //UserInput?
         return results;
     }
 
+
+    public String calculateTotalCost() {
+        ArrayList<String> nrOfInterventions = calculateNrOfInterventions();
+        int nrDirAds = Integer.valueOf(nrOfInterventions.get(0));
+        int nrToT = Integer.valueOf(nrOfInterventions.get(1));
+        int dirAdCost = calculateDirAdCost();
+        int ToTCost= calculateToTCost();
+
+        int totalCost = (nrDirAds * dirAdCost) + (nrToT * ToTCost);
+        return Integer.toString(totalCost);
+    }
+
     public String isModelInputValid(UserInput userInput) { // numberOfTicks, frequencyDirectAd, frequencyChiefTraining, typeDirectAd
 
         // frequencyDirectAd is not empty, integer, not negative

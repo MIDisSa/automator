@@ -361,12 +361,8 @@ public class AutomatorController {
 
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("MaxAdopters.finalCheckedBests.csv");
             UserInput optimalInput = OptimizationResultsConverter.convertResultsToUserInput(OptimizationResults, userInput);
-            
-            ArrayList<String> results = ABMRunner.runABM(workingDataInput, optimalInput);
-            ModelResults modelResults = new ModelResults();
-            modelResults.saveABMRunnerOutput(results);
 
-            OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            OptimizationOutput output = new OptimizationOutput(OptimizationResults, userInput);
             ArrayList<String> nrOfInterventions = optimalInput.calculateNrOfInterventions();
             output.setNrOfDirectAds(nrOfInterventions.get(0));
             output.setNrOfChiefTrainings(nrOfInterventions.get(0));
@@ -402,12 +398,8 @@ public class AutomatorController {
 
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("MaxKnowledge.finalCheckedBests.csv");
             UserInput optimalInput = OptimizationResultsConverter.convertResultsToUserInput(OptimizationResults, userInput);
-            
-            ArrayList<String> results = ABMRunner.runABM(workingDataInput, optimalInput);
-            ModelResults modelResults = new ModelResults();
-            modelResults.saveABMRunnerOutput(results);
 
-            OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            OptimizationOutput output = new OptimizationOutput(OptimizationResults, userInput);
             ArrayList<String> nrOfInterventions = optimalInput.calculateNrOfInterventions();
             output.setNrOfDirectAds(nrOfInterventions.get(0));
             output.setNrOfChiefTrainings(nrOfInterventions.get(0));
@@ -443,12 +435,8 @@ public class AutomatorController {
             
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("MinCostPerAdopter.finalCheckedBests.csv");
             UserInput optimalInput = OptimizationResultsConverter.convertResultsToUserInput(OptimizationResults, userInput);
-            
-            ArrayList<String> results = ABMRunner.runABM(workingDataInput, optimalInput);
-            ModelResults modelResults = new ModelResults();
-            modelResults.saveABMRunnerOutput(results);
 
-            OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            OptimizationOutput output = new OptimizationOutput(OptimizationResults, userInput);
             ArrayList<String> nrOfInterventions = optimalInput.calculateNrOfInterventions();
             output.setNrOfDirectAds(nrOfInterventions.get(0));
             output.setNrOfChiefTrainings(nrOfInterventions.get(0));
@@ -478,13 +466,8 @@ public class AutomatorController {
         try {
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("testResults.csv");
             UserInput optimalInput = OptimizationResultsConverter.convertResultsToUserInput(OptimizationResults, userInput);
-            
-            
-            ArrayList<String> results = ABMRunner.runABM(workingDataInput, optimalInput);
-            ModelResults modelResults = new ModelResults();
-            modelResults.saveABMRunnerOutput(results);
 
-            OptimizationOutput output = new OptimizationOutput(OptimizationResults, modelResults);
+            OptimizationOutput output = new OptimizationOutput(OptimizationResults, userInput);
             ArrayList<String> nrOfInterventions = optimalInput.calculateNrOfInterventions();
             output.setNrOfDirectAds(nrOfInterventions.get(0));
             output.setNrOfChiefTrainings(nrOfInterventions.get(0));

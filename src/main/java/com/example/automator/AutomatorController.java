@@ -210,7 +210,7 @@ public class AutomatorController {
     
     @PostMapping("/optimization") //Optimization
     @ResponseStatus(HttpStatus.OK)
-    public OptimizationOutput optimize(@RequestBody String optimizationType) {
+    public OptimizationOutput optimize(@RequestBody UserInput userInput) {
 
         // check if user input is valid
        /*  String inputValidation = userInput.isOptimizationInputValid(optimizationType);
@@ -220,10 +220,11 @@ public class AutomatorController {
         System.out.println("input is valid");*/
 
         try {
-            workingUserInput.setOptimizationType(optimizationType);
+            workingUserInput.setOptimizationType(userInput.getOptimizationType());
+            System.out.println(workingUserInput.getOptimizationType());
             OptimizationOutput results = null;
             
-            switch(optimizationType) {
+            switch(workingUserInput.getOptimizationType()) {
                 case "maxAdopters":
                     results = maxAdopters(workingUserInput);
                     System.out.println("maximizing adopters");
@@ -410,7 +411,7 @@ public class AutomatorController {
             ArrayList<String> nrOfInterventions = optimalInput.calculateNrOfInterventions();
             output.setNrOfDirectAds(nrOfInterventions.get(0));
             output.setNrOfChiefTrainings(nrOfInterventions.get(0));
-            output.setOptimizationType("Max Knowledge")
+            output.setOptimizationType("Max Knowledge");
 
             //Path to output CSV
             File file = new File("optimization-results-go-here/optimizationResults.csv");

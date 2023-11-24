@@ -20,8 +20,9 @@ public class UserInput { //UserInput?
     private String directAdType = "Direct Ad";
     private String directAdCoverage = "50";
     private String trainChiefsCoverage = "50";
-    private String optimizationType = "test";
     private String percentageOfVillagersAddressed = "50";
+    private String optimizationType = "test";
+
     
     private String farmersPerVillage = "10";
     private String nrOfVillages = "100";
@@ -198,23 +199,23 @@ public class UserInput { //UserInput?
         int result = 0;
         switch(directAdType) {
             case "\"Direct Ad\"":
-                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDirectAd) * Integer.valueOf(directAdNrOfVillages));
+                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDirectAd) * Integer.valueOf(directAdCoverage));
                 break;
             case "\"Direct Ad + Discount\"":
-                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDiscount) * Integer.valueOf(directAdNrOfVillages));
+                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDiscount) * Integer.valueOf(directAdCoverage));
                 break;
             case "\"Direct Ad + Deferred Payment\"":
-                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDelayed) * Integer.valueOf(directAdNrOfVillages));
+                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDelayed) * Integer.valueOf(directAdCoverage));
                 break;
             case "\"Direct Ad + Deferred P. + Discount\"":
-                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDelayedDiscount) * Integer.valueOf(directAdNrOfVillages));
+                result = Integer.valueOf(fixedCostsDirectAd) + (Integer.valueOf(variableCostsDelayedDiscount) * Integer.valueOf(directAdCoverage));
                 break; 
             }
         return result;
     }
 
     public int calculateToTCost() {
-        int result = Integer.valueOf(fixedCostsTrainChiefs) + (Integer.valueOf(variableCostsTrainChiefs) * Integer.valueOf(trainChiefsNr));
+        int result = Integer.valueOf(fixedCostsTrainChiefs) + (Integer.valueOf(variableCostsTrainChiefs) * Integer.valueOf(trainChiefsCoverage));
         return result;
     }
 

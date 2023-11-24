@@ -1201,11 +1201,10 @@ end
 
 
 to intervention_strategy_sample
-    direct_village_intervention]  if direct_ad_frequency > 0 and ticks != run_until_day_x and ticks mod (direct_ad_frequency) = 0 [
+  if direct_ad_frequency > 0 and ticks != run_until_day_x and ticks mod (direct_ad_frequency) = 0 [direct_village_intervention]
 
 
-  if train_chiefs_frequency > 0 and ticks != run_until_day_x and ticks mod (train_chiefs_frequency) = 0 [
-    train_chiefs]
+  if train_chiefs_frequency > 0 and ticks != run_until_day_x and ticks mod (train_chiefs_frequency) = 0 [train_chiefs]
 end
 
 ;; ----------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -24,7 +24,9 @@ public class OptimizationOutput {
             this.trainChiefsFrequency = optRes.getTrainChiefsFrequency();
             this.directAdNrOfVillages = optRes.getDirectAdNrOfVillages();
             this.trainChiefsNumber = optRes.getTrainChiefsNumber();
-            this.bestFitness = optRes.getBestFitness();
+
+            Double fitness = Double.valueOf(optRes.getBestFitness());
+            this.bestFitness = String.valueOf(Math.floor(fitness * 10) / 10);
 
             ArrayList<String> nrOfInterventions = userInput.calculateNrOfInterventions();
             this.nrOfDirectAds = nrOfInterventions.get(0);

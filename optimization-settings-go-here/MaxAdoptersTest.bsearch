@@ -19,9 +19,9 @@
 <paramSpec>["direct_ad_type" "Direct Ad" "Direct Ad + Discount" "Direct Ad + Deferred Payment" "Direct Ad + Deferred P. + Discount"]</paramSpec>
 <paramSpec>["direct_ad_frequency" 0 30 60 90 120 180 360]</paramSpec>
 <paramSpec>["train_chiefs_frequency" 0 30 60 90 120 180 360]</paramSpec>
-<paramSpec>["direct_ad_nr_of_villages" [0 10 100]]</paramSpec>
+<paramSpec>["direct_ad_nr_of_villages" [0 1 100]]</paramSpec>
 <paramSpec>["percentage_of_villagers_addressed" 50]</paramSpec>
-<paramSpec>["train_chiefs_nr" [0 10 100]]</paramSpec>
+<paramSpec>["train_chiefs_nr" [0 1 100]]</paramSpec>
 <paramSpec>["run_until_day_x" 365]</paramSpec>
 <paramSpec>["nr_default_friends_inter_village" 5]</paramSpec>
 <paramSpec>["avg_intra_village_interaction_frequency" 4]</paramSpec>

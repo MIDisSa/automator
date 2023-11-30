@@ -8,6 +8,16 @@ import java.util.List;
 
 public class CSVBuilder {
 
+    public static String[] buildCsvHeaderForModelResults() {
+        String[] newHeader = {"Timestamp","Adopters","Aware Agents","Total Cost","Days","Budget","Fixed Costs Direct Ad","Fixed Costs ToT","Variable Costs Direct Ad","Variable Costs Direct Ad + Discount","Variable Costs for Direct Ad + Deferred Payment","Variable Costs for Direct Ad + Deferred Payment + Discount","Variable Costs ToT","Treatment Frequency","Treatment Arm","ToT Frequency","Treatment Coverage","ToT Coverage","Percentage of Villagers addressed","Mention Probability","Negative WoM","Adoption Probability","Friends Inter Village","Inter Village Interaction Frequency","Intra Village Interaction Frequency","Farmgroup Meeting Frequency","Relative Chief Influence Factor"};
+        return newHeader;
+    }
+
+    public static String[] buildCsvHeaderForOptimizationResults() {
+        String[] newHeader = {"Timestamp","Optimization Type","Best Fitness","Treatment Arm*","Treatment Frequency*","ToT Frequency*","Treatment Coverage*","ToT Coverage*","Percentage of Villagers addressed","Number of Treatments*","Number of ToTs*","Total Cost","Days","Budget","Fixed Costs Direct Ad","Fixed Costs ToT","Variable Costs Direct Ad","Variable Costs Direct Ad + Discount","Variable Costs for Direct Ad + Deferred Payment","Variable Costs for Direct Ad + Deferred Payment + Discount","Variable Costs ToT","Mention Probability","Negative WoM","Adoption Probability","Friends Inter Village","Inter Village Interaction Frequency","Intra Village Interaction Frequency","Farmgroup Meeting Frequency","Relative Chief Influence Factor"};
+        return newHeader;
+    }
+
     public static String[] buildCsvEntryForModelResults(ModelResults modelResults, DataInput workingDataInput, UserInput workingUserInput) {
         String[] newRow = {};
         List<String> row = new ArrayList<String>(Arrays.asList(newRow));

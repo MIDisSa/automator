@@ -54,14 +54,14 @@ public class AutomatorController {
     
     @GetMapping(value="/downloadModelResultsCSV", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public @ResponseBody byte[] downloadModelResultsCSV() throws IOException {
-        String path = "model-results-go-here/modelResults.csv";
+        String path = "./model-results-go-here/modelResults.csv";
         InputStream in = Files.newInputStream(Path.of(path));
         return IOUtils.toByteArray(in);
     }
 
     @GetMapping(value="/downloadOptimizationResultsCSV", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public @ResponseBody byte[] downloadOptimizationResultsCSV() throws IOException {
-        String path = "optimization-results-go-here/optimizationResults.csv";
+        String path = "./optimization-results-go-here/optimizationResults.csv";
         InputStream in = Files.newInputStream(Path.of(path));
         return IOUtils.toByteArray(in);
     }
@@ -163,7 +163,7 @@ public class AutomatorController {
         System.out.println("input is valid");
 
         //Path to output CSV
-        File file = new File("model-results-go-here/modelResults.csv");
+        File file = new File("./model-results-go-here/modelResults.csv");
 
          try {
             //run netlogo model and receive results
@@ -369,7 +369,7 @@ public class AutomatorController {
             output.setOptimizationType("Max Adopters");
 
             //Path to output CSV
-            File file = new File("optimization-results-go-here/optimizationResults.csv");
+            File file = new File("./optimization-results-go-here/optimizationResults.csv");
 
             //Build row for ResultsCSV
             FileWriter outputfile = new FileWriter(file, true);
@@ -406,7 +406,7 @@ public class AutomatorController {
             output.setOptimizationType("Max Knowledge");
 
             //Path to output CSV
-            File file = new File("optimization-results-go-here/optimizationResults.csv");
+            File file = new File("./optimization-results-go-here/optimizationResults.csv");
 
             //Build row for ResultsCSV
             FileWriter outputfile = new FileWriter(file, true);
@@ -443,7 +443,7 @@ public class AutomatorController {
             output.setOptimizationType("Min Cost per Adopter");
 
             //Path to output CSV
-            File file = new File("optimization-results-go-here/optimizationResults.csv");
+            File file = new File("./optimization-results-go-here/optimizationResults.csv");
 
             //Build row for ResultsCSV
             FileWriter outputfile = new FileWriter(file, true);
@@ -474,7 +474,7 @@ public class AutomatorController {
             output.setOptimizationType("Test Results");
 
             //Path to output CSV
-            File file = new File("optimization-results-go-here/optimizationResults.csv");
+            File file = new File("./optimization-results-go-here/optimizationResults.csv");
 
             //Build row for ResultsCSV
             FileWriter outputfile = new FileWriter(file, true);

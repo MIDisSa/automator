@@ -66,6 +66,33 @@ public class AutomatorController {
         return IOUtils.toByteArray(in);
     }
 
+    @PostMapping(value="/clearResultCSVs")
+    @ResponseStatus(HttpStatus.OK)
+    public void clearModelHistory() throws IOException {
+        File modelFile = new File("model-results-go-here/modelResults.csv");
+        File optimizerFile = new File("optimization-results-go-here/optimizationResults.csv");
+        
+        try {
+            //overwrite modelResults CSV with header only
+            FileWriter modelFileWriter = new FileWriter(modelFile, false);
+            CSVWriter writer = new CSVWriter(modelFileWriter);
+            String[] newHeader = CSVBuilder.buildCsvHeaderForModelResults();
+            writer.writeNext(newHeader);
+            writer.close();
+
+            //overwrite optimizationResults CSV with header only
+            FileWriter optimizerFileWriter = new FileWriter(optimizerFile, false);
+            writer = new CSVWriter(optimizerFileWriter);
+            newHeader = CSVBuilder.buildCsvHeaderForOptimizationResults();
+            writer.writeNext(newHeader);
+            writer.close();
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Something went wrong: ", e)); // 400 - bad request
+        }
+    }
     @PostMapping("/updateInput")
     @ResponseStatus(HttpStatus.OK)
     public void updateInput(@RequestBody DataInput input) {

@@ -3,7 +3,7 @@ package com.example.automator.helper;
 import org.springframework.util.Assert;
 
 public class DataInput {
-    private String trainChiefInfluence = "175";
+    private String trainChiefInfluence = "1.75";
     private String nrDefaultFriendsInterVillage = "5";
     private String stdNrDefaultFriendsInterVillage = "1";
     private String avgIntraVillageInteractionFrequency = "4";
@@ -152,15 +152,15 @@ public class DataInput {
 
         // numbers are positive doubles
         try {
-        Assert.isTrue(dataInput.getNrDefaultFriendsInterVillage().matches("\\d+(\\.\\d+)?"), "nrDefaultFriendsInterVillage must be a number greater or equal to 0");
-        Assert.isTrue(dataInput.getAvgIntraVillageInteractionFrequency().matches("\\d+(\\.\\d+)?"), "avgIntraVillageInteractionFrequency must be a number greater or equal to 0");
-        Assert.isTrue(dataInput.getAvgInterVillageInteractionFrequency().matches("\\d+(\\.\\d+)?"), "avgInterVillageInteractionFrequency must be a number greater or equal to 0");
-        Assert.isTrue(dataInput.getAvgChiefFarmerMeetingFrequency().matches("\\d+(\\.\\d+)?"), "avgChiefFarmerMeetingFrequency must be a number greater or equal to 0");
-        Assert.isTrue(dataInput.getPercentageNegativeWoM().matches("\\d+(\\.\\d+)?"), "percentageNegativeWoM must be a number greater or equal to 0");
-        Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability must be a number greater or equal to 0");
-        Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability must be a number greater or equal to 0");
-        Assert.isTrue(dataInput.getAvgIntraMentionPercentage().matches("\\d+(\\.\\d+)?"), "avgIntraMentionPercentage must be a number greater or equal to 0");
-        Assert.isTrue(dataInput.getTrainChiefInfluence().matches("\\d+(\\.\\d+)?"), "trainChiefInfluence must be a number greater or equal to 0");
+        Assert.isTrue(dataInput.getNrDefaultFriendsInterVillage().matches("\\d+(\\.\\d+)?"), "nrDefaultFriendsInterVillage must be a number greater or equal to 0. Please use a dot as decimal separator.");
+        Assert.isTrue(dataInput.getAvgIntraVillageInteractionFrequency().matches("\\d+(\\.\\d+)?"), "avgIntraVillageInteractionFrequency must be a number greater or equal to 0. Please use a dot as decimal separator.");
+        Assert.isTrue(dataInput.getAvgInterVillageInteractionFrequency().matches("\\d+(\\.\\d+)?"), "avgInterVillageInteractionFrequency must be a number greater or equal to 0. Please use a dot as decimal separator.");
+        Assert.isTrue(dataInput.getAvgChiefFarmerMeetingFrequency().matches("\\d+(\\.\\d+)?"), "avgChiefFarmerMeetingFrequency must be a number greater or equal to 0. Please use a dot as decimal separator.");
+        Assert.isTrue(dataInput.getPercentageNegativeWoM().matches("\\d+(\\.\\d+)?"), "percentageNegativeWoM must be a number greater or equal to 0. Please use a dot as decimal separator.");
+        Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability must be a number greater or equal to 0. Please use a dot as decimal separator.");
+        Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability must be a number greater or equal to 0. Please use a dot as decimal separator.");
+        Assert.isTrue(dataInput.getAvgIntraMentionPercentage().matches("\\d+(\\.\\d+)?"), "avgIntraMentionPercentage must be a number greater or equal to 0. Please use a dot as decimal separator.");
+        Assert.isTrue(dataInput.getTrainChiefInfluence().matches("\\d+(\\.\\d+)?"), "trainChiefInfluence must be a number greater or equal to 0. Please use a dot as decimal separator.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();

@@ -334,18 +334,18 @@ public class UserInput { //UserInput?
             //Assert.hasText(userInput.getPercentageOfNumbersInFarmgroup(), "percentageOfNumbersInFarmgroup is empty");
 
             Assert.isTrue(userInput.getNumberOfTicks() > 0, "numberOfTicks must be larger than 0");
-            Assert.isTrue(userInput.getBudget().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getFixedCostsDirectAd().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getFixedCostsTrainChiefs().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getVariableCostsDirectAd().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getVariableCostsDiscount().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getVariableCostsDelayed().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getVariableCostsDelayedDiscount().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getVariableCostsTrainChiefs().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getFarmersPerVillage().matches("\\d+"), "farmersPerVillage is not a positive integer");
-            Assert.isTrue(userInput.getNrOfVillages().matches("\\d+"), "nrOfVillages is not a positive integer");
-            Assert.isTrue(userInput.getNrOfNeighborhoods().matches("\\d+"), "nrOfNeighborhoods is not a positive integer");
-            Assert.isTrue(userInput.getPercentageOfFarmersInFarmgroup().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getBudget().matches("\\d+(\\.\\d+)?"), "budget must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getFixedCostsDirectAd().matches("\\d+(\\.\\d+)?"), "fixedCostsDirectAd must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getFixedCostsTrainChiefs().matches("\\d+(\\.\\d+)?"), "fixedCostsTrainChiefs must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsDirectAd().matches("\\d+(\\.\\d+)?"), "variableCostsDirectAd must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsDiscount().matches("\\d+(\\.\\d+)?"), "variableCostsDiscount must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsDelayed().matches("\\d+(\\.\\d+)?"), "variableCostsDelayed must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsDelayedDiscount().matches("\\d+(\\.\\d+)?"), "variableCostsDelayedDiscount must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsTrainChiefs().matches("\\d+(\\.\\d+)?"), "variableCostsTrainChiefs  must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getFarmersPerVillage().matches("\\d+"), "farmersPerVillage must be a number greater or equal to 0. This number can't be a decimal.");
+            Assert.isTrue(userInput.getNrOfVillages().matches("\\d+"), "nrOfVillages must be a number greater or equal to 0. This number can't be a decimal.");
+            Assert.isTrue(userInput.getNrOfNeighborhoods().matches("\\d+"), "nrOfNeighborhoods must be a number greater or equal to 0. This number can't be a decimal.");
+            Assert.isTrue(userInput.getPercentageOfFarmersInFarmgroup().matches("\\d+"), "frequencyChiefTraining must be a number greater or equal to 0. This number can't be a decimal.");
             
             int farmersInFarmgroup = Integer.parseInt(userInput.getPercentageOfFarmersInFarmgroup());
             Assert.isTrue(farmersInFarmgroup >= 0 && farmersInFarmgroup <= 100, "farmersInFarmgroup must lie between 0 and 100");

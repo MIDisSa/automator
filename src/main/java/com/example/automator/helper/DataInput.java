@@ -144,6 +144,7 @@ public class DataInput {
         Assert.hasText(dataInput.getAvgIntraMentionPercentage(), "avgIntraMentionPercentage must not be empty");
         Assert.hasText(dataInput.getPercentageNegativeWoM(), "percentageNegativeWoM must not be empty");
         Assert.hasText(dataInput.getBaseAdoptionProbability(), "baseAdoptionProbability must not be empty");
+        Assert.hasText(dataInput.getTrainChiefInfluence(), "trainChiefInfluence must not be empty");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -159,6 +160,7 @@ public class DataInput {
         Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability must be a number greater or equal to 0");
         Assert.isTrue(dataInput.getBaseAdoptionProbability().matches("\\d+(\\.\\d+)?"), "baseAdoptionProbability must be a number greater or equal to 0");
         Assert.isTrue(dataInput.getAvgIntraMentionPercentage().matches("\\d+(\\.\\d+)?"), "avgIntraMentionPercentage must be a number greater or equal to 0");
+        Assert.isTrue(dataInput.getTrainChiefInfluence().matches("\\d+(\\.\\d+)?"), "trainChiefInfluence must be a number greater or equal to 0");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();

@@ -328,10 +328,10 @@ public class UserInput { //UserInput?
             Assert.hasText(userInput.getVariableCostsDelayed(), "variableCostsDelayed imust not bes empty");
             Assert.hasText(userInput.getVariableCostsDelayedDiscount(), "variableCostsDelayedDiscount must not be empty");
             Assert.hasText(userInput.getVariableCostsTrainChiefs(), "variableCostsTrainChiefs must not be empty");
-            //Assert.hasText(userInput.getFarmersPerVillage(), "farmersPerVillage is empty");
-            //Assert.hasText(userInput.getNrOfVillages(), "nrOfVillages is empty");
-            //Assert.hasText(userInput.getNrOfNeighborhoods(), "nrOfNeighborhoods is empty");
-            //Assert.hasText(userInput.getPercentageOfNumbersInFarmgroup(), "percentageOfNumbersInFarmgroup is empty");
+            Assert.hasText(userInput.getFarmersPerVillage(), "farmersPerVillage must not be empty");
+            Assert.hasText(userInput.getNrOfVillages(), "nrOfVillages must not be empty");
+            Assert.hasText(userInput.getNrOfNeighborhoods(), "nrOfNeighborhoods must not be empty");
+            Assert.hasText(userInput.getPercentageOfFarmersInFarmgroup(), "percentageOfFarmersInFarmgroup must not be empty");
 
             Assert.isTrue(userInput.getNumberOfTicks() > 0, "numberOfTicks must be larger than 0");
             Assert.isTrue(userInput.getBudget().matches("\\d+(\\.\\d+)?"), "budget must be a number greater or equal to 0. Please use a dot as decimal separator.");

@@ -27,6 +27,10 @@ public class CSVBuilder {
         row.add(modelResults.getAwareFarmers());
         row.add(modelResults.getTotalCost());
         row.add(String.valueOf(workingUserInput.getNumberOfTicks()));
+        row.add(workingUserInput.getNrOfVillages());
+        row.add(workingUserInput.getNrOfNeighborhoods());
+        row.add(workingUserInput.getFarmersPerVillage());
+        row.add(workingUserInput.getPercentageOfFarmersInFarmgroup());
         row.add(workingUserInput.getBudget());
         row.add(workingUserInput.getFixedCostsDirectAd());
         row.add(workingUserInput.getFixedCostsTrainChiefs());
@@ -72,6 +76,10 @@ public class CSVBuilder {
         row.add(optimizationOutput.getNrOfChiefTrainings());
         row.add(optimizationOutput.getTotalCost());
         row.add(String.valueOf(workingUserInput.getNumberOfTicks()));
+        row.add(workingUserInput.getNrOfVillages());
+        row.add(workingUserInput.getNrOfNeighborhoods());
+        row.add(workingUserInput.getFarmersPerVillage());
+        row.add(workingUserInput.getPercentageOfFarmersInFarmgroup());
         row.add(workingUserInput.getBudget());
         row.add(workingUserInput.getFixedCostsDirectAd());
         row.add(workingUserInput.getFixedCostsTrainChiefs());

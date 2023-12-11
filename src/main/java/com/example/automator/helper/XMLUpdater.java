@@ -9,7 +9,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
-import javax.xml.parsers.DocumentBuilder;  
+import javax.xml.parsers.DocumentBuilder;
 
 import org.w3c.dom.Document;  
 import org.w3c.dom.Node;  
@@ -35,27 +35,35 @@ public class XMLUpdater {
                 //Update XML
                 System.out.println("updating XML");
                 XPath xPath = XPathFactory.newInstance().newXPath();
-                
+
+                /* Max. value for some parameters because they increase optimization time exponentially */
+                Integer min;
+
                 Node node = (Node) xPath.compile("/search/modelInfo/modelStopCondition").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("ticks >= %s", userInput.getNumberOfTicks()));
+                min = Math.min(Integer.valueOf(userInput.getNumberOfTicks()), 720);
+                node.setTextContent(String.format("ticks >= %s", String.valueOf(min)));
 
                 node = (Node) xPath.compile("/search/modelInfo/modelStepLimit").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("%d", userInput.getNumberOfTicks()));
+                node.setTextContent(String.format("%d", min));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[5]").evaluate(doc, XPathConstants.NODE);
                 node.setTextContent(String.format("[\"percentage_of_villagers_addressed\" %s]", userInput.getPercentageOfVillagersAddressed()));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[7]").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("[\"run_until_day_x\" %s]", userInput.getNumberOfTicks()));
+                min = Math.min(Integer.valueOf(userInput.getNumberOfTicks()), 720);
+                node.setTextContent(String.format("[\"run_until_day_x\" %s]", String.valueOf(min)));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[8]").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("[\"avg_nr_of_farmers_per_village\" %s]", userInput.getFarmersPerVillage()));
+                min = Math.min(Integer.valueOf(userInput.getFarmersPerVillage()), 10);
+                node.setTextContent(String.format("[\"avg_nr_of_farmers_per_village\" %s]", String.valueOf(min)));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[9]").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("[\"nr_of_villages\" %s]", userInput.getNrOfVillages()));
+                min = Math.min(Integer.valueOf(userInput.getNrOfVillages()), 100);
+                node.setTextContent(String.format("[\"nr_of_villages\" %s]", String.valueOf(min)));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[10]").evaluate(doc, XPathConstants.NODE);
-                node.setTextContent(String.format("[\"nr_of_neighborhoods\" %s]", userInput.getNrOfNeighborhoods()));
+                Integer min2 = Math.min(Integer.valueOf(userInput.getNrOfNeighborhoods()), min);
+                node.setTextContent(String.format("[\"nr_of_neighborhoods\" %s]", String.valueOf(min2)));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[11]").evaluate(doc, XPathConstants.NODE);
                 node.setTextContent(String.format("[\"percentage_of_farmers_in_farmgroup\" %s]", userInput.getPercentageOfFarmersInFarmgroup()));

@@ -21,7 +21,8 @@ public class DataInput {
 
     //GETTER:
     public String getTrainChiefInfluence() {
-        return trainChiefInfluence;
+        String s = String.valueOf((int) Math.round(Double.valueOf(trainChiefInfluence) * 100));
+        return s;
     }
 
     public String getNrDefaultFriendsInterVillage() {

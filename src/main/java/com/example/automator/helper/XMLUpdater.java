@@ -54,7 +54,7 @@ public class XMLUpdater {
                 node.setTextContent(String.format("[\"run_until_day_x\" %s]", String.valueOf(min)));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[8]").evaluate(doc, XPathConstants.NODE);
-                min = Math.min(Integer.valueOf(userInput.getFarmersPerVillage()), 10);
+                min = Math.min(Integer.valueOf(userInput.getFarmersPerVillage()), 20);
                 node.setTextContent(String.format("[\"avg_nr_of_farmers_per_village\" %s]", String.valueOf(min)));
 
                 node = (Node) xPath.compile("/search/searchSpace/paramSpec[9]").evaluate(doc, XPathConstants.NODE);

@@ -22,7 +22,7 @@ public class CSVBuilder {
         String[] newRow = {};
         List<String> row = new ArrayList<String>(Arrays.asList(newRow));
 
-        row.add(String.format("%s", LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).toString()));
+        row.add(String.format("%s", LocalDateTime.now().plusHours(1).truncatedTo(ChronoUnit.MINUTES).toString()));
         row.add(modelResults.getAdopters());
         row.add(modelResults.getAwareFarmers());
         row.add(modelResults.getTotalCost());

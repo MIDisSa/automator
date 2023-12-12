@@ -23,8 +23,13 @@ public class CSVBuilder {
         List<String> row = new ArrayList<String>(Arrays.asList(newRow));
 
         row.add(String.format("%s", LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).toString()));
-        row.add(modelResults.getAdopters());
-        row.add(modelResults.getAwareFarmers());
+        
+        Integer adopters = Integer.valueOf(modelResults.getAdopters());
+        Integer awareFarmers = Integer.valueOf(modelResults.getAwareFarmers());
+        Integer totalAwareAgents = adopters + awareFarmers;
+
+        row.add(String.valueOf(adopters));
+        row.add(String.valueOf(totalAwareAgents));
         row.add(modelResults.getTotalCost());
         row.add(String.valueOf(workingUserInput.getNumberOfTicks()));
         row.add(workingUserInput.getNrOfVillages());

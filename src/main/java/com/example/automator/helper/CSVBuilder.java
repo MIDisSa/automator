@@ -24,9 +24,9 @@ public class CSVBuilder {
 
         row.add(String.format("%s", LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).toString()));
         
-        Integer adopters = Integer.valueOf(modelResults.getAdopters());
-        Integer awareFarmers = Integer.valueOf(modelResults.getAwareFarmers());
-        Integer totalAwareAgents = adopters + awareFarmers;
+        Double adopters = Double.valueOf(modelResults.getAdopters());
+        Double awareFarmers = Double.valueOf(modelResults.getAwareFarmers());
+        Double totalAwareAgents = adopters + awareFarmers;
 
         row.add(String.valueOf(adopters));
         row.add(String.valueOf(totalAwareAgents));

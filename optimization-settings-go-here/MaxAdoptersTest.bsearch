@@ -5,7 +5,7 @@
 <modelSetupCommands>setup</modelSetupCommands>
 <modelStepCommands>go</modelStepCommands>
 <modelStopCondition>ticks &gt;= 360</modelStopCondition>
-<modelStepLimit>365</modelStepLimit>
+<modelStepLimit>360</modelStepLimit>
 <modelMetricReporter>count turtles with [adoption_state = 2]</modelMetricReporter>
 <modelMeasureIf>true</modelMeasureIf>
 </modelInfo>
@@ -22,7 +22,11 @@
 <paramSpec>["direct_ad_nr_of_villages" [0 1 100]]</paramSpec>
 <paramSpec>["percentage_of_villagers_addressed" 50]</paramSpec>
 <paramSpec>["train_chiefs_nr" [0 1 100]]</paramSpec>
-<paramSpec>["run_until_day_x" 365]</paramSpec>
+<paramSpec>["run_until_day_x" 360]</paramSpec>
+<paramSpec>["avg_nr_of_farmers_per_village" 10]</paramSpec>
+<paramSpec>["nr_of_villages" 100]</paramSpec>
+<paramSpec>["nr_of_neighborhoods" 20]</paramSpec>
+<paramSpec>["percentage_of_farmers_in_farmgroup" 50]</paramSpec>
 <paramSpec>["nr_default_friends_inter_village" 5]</paramSpec>
 <paramSpec>["avg_intra_village_interaction_frequency" 4]</paramSpec>
 <paramSpec>["avg_inter_village_interaction_frequency" 5]</paramSpec>
@@ -31,23 +35,22 @@
 <paramSpec>["base_adoption_probability" 1]</paramSpec>
 <paramSpec>["avg_inter_mention_percentage" 1]</paramSpec>
 <paramSpec>["avg_intra_mention_percentage" 2]</paramSpec>
-<paramSpec>["max_budget" 99999]</paramSpec>
-<paramSpec>["fixed_costs_direct_ad" 6666]</paramSpec>
+<paramSpec>["max_budget" 100000]</paramSpec>
+<paramSpec>["fixed_costs_direct_ad" 6000]</paramSpec>
 <paramSpec>["fixed_costs_train_chiefs" 5000]</paramSpec>
 <paramSpec>["variable_costs_direct_ad" 400]</paramSpec>
-<paramSpec>["variable_costs_discount" 555]</paramSpec>
+<paramSpec>["variable_costs_discount" 500]</paramSpec>
 <paramSpec>["variable_costs_delayed" 700]</paramSpec>
 <paramSpec>["variable_costs_delayed_discount" 800]</paramSpec>
-<paramSpec>["variable_costs_train_chiefs" 444]</paramSpec>
-
+<paramSpec>["variable_costs_train_chiefs" 400]</paramSpec>
 
 </searchSpace>
 <searchMethod type="MutationHillClimber">
-<searchMethodParameter name="mutation-rate" value="0.05"/>
-<searchMethodParameter name="restart-after-stall-count" value="0"/>
+<searchMethodParameter name="mutation-rate" value="0.2"/>
+<searchMethodParameter name="restart-after-stall-count" value="10"/>
 </searchMethod>
 <chromosomeRepresentation type="GrayBinaryChromosome"/>
 <caching>true</caching>
-<evaluationLimit>300</evaluationLimit>
+<evaluationLimit>400</evaluationLimit>
 <bestCheckingNumReplications>10</bestCheckingNumReplications>
 </search>

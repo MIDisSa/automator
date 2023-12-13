@@ -271,10 +271,10 @@ public class UserInput { //UserInput?
 
         // frequencyDirectAd is not empty, integer, not negative
         try {
-            Assert.hasText(userInput.getFrequencyDirectAd(), "frequencyDirectAd is empty");
-            Assert.isTrue(userInput.getFrequencyDirectAd().matches("\\d+"), "getFrequencyDirectAd is not a positive integer");
+            Assert.hasText(userInput.getFrequencyDirectAd(), "frequencyDirectAd must not be empty");
+            Assert.isTrue(userInput.getFrequencyDirectAd().matches("\\d+"), "getFrequencyDirectAd  must be a number greater or equal to 0. This number can't be a decimal.");
             int frequencyDirectAd = Integer.parseInt(userInput.getFrequencyDirectAd());
-            Assert.isTrue(frequencyDirectAd >= 0 && frequencyDirectAd <= 365, "frequencyDirectAd is not within range");
+            Assert.isTrue(frequencyDirectAd >= 0 && frequencyDirectAd <= 365, "frequencyDirectAd must be larger or equal to 0 and smaller or equal to 365");
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -285,10 +285,10 @@ public class UserInput { //UserInput?
 
         // frequencyChiefTraining is not empty, integer, not negative
         try {
-            Assert.hasText(userInput.getFrequencyChiefTraining(), "frequencyChiefTraining is empty");
-            Assert.isTrue(userInput.getFrequencyChiefTraining().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.hasText(userInput.getFrequencyChiefTraining(), "frequencyChiefTraining must not be empty");
+            Assert.isTrue(userInput.getFrequencyChiefTraining().matches("\\d+"), "frequencyChiefTraining must be a number greater or equal to 0. This number can't be a decimal.");
             int tempFrequencyChiefTraining = Integer.parseInt(userInput.getFrequencyChiefTraining());
-            Assert.isTrue(tempFrequencyChiefTraining >= 0 && tempFrequencyChiefTraining <= 365, "frequencyChiefTraining is not within range");
+            Assert.isTrue(tempFrequencyChiefTraining >= 0 && tempFrequencyChiefTraining <= 365, "frequencyChiefTraining must be larger or equal to 0 and smaller or equal to 365.");
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -299,14 +299,14 @@ public class UserInput { //UserInput?
 
         // directAdType is not empty and matches one of four possible string
         try {
-            Assert.hasText(userInput.getDirectAdType(), "directAdType is empty");
+            Assert.hasText(userInput.getDirectAdType(), "directAdType must not be empty");
             
             ArrayList<String> possible_interventions = new ArrayList<String>();
             possible_interventions.add("\"Direct Ad\"");
             possible_interventions.add("\"Direct Ad + Discount\"");
             possible_interventions.add("\"Direct Ad + Deferred Payment\"");
             possible_interventions.add("\"Direct Ad + Deferred P. + Discount\"");
-            Assert.isTrue(possible_interventions.contains(userInput.getDirectAdType()), "directAdType is not one of the four possible interventions");
+            Assert.isTrue(possible_interventions.contains(userInput.getDirectAdType()), "directAdType must match one of the four possible interventions");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
@@ -320,32 +320,32 @@ public class UserInput { //UserInput?
 
         // parameters are not empty, not negative
         try {
-            Assert.hasText(userInput.getBudget(), "budget is empty");
-            Assert.hasText(userInput.getFixedCostsDirectAd(), "fixedCostsDirectAd is empty");
-            Assert.hasText(userInput.getFixedCostsTrainChiefs(), "fixedCostsTrainChiefs is empty");
-            Assert.hasText(userInput.getVariableCostsDirectAd(), "variableCostsDirectAd is empty");
-            Assert.hasText(userInput.getVariableCostsDiscount(), "variableCostsDiscount is empty");
-            Assert.hasText(userInput.getVariableCostsDelayed(), "variableCostsDelayed is empty");
-            Assert.hasText(userInput.getVariableCostsDelayedDiscount(), "variableCostsDelayedDiscount is empty");
-            Assert.hasText(userInput.getVariableCostsTrainChiefs(), "variableCostsTrainChiefs is empty");
-            //Assert.hasText(userInput.getFarmersPerVillage(), "farmersPerVillage is empty");
-            //Assert.hasText(userInput.getNrOfVillages(), "nrOfVillages is empty");
-            //Assert.hasText(userInput.getNrOfNeighborhoods(), "nrOfNeighborhoods is empty");
-            //Assert.hasText(userInput.getPercentageOfNumbersInFarmgroup(), "percentageOfNumbersInFarmgroup is empty");
+            Assert.hasText(userInput.getBudget(), "budget must not be empty");
+            Assert.hasText(userInput.getFixedCostsDirectAd(), "fixedCostsDirectAd must not be empty");
+            Assert.hasText(userInput.getFixedCostsTrainChiefs(), "fixedCostsTrainChiefs must not be empty");
+            Assert.hasText(userInput.getVariableCostsDirectAd(), "variableCostsDirectAd must not be empty");
+            Assert.hasText(userInput.getVariableCostsDiscount(), "variableCostsDiscount must not be empty");
+            Assert.hasText(userInput.getVariableCostsDelayed(), "variableCostsDelayed imust not bes empty");
+            Assert.hasText(userInput.getVariableCostsDelayedDiscount(), "variableCostsDelayedDiscount must not be empty");
+            Assert.hasText(userInput.getVariableCostsTrainChiefs(), "variableCostsTrainChiefs must not be empty");
+            Assert.hasText(userInput.getFarmersPerVillage(), "farmersPerVillage must not be empty");
+            Assert.hasText(userInput.getNrOfVillages(), "nrOfVillages must not be empty");
+            Assert.hasText(userInput.getNrOfNeighborhoods(), "nrOfNeighborhoods must not be empty");
+            Assert.hasText(userInput.getPercentageOfFarmersInFarmgroup(), "percentageOfFarmersInFarmgroup must not be empty");
 
             Assert.isTrue(userInput.getNumberOfTicks() > 0, "numberOfTicks must be larger than 0");
-            Assert.isTrue(userInput.getBudget().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getFixedCostsDirectAd().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getFixedCostsTrainChiefs().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getVariableCostsDirectAd().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getVariableCostsDiscount().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getVariableCostsDelayed().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getVariableCostsDelayedDiscount().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getVariableCostsTrainChiefs().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
-            Assert.isTrue(userInput.getFarmersPerVillage().matches("\\d+"), "farmersPerVillage is not a positive integer");
-            Assert.isTrue(userInput.getNrOfVillages().matches("\\d+"), "nrOfVillages is not a positive integer");
-            Assert.isTrue(userInput.getNrOfNeighborhoods().matches("\\d+"), "nrOfNeighborhoods is not a positive integer");
-            Assert.isTrue(userInput.getPercentageOfFarmersInFarmgroup().matches("\\d+"), "frequencyChiefTraining is not a positive integer");
+            Assert.isTrue(userInput.getBudget().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "budget must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getFixedCostsDirectAd().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "fixedCostsDirectAd must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getFixedCostsTrainChiefs().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "fixedCostsTrainChiefs must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsDirectAd().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "variableCostsDirectAd must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsDiscount().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "variableCostsDiscount must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsDelayed().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "variableCostsDelayed must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsDelayedDiscount().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "variableCostsDelayedDiscount must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsTrainChiefs().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "variableCostsTrainChiefs  must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getFarmersPerVillage().matches("\\d+"), "farmersPerVillage must be a number greater or equal to 0. This number can't be a decimal.");
+            Assert.isTrue(userInput.getNrOfVillages().matches("\\d+"), "nrOfVillages must be a number greater or equal to 0. This number can't be a decimal.");
+            Assert.isTrue(userInput.getNrOfNeighborhoods().matches("\\d+"), "nrOfNeighborhoods must be a number greater or equal to 0. This number can't be a decimal.");
+            Assert.isTrue(userInput.getPercentageOfFarmersInFarmgroup().matches("\\d+"), "frequencyChiefTraining must be a number greater or equal to 0. This number can't be a decimal.");
             
             int farmersInFarmgroup = Integer.parseInt(userInput.getPercentageOfFarmersInFarmgroup());
             Assert.isTrue(farmersInFarmgroup >= 0 && farmersInFarmgroup <= 100, "farmersInFarmgroup must lie between 0 and 100");
@@ -362,13 +362,13 @@ public class UserInput { //UserInput?
         
         // optimizationType is not empty and matches one of four possible string
         try {       
-            Assert.hasText(optimizationInput, "optimizationType is empty");     
+            Assert.hasText(optimizationInput, "optimizationType must not be empty");     
             ArrayList<String> possible_optimizations = new ArrayList<String>();
             possible_optimizations.add("maxAdopters");
             possible_optimizations.add("maxKnowledge");
             possible_optimizations.add("minCost");
             possible_optimizations.add("test");
-            Assert.isTrue(possible_optimizations.contains(optimizationInput), "optimizationType is not one of the four possible types");
+            Assert.isTrue(possible_optimizations.contains(optimizationInput), "optimizationType must match one of the four possible types");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return e.getMessage();

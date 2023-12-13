@@ -23,10 +23,19 @@ public class CSVBuilder {
         List<String> row = new ArrayList<String>(Arrays.asList(newRow));
 
         row.add(String.format("%s", LocalDateTime.now().plusHours(1).truncatedTo(ChronoUnit.MINUTES).toString()));
-        row.add(modelResults.getAdopters());
-        row.add(modelResults.getAwareFarmers());
+        
+        Double adopters = Double.valueOf(modelResults.getAdopters());
+        Double awareFarmers = Double.valueOf(modelResults.getAwareFarmers());
+        Double totalAwareAgents = adopters + awareFarmers;
+
+        row.add(String.valueOf(adopters));
+        row.add(String.valueOf(totalAwareAgents));
         row.add(modelResults.getTotalCost());
         row.add(String.valueOf(workingUserInput.getNumberOfTicks()));
+        row.add(workingUserInput.getNrOfVillages());
+        row.add(workingUserInput.getNrOfNeighborhoods());
+        row.add(workingUserInput.getFarmersPerVillage());
+        row.add(workingUserInput.getPercentageOfFarmersInFarmgroup());
         row.add(workingUserInput.getBudget());
         row.add(workingUserInput.getFixedCostsDirectAd());
         row.add(workingUserInput.getFixedCostsTrainChiefs());
@@ -72,6 +81,10 @@ public class CSVBuilder {
         row.add(optimizationOutput.getNrOfChiefTrainings());
         row.add(optimizationOutput.getTotalCost());
         row.add(String.valueOf(workingUserInput.getNumberOfTicks()));
+        row.add(workingUserInput.getNrOfVillages());
+        row.add(workingUserInput.getNrOfNeighborhoods());
+        row.add(workingUserInput.getFarmersPerVillage());
+        row.add(workingUserInput.getPercentageOfFarmersInFarmgroup());
         row.add(workingUserInput.getBudget());
         row.add(workingUserInput.getFixedCostsDirectAd());
         row.add(workingUserInput.getFixedCostsTrainChiefs());

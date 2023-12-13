@@ -1157,7 +1157,7 @@ to train_chiefs
     let chosen_chiefs at-most-n-of ((train_chiefs_nr / 100) * nr_of_villages) chiefs
     if (any? chosen_chiefs) [
       ask chosen_chiefs [
-        interact research_team_agent train_chiefs_influence * 100 false self 0 true true false
+        interact research_team_agent (train_chiefs_influence * 100) false self 0 true true false
         set intervention_state 5
       ]
     ]

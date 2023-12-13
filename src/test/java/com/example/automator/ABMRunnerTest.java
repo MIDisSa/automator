@@ -59,7 +59,7 @@ public class ABMRunnerTest {
         // mock result
         ArrayList<Double> awareFarmersPerTick = new ArrayList<Double>();
         ArrayList<Double> adoptersPerTick = new ArrayList<Double>();
-        for (int i = 0; i < mockUserInput.getNumberOfTicks(); i++) {
+        for (int i = 0; i < Integer.valueOf(mockUserInput.getNumberOfTicks()); i++) {
             awareFarmersPerTick.add(1.0);
             adoptersPerTick.add(2.0);
         }

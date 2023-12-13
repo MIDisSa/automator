@@ -27,10 +27,19 @@ public class ABMRunner {
    
             // SETUP SIMULATION
             //workspace.command("random-seed 0");
-            workspace.command("setup");
-        
-            // SET MODEL PARAMETERS
+
+            // SET VILLAGE PARAMETERS
+            workspace.command(String.format("set avg_nr_of_farmers_per_village %s", userInput.getFarmersPerVillage()));
+            workspace.command(String.format("set nr_of_villages %s", userInput.getNrOfVillages()));
+            workspace.command(String.format("set nr_of_neighborhoods %s", userInput.getNrOfNeighborhoods()));
+            workspace.command(String.format("set percentage_of_farmers_in_farmgroup %s", userInput.getPercentageOfFarmersInFarmgroup()));
             workspace.command(String.format("set nr_default_friends_inter_village %s", dataInput.getNrDefaultFriendsInterVillage()));
+            workspace.command(String.format("set direct_ad_nr_of_villages %s", userInput.getDirectAdCoverage()));
+            workspace.command(String.format("set train_chiefs_nr %s", userInput.getTrainChiefsCoverage()));
+            workspace.command("setup");
+
+
+            // SET MODEL PARAMETERS
             workspace.command(String.format("set avg_intra_village_interaction_frequency %s", dataInput.getAvgIntraVillageInteractionFrequency()));
             workspace.command(String.format("set avg_inter_village_interaction_frequency %s", dataInput.getAvgInterVillageInteractionFrequency()));
             workspace.command(String.format("set avg_chief_farmer_meeting_frequency %s", dataInput.getAvgChiefFarmerMeetingFrequency()));
@@ -45,9 +54,7 @@ public class ABMRunner {
             workspace.command(String.format("set direct_ad_frequency %s", userInput.getFrequencyDirectAd()));
             workspace.command(String.format("set train_chiefs_frequency %s", userInput.getFrequencyChiefTraining()));
             workspace.command(String.format("set max_budget %s", userInput.getBudget()));
-            workspace.command(String.format("set direct_ad_nr_of_villages %s", userInput.getDirectAdCoverage()));
-            workspace.command("set percentage_of_villagers_addressed 50"); //not part of optimization atm
-            workspace.command(String.format("set train_chiefs_nr %s", userInput.getTrainChiefsCoverage())); 
+            workspace.command("set percentage_of_villagers_addressed 50"); //not part of optimization atm 
 
             // SET FIXED AND VARIABLE COST
             workspace.command(String.format("set fixed_costs_direct_ad %s", userInput.getFixedCostsDirectAd()));
@@ -58,22 +65,16 @@ public class ABMRunner {
             workspace.command(String.format("set variable_costs_delayed_discount %s", userInput.getVariableCostsDelayedDiscount()));
             workspace.command(String.format("set variable_costs_train_chiefs %s", userInput.getVariableCostsTrainChiefs()));
 
-            // SET VILLAGE PARAMETERS
-            workspace.command(String.format("set avg_nr_of_farmers_per_village %s", userInput.getFarmersPerVillage()));
-            workspace.command(String.format("set nr_of_villages %s", userInput.getNrOfVillages()));
-            workspace.command(String.format("set nr_of_neighborhoods %s", userInput.getNrOfNeighborhoods()));
-            workspace.command(String.format("set percentage_of_farmers_in_farmgroup %s", userInput.getPercentageOfFarmersInFarmgroup()));
-
             // keep track of number of aware farmers and adopters per tick (needed for graph)
             ArrayList<Double> awareFarmersPerTick = new ArrayList<Double>();
             ArrayList<Double> adoptersPerTick = new ArrayList<Double>();
 
             // run model for set number of ticks
-            int ticks = userInput.getNumberOfTicks();
+            int ticks = Integer.valueOf(userInput.getNumberOfTicks());
             int counter = 0;
             while (counter < ticks) {
                 workspace.command("go");
-                counter += 1;
+                counter += 1;   
                 awareFarmersPerTick.add((Double) workspace.report("count turtles with [adoption_state = 1]"));
                 adoptersPerTick.add((Double) workspace.report("count turtles with [adoption_state = 2]"));
             }
@@ -84,6 +85,9 @@ public class ABMRunner {
             String nrOfDirectAds = String.valueOf(workspace.report("nr_of_direct_ads"));
             String nrOfChiefTrainings = String.valueOf(workspace.report("nr_of_chief_trainings"));
             String totalCost = String.valueOf(workspace.report("current_cost"));
+            Double roundedTotalCost = Math.floor(Double.valueOf(totalCost));
+            totalCost = String.valueOf(roundedTotalCost);
+
 
             workspace.dispose();
 

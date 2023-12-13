@@ -9,12 +9,14 @@ import java.util.List;
 public class CSVBuilder {
 
     public static String[] buildCsvHeaderForModelResults() {
-        String[] newHeader = {"Timestamp","Adopters","Aware Agents","Total Cost","Days","Budget","Fixed Costs Direct Ad","Fixed Costs ToT","Variable Costs Direct Ad","Variable Costs Direct Ad + Discount","Variable Costs for Direct Ad + Deferred Payment","Variable Costs for Direct Ad + Deferred Payment + Discount","Variable Costs ToT","Treatment Frequency","Treatment Arm","ToT Frequency","Treatment Coverage","ToT Coverage","Percentage of Villagers addressed","Mention Probability","Negative WoM","Adoption Probability","Friends Inter Village","Inter Village Interaction Frequency","Intra Village Interaction Frequency","Farmgroup Meeting Frequency","Relative Chief Influence Factor"};
+        String[] newHeader = {"Timestamp","Adopters","Aware Agents","Total Cost","Days","Number of Villages","Number of Neighborhoods","Avg. Number of Farmers per Village","% of Farmers in Farmgoup","Budget","Fixed Costs Direct Ad","Fixed Costs ToT","Variable Costs Direct Ad","Variable Costs Direct Ad + Discount","Variable Costs for Direct Ad + Deferred Payment","Variable Costs for Direct Ad + Deferred Payment + Discount","Variable Costs ToT","Treatment Frequency","Treatment Arm","ToT Frequency","Treatment Coverage","ToT Coverage","Percentage of Villagers addressed","Mention Probability","Negative WoM","Adoption Probability","Friends Inter Village","Inter Village Interaction Frequency","Intra Village Interaction Frequency","Farmgroup Meeting Frequency","Relative Chief Influence Factor"
+    };
         return newHeader;
     }
 
     public static String[] buildCsvHeaderForOptimizationResults() {
-        String[] newHeader = {"Timestamp","Optimization Type","Best Fitness","Treatment Arm*","Treatment Frequency*","ToT Frequency*","Treatment Coverage*","ToT Coverage*","Percentage of Villagers addressed","Number of Treatments*","Number of ToTs*","Total Cost","Days","Budget","Fixed Costs Direct Ad","Fixed Costs ToT","Variable Costs Direct Ad","Variable Costs Direct Ad + Discount","Variable Costs for Direct Ad + Deferred Payment","Variable Costs for Direct Ad + Deferred Payment + Discount","Variable Costs ToT","Mention Probability","Negative WoM","Adoption Probability","Friends Inter Village","Inter Village Interaction Frequency","Intra Village Interaction Frequency","Farmgroup Meeting Frequency","Relative Chief Influence Factor"};
+        String[] newHeader = {"Timestamp","Optimization Type","Best Fitness","Treatment Arm*","Treatment Frequency*","ToT Frequency*","Treatment Coverage*","ToT Coverage*","Percentage of Villagers addressed","Number of Treatments*","Number of ToTs*","Total Cost","Days","Number of Villages","Number of Neighborhoods","Avg. Number of Farmers per Village","% of Farmers in Farmgoup","Budget","Fixed Costs Direct Ad","Fixed Costs ToT","Variable Costs Direct Ad","Variable Costs Direct Ad + Discount","Variable Costs for Direct Ad + Deferred Payment","Variable Costs for Direct Ad + Deferred Payment + Discount","Variable Costs ToT","Mention Probability","Negative WoM","Adoption Probability","Friends Inter Village","Inter Village Interaction Frequency","Intra Village Interaction Frequency","Farmgroup Meeting Frequency","Relative Chief Influence Factor"
+    };
         return newHeader;
     }
 
@@ -31,7 +33,7 @@ public class CSVBuilder {
         row.add(String.valueOf(adopters));
         row.add(String.valueOf(totalAwareAgents));
         row.add(modelResults.getTotalCost());
-        row.add(String.valueOf(workingUserInput.getNumberOfTicks()));
+        row.add(workingUserInput.getNumberOfTicks());
         row.add(workingUserInput.getNrOfVillages());
         row.add(workingUserInput.getNrOfNeighborhoods());
         row.add(workingUserInput.getFarmersPerVillage());
@@ -80,7 +82,7 @@ public class CSVBuilder {
         row.add(optimizationOutput.getNrOfDirectAds());
         row.add(optimizationOutput.getNrOfChiefTrainings());
         row.add(optimizationOutput.getTotalCost());
-        row.add(String.valueOf(workingUserInput.getNumberOfTicks()));
+        row.add(workingUserInput.getNumberOfTicks());
         row.add(workingUserInput.getNrOfVillages());
         row.add(workingUserInput.getNrOfNeighborhoods());
         row.add(workingUserInput.getFarmersPerVillage());

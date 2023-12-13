@@ -1101,6 +1101,7 @@ to direct_ad
   let b_in_budget check_budget intervention_cost
   if b_in_budget [set nr_of_direct_ads nr_of_direct_ads + 1
                   update_current_cost intervention_cost
+
                   contact_farmers nr_of_contacted_villages (percentage_of_villagers_addressed / 100) direct_ad_influence 1]
 end
 
@@ -1155,6 +1156,8 @@ to train_chiefs
   if b_in_budget [
     set nr_of_chief_trainings nr_of_chief_trainings + 1
     update_current_cost intervention_cost
+    show intervention_cost
+    show current_cost
 
 
     let chosen_chiefs at-most-n-of nr_of_trained_chiefs chiefs

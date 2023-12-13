@@ -5,7 +5,7 @@ import org.springframework.util.Assert;
 
 public class UserInput { //UserInput?
     //Optimization parameters:
-    private int numberOfTicks = 360;
+    private String numberOfTicks = "360";
     private String budget = "100000";
     private String fixedCostsDirectAd = "6000";
     private String fixedCostsTrainChiefs = "5000";
@@ -66,7 +66,7 @@ public class UserInput { //UserInput?
     }
 
     //GETTER (Optimization Parameters)
-        public int getNumberOfTicks() {
+    public String getNumberOfTicks() {
         return numberOfTicks;
     }
 
@@ -131,7 +131,7 @@ public class UserInput { //UserInput?
     }
     
     //SETTER (Optimization Parameters)
-        public void setNumberOfTicks(int numberOfTicks) {
+    public void setNumberOfTicks(String numberOfTicks) {
         this.numberOfTicks = numberOfTicks;
     }
 
@@ -222,6 +222,7 @@ public class UserInput { //UserInput?
     public ArrayList<String> calculateNrOfInterventions() {
         ArrayList<String> results = new ArrayList<String>();
         int i = 0;
+        int numberOfDays = Integer.valueOf(numberOfTicks);
         int tmpBudget = Integer.valueOf(budget);
         int dirAdCounter = 0;
         int ToTCounter = 0;
@@ -229,15 +230,15 @@ public class UserInput { //UserInput?
         int ToTCost = calculateToTCost();
 
 
-        while (i <= numberOfTicks) {
-            if (Integer.valueOf(frequencyDirectAd) > 0 && i != numberOfTicks && i % Integer.valueOf(frequencyDirectAd) == 0) {
+        while (i <= numberOfDays) {
+            if (Integer.valueOf(frequencyDirectAd) > 0 && i != numberOfDays && i % Integer.valueOf(frequencyDirectAd) == 0) {
                 if (dirAdCost <= tmpBudget) {
                     tmpBudget = tmpBudget - dirAdCost;
                     dirAdCounter++;
                 }
             }
 
-            if (Integer.valueOf(frequencyChiefTraining) > 0 && i != numberOfTicks && i % Integer.valueOf(frequencyChiefTraining) == 0) {
+            if (Integer.valueOf(frequencyChiefTraining) > 0 && i != numberOfDays && i % Integer.valueOf(frequencyChiefTraining) == 0) {
                 if (ToTCost <= tmpBudget) {
                     tmpBudget = tmpBudget - ToTCost;
                     ToTCounter++;
@@ -333,7 +334,7 @@ public class UserInput { //UserInput?
             Assert.hasText(userInput.getNrOfNeighborhoods(), "nrOfNeighborhoods must not be empty");
             Assert.hasText(userInput.getPercentageOfFarmersInFarmgroup(), "percentageOfFarmersInFarmgroup must not be empty");
 
-            Assert.isTrue(userInput.getNumberOfTicks() > 0, "numberOfTicks must be larger than 0");
+            Assert.isTrue(userInput.getNumberOfTicks().matches("\\d+"), "numberOfDays must be a number greater or equal to 0. This number can't be a decimal.");
             Assert.isTrue(userInput.getBudget().matches("^\\d{1,3}(,?\\d{3})*(\\.\\d+)?$"), "budget must be a number greater or equal to 0. Please use a dot as decimal separator.");
             Assert.isTrue(userInput.getFixedCostsDirectAd().matches("^\\d{1,3}(,?\\d{3})*(\\.\\d+)?$"), "fixedCostsDirectAd must be a number greater or equal to 0. Please use a dot as decimal separator.");
             Assert.isTrue(userInput.getFixedCostsTrainChiefs().matches("^\\d{1,3}(,?\\d{3})*(\\.\\d+)?$"), "fixedCostsTrainChiefs must be a number greater or equal to 0. Please use a dot as decimal separator.");

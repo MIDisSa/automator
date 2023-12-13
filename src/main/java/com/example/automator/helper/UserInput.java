@@ -334,14 +334,14 @@ public class UserInput { //UserInput?
             Assert.hasText(userInput.getPercentageOfFarmersInFarmgroup(), "percentageOfFarmersInFarmgroup must not be empty");
 
             Assert.isTrue(userInput.getNumberOfTicks() > 0, "numberOfTicks must be larger than 0");
-            Assert.isTrue(userInput.getBudget().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "budget must be a number greater or equal to 0. Please use a dot as decimal separator.");
-            Assert.isTrue(userInput.getFixedCostsDirectAd().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "fixedCostsDirectAd must be a number greater or equal to 0. Please use a dot as decimal separator.");
-            Assert.isTrue(userInput.getFixedCostsTrainChiefs().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "fixedCostsTrainChiefs must be a number greater or equal to 0. Please use a dot as decimal separator.");
-            Assert.isTrue(userInput.getVariableCostsDirectAd().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "variableCostsDirectAd must be a number greater or equal to 0. Please use a dot as decimal separator.");
-            Assert.isTrue(userInput.getVariableCostsDiscount().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "variableCostsDiscount must be a number greater or equal to 0. Please use a dot as decimal separator.");
-            Assert.isTrue(userInput.getVariableCostsDelayed().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "variableCostsDelayed must be a number greater or equal to 0. Please use a dot as decimal separator.");
-            Assert.isTrue(userInput.getVariableCostsDelayedDiscount().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "variableCostsDelayedDiscount must be a number greater or equal to 0. Please use a dot as decimal separator.");
-            Assert.isTrue(userInput.getVariableCostsTrainChiefs().matches("\\d{1,3}(,\\d{3})*(\\.\\d+)?"), "variableCostsTrainChiefs  must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getBudget().matches("^\\d{1,3}(.?\\d{3})*(\\.\\d+)?$"), "budget must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getFixedCostsDirectAd().matches("^\\d{1,3}(.?\\d{3})*(\\.\\d+)?$"), "fixedCostsDirectAd must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getFixedCostsTrainChiefs().matches("^\\d{1,3}(.?\\d{3})*(\\.\\d+)?$"), "fixedCostsTrainChiefs must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsDirectAd().matches("^\\d{1,3}(.?\\d{3})*(\\.\\d+)?$"), "variableCostsDirectAd must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsDiscount().matches("^\\d{1,3}(.?\\d{3})*(\\.\\d+)?$"), "variableCostsDiscount must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsDelayed().matches("^\\d{1,3}(.?\\d{3})*(\\.\\d+)?$"), "variableCostsDelayed must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsDelayedDiscount().matches("^\\d{1,3}(.?\\d{3})*(\\.\\d+)?$"), "variableCostsDelayedDiscount must be a number greater or equal to 0. Please use a dot as decimal separator.");
+            Assert.isTrue(userInput.getVariableCostsTrainChiefs().matches("^\\d{1,3}(.?\\d{3})*(\\.\\d+)?$"), "variableCostsTrainChiefs  must be a number greater or equal to 0. Please use a dot as decimal separator.");
             Assert.isTrue(userInput.getFarmersPerVillage().matches("\\d+"), "farmersPerVillage must be a number greater or equal to 0. This number can't be a decimal.");
             Assert.isTrue(userInput.getNrOfVillages().matches("\\d+"), "nrOfVillages must be a number greater or equal to 0. This number can't be a decimal.");
             Assert.isTrue(userInput.getNrOfNeighborhoods().matches("\\d+"), "nrOfNeighborhoods must be a number greater or equal to 0. This number can't be a decimal.");

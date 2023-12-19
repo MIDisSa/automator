@@ -385,6 +385,10 @@ public class AutomatorController {
         String output = CLIRunner.getOutputBuffer();
         String[] lines = output.split("\n");
         String lastOutput = lines[lines.length - 1];
+        // return empty string when finished
+        if (lastOutput.equals("All searches completed.")) {
+            return "";
+        }
         return lastOutput;
     }
 

@@ -45,6 +45,11 @@ import com.example.automator.helper.CSVBuilder;
 public class AutomatorController { 
     DataInput workingDataInput = new DataInput();
     UserInput workingUserInput = new UserInput();
+    private CLIRunner CLIRunner = new CLIRunner();
+
+    public AutomatorController() {
+        this.CLIRunner = new CLIRunner();
+    }
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
@@ -374,6 +379,14 @@ public class AutomatorController {
         return parameters;
     }
 
+    @GetMapping("/optimizerBuffer")
+    public String getOptimizerBuffer() {
+        // only return second to last line (last line is empty)
+        String output = CLIRunner.getOutputBuffer();
+        String[] lines = output.split("\n");
+        String lastOutput = lines[lines.length - 1];
+        return lastOutput;
+    }
 
     //Helper methods:
 
@@ -382,7 +395,7 @@ public class AutomatorController {
             //Update Budget
             XMLUpdater.updateXML("MaxAdopters.bsearch", workingDataInput, userInput);
 
-            CLIRunner CLIRunner = new CLIRunner();
+            //CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MaxAdopters.bsearch -o optimization-results-go-here/MaxAdopters");
 
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("MaxAdopters.finalCheckedBests.csv");
@@ -419,7 +432,7 @@ public class AutomatorController {
             //Update Budget
             XMLUpdater.updateXML("MaxKnowledge.bsearch", workingDataInput, userInput);
 
-            CLIRunner CLIRunner = new CLIRunner();
+            //CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MaxKnowledge.bsearch -o optimization-results-go-here/MaxKnowledge");
 
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("MaxKnowledge.finalCheckedBests.csv");
@@ -456,7 +469,7 @@ public class AutomatorController {
             //Update Budget
             XMLUpdater.updateXML("MinCostPerAdopter.bsearch", workingDataInput, userInput);
 
-            CLIRunner CLIRunner = new CLIRunner();
+            //CLIRunner CLIRunner = new CLIRunner();
             CLIRunner.runCommand("-p optimization-settings-go-here/MinCostPerAdopter.bsearch -o optimization-results-go-here/MinCostPerAdopter");
             
             OptimizationResults OptimizationResults = new CSVReader().parseResultsCSV("MinCostPerAdopter.finalCheckedBests.csv");

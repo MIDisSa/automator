@@ -7,6 +7,13 @@ import java.lang.ProcessBuilder;
 import org.apache.commons.lang3.SystemUtils;
 
 public class CLIRunner {
+
+    private StringBuilder outputBuffer;
+
+    public CLIRunner() {
+        outputBuffer = new StringBuilder();
+    }
+
     public void runCommand(String cmd) {
         try {
             ProcessBuilder pb = new ProcessBuilder();
@@ -26,11 +33,16 @@ public class CLIRunner {
                 
             String line;
             while ((line = reader.readLine()) != null) {
+                outputBuffer.append(line + "\n");
                 System.out.println(line);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getOutputBuffer() {
+        return outputBuffer.toString();
     }
 }

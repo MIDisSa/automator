@@ -40,6 +40,7 @@ public class ABMRunner {
 
 
             // SET MODEL PARAMETERS
+            workspace.command(String.format("set train_chiefs_influence %s", dataInput.getTrainChiefInfluence()));
             workspace.command(String.format("set avg_intra_village_interaction_frequency %s", dataInput.getAvgIntraVillageInteractionFrequency()));
             workspace.command(String.format("set avg_inter_village_interaction_frequency %s", dataInput.getAvgInterVillageInteractionFrequency()));
             workspace.command(String.format("set avg_chief_farmer_meeting_frequency %s", dataInput.getAvgChiefFarmerMeetingFrequency()));

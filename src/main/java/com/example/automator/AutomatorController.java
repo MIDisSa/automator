@@ -389,6 +389,10 @@ public class AutomatorController {
         if (lastOutput.equals("All searches completed.")) {
             return "";
         }
+        // only return last few characters that include percentage
+        if (lastOutput.length() >= 3) {
+            lastOutput = lastOutput.substring(lastOutput.length() - 3);
+        }
         return lastOutput;
     }
 

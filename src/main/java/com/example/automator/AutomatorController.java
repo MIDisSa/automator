@@ -286,7 +286,7 @@ public class AutomatorController {
 
         } catch(Exception e) {
             System.out.println(e);
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Something went wrong: ", e)); // 400 - bad request
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.toString()); // 400 - bad request
         }
     }
 

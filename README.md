@@ -25,3 +25,6 @@ The .jar can be executed on Windows as well as UNIX-based operating systems. The
 ## How to make changes
 Whenever the Java-code is changed, delete old .jars in the target folder and re-package the code using maven (should be possible in all IDEs, for me IntelliJ worked best).
 Then rebuild Docker image to apply the changes.
+
+## License
+This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1).

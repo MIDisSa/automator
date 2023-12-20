@@ -245,11 +245,11 @@ public class AutomatorController {
     public OptimizationOutput optimize(@RequestBody UserInput userInput) {
 
         // check if user input is valid
-       /*  String inputValidation = userInput.isOptimizationInputValid(optimizationType);
+       String inputValidation = userInput.isOptimizationInputValid(userInput.getOptimizationType());
         if (inputValidation != "ok") {
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, inputValidation); // 406 - not acceptable
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, inputValidation); //  406 - not acceptable
         }
-        System.out.println("input is valid");*/
+        System.out.println("input is valid");
 
         try {
             workingUserInput.setOptimizationType(userInput.getOptimizationType());
@@ -396,6 +396,8 @@ public class AutomatorController {
         }
         return lastOutput;
     }
+
+
     @PutMapping("/abortOptimization")
     @ResponseStatus(HttpStatus.OK)
     public void abortOptimizationv2() {
@@ -408,8 +410,6 @@ public class AutomatorController {
             System.out.println(e);
         }
     }
-
-
     //Helper methods:
 
     public OptimizationOutput maxAdopters(UserInput userInput) {

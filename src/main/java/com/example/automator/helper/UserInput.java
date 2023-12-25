@@ -346,6 +346,7 @@ public class UserInput { //UserInput?
             Assert.isTrue(userInput.getFarmersPerVillage().matches("\\d+"), "farmersPerVillage must be a number greater or equal to 0. This number can't be a decimal.");
             Assert.isTrue(userInput.getNrOfVillages().matches("\\d+"), "nrOfVillages must be a number greater or equal to 0. This number can't be a decimal.");
             Assert.isTrue(userInput.getNrOfNeighborhoods().matches("\\d+"), "nrOfNeighborhoods must be a number greater or equal to 0. This number can't be a decimal.");
+            Assert.isTrue(Integer.valueOf(userInput.getNrOfNeighborhoods()) <= Integer.valueOf(userInput.getNrOfVillages()), "nrOfNeighborhoods must not be greater than nrOfVillages");
             Assert.isTrue(userInput.getPercentageOfFarmersInFarmgroup().matches("^\\d{1,3}(,?\\d{3})*(\\.\\d+)?$"), "percentageOfFarmersInFarmgroup must be a number greater or equal to 0.Use a dot as a decimal separator.");
             
             Double farmersInFarmgroup = Double.valueOf(userInput.getPercentageOfFarmersInFarmgroup());

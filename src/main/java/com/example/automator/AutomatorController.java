@@ -234,11 +234,6 @@ public class AutomatorController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Something went wrong: ", e)); // 400 - bad request
          }
     }
-
-    @PostMapping("/testUpdateXML") 
-    public void updateXML(@RequestBody UserInput input) {
-        XMLUpdater.updateXML("MaxAdoptersTest.bsearch", workingDataInput, input);
-    }
     
     @PostMapping("/optimization") //Optimization
     @ResponseStatus(HttpStatus.OK)
@@ -288,20 +283,6 @@ public class AutomatorController {
             System.out.println(e);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.toString()); // 400 - bad request
         }
-    }
-
-    @GetMapping("/testOptimizer") //Starts up optimizer with a test model
-    public OptimizationResults testOptimizer() {
-        try {
-            CLIRunner CLIRunner = new CLIRunner();
-            CLIRunner.runCommand("-p optimization-settings-go-here/TestSettings.bsearch -o optimization-results-go-here/Test");
-            
-            OptimizationResults results = new CSVReader().parseResultsCSV("Test.finalCheckedBests.csv");
-            return results;
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

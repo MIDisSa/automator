@@ -55,7 +55,7 @@ public class ABMRunner {
             workspace.command(String.format("set direct_ad_frequency %s", userInput.getFrequencyDirectAd()));
             workspace.command(String.format("set train_chiefs_frequency %s", userInput.getFrequencyChiefTraining()));
             workspace.command(String.format("set max_budget %s", userInput.getBudget()));
-            workspace.command("set percentage_of_villagers_addressed 50"); //not part of optimization atm 
+            workspace.command(String.format("set percentage_of_villagers_addressed %s", userInput.getPercentageOfVillagersAddressed()));
 
             // SET FIXED AND VARIABLE COST
             workspace.command(String.format("set fixed_costs_direct_ad %s", userInput.getFixedCostsDirectAd()));
@@ -104,13 +104,6 @@ public class ABMRunner {
             results.add(totalCost);
             results.add(awareFarmersPerTickString);
             results.add(adoptersPerTickString);
-            
-            //To test calculation of actual number of interventions
-            /*ArrayList<String> numbers = userInput.calculateNrOfInterventions();
-            System.out.println("real nr DirAds: " + nrOfDirectAds);
-            System.out.println("calc nr DirAds: " + numbers.get(0));
-            System.out.println("real nr ToT: " + nrOfChiefTrainings);
-            System.out.println("calc nr ToT: " + numbers.get(1))*/
 
         } catch(Exception e) {
             e.printStackTrace();

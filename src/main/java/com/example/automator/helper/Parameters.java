@@ -46,38 +46,6 @@ public class Parameters {
     @CsvBindByName
     private String base_adoption_probability;
 
-    /*
-    Parameters(
-        String train_chief_influence,
-        String nr_default_friends_inter_village,
-        String std_nr_default_friends_inter_village,
-        String avg_intra_village_interaction_frequency,
-        String stdev_intra_village_interaction_frequency,
-        String avg_inter_village_interaction_frequency,
-        String stdev_inter_village_interaction_frequency,
-        String avg_chief_farmer_meeting_frequency,
-        String avg_intra_mention_percentage,
-        String stdev_intra_mention_percentage,
-        String avg_inter_mention_percentage,
-        String stdev_inter_mention_percentage,
-        String percentage_negative_WoM,
-        String base_adoption_probability) {
-            this.train_chief_influence = train_chief_influence;
-            this.nr_default_friends_inter_village = nr_default_friends_inter_village;
-            this.std_nr_default_friends_inter_village = std_nr_default_friends_inter_village;
-            this.avg_intra_village_interaction_frequency = avg_intra_village_interaction_frequency;
-            this.stdev_intra_village_interaction_frequency = stdev_intra_village_interaction_frequency;
-            this.avg_inter_village_interaction_frequency = avg_inter_village_interaction_frequency;
-            this.stdev_inter_village_interaction_frequency = stdev_inter_village_interaction_frequency;
-            this.avg_chief_farmer_meeting_frequency = avg_chief_farmer_meeting_frequency;
-            this.avg_intra_mention_percentage = avg_intra_mention_percentage;
-            this.stdev_intra_mention_percentage = stdev_intra_mention_percentage;
-            this.avg_inter_mention_percentage = avg_inter_mention_percentage;
-            this.stdev_inter_mention_percentage = stdev_inter_mention_percentage;
-            this.percentage_negative_WoM = percentage_negative_WoM;
-            this.base_adoption_probability = base_adoption_probability;
-        } */
-
     // getters
     public String getTrainChiefInfluence() {
         return train_chief_influence;

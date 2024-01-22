@@ -201,7 +201,7 @@ df_results = pd.DataFrame(columns=['train_chief_influence', 'nr_default_friends_
 
 
 # Assign the values
-df_results['train_chief_influence'] = [round(sigmoid_value_TCI[0] + 1, 2)]
+df_results['train_chief_influence'] = [round(sigmoid_value_TCI[0] * 100, 0)]
 
 # nr_default_friends_inter_village
 df_results['nr_default_friends_inter_village'] = [round(nr_default_friends_inter_village, 2)]

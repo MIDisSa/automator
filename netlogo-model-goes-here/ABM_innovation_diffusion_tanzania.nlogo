@@ -69,7 +69,8 @@ globals [
   ;; paramters affecting attitude after intervetion
 
   direct_ad_influence                              ;; defines influence of intervetion targetted directly to farmers
-  train_chiefs_influence                           ;; defines influence of ToT on chiefs
+  train_chiefs_influence_attitude                  ;; defines influence of ToT on chief's attitude
+  train_chiefs_influence_adoption                  ;; defines influence of ToT on chief's adoption probability
   direct_ad_discount_influence                     ;; defines influence of intervention targeted directly to farmers and offering them a discount on the HB
   direct_ad_delayed_payment_influence              ;; defines influence of intervention targeted directly to farmers and offering them a delayed payment option
 
@@ -236,9 +237,10 @@ to init_parameters
 
 
   set direct_ad_influence 150 ;; in %
-  set train_chiefs_influence 2 ;; in %
-  set direct_ad_discount_influence 150 ;; in % ;; TODO: maybe different number?
-  set direct_ad_delayed_payment_influence 150 ;; in % ;; TODO: maybe different number?
+  set train_chiefs_influence_attitude 200 ;; in %
+  set train_chiefs_influence_adoption 88 ;; in % ;; probability of a chief adopting innovation directly after training
+  set direct_ad_discount_influence 150 ;; in %
+  set direct_ad_delayed_payment_influence 150 ;; in %
 
   set avg_check_adoption_interval 5
   set max_influence_risk_aversion_on_adoption  10 ;; in %
@@ -1075,12 +1077,12 @@ to-report calc_intervention_state_influence_on_decision [agent]
   let state [intervention_state] of agent
   let influence (ifelse-value
     state = 0 [ 0 ]
-    state = 1 [ 32 ]
-    state = 2 [ 35 ]
-    state = 3 [ 76 ]
-    state = 4 [ 72 ]
-    state = 5 [ 88 ])
-  report influence / 100
+    state = 1 [ 0.32 ]
+    state = 2 [ 0.35 ]
+    state = 3 [ 0.76 ]
+    state = 4 [ 0.72 ]
+    state = 5 [ train_chiefs_influence_adoption / 100 ])
+  report influence
 end
 
 
@@ -1160,7 +1162,7 @@ to train_chiefs
     let chosen_chiefs at-most-n-of nr_of_trained_chiefs chiefs
     if (any? chosen_chiefs) [
       ask chosen_chiefs [
-        interact research_team_agent (train_chiefs_influence * 100) false self 0 true true false
+        interact research_team_agent train_chiefs_influence_attitude false self 0 true true false
         set intervention_state 5
       ]
     ]
@@ -1464,7 +1466,7 @@ avg_nr_of_farmers_per_village
 avg_nr_of_farmers_per_village
 2
 50
-5.0
+10.0
 1
 1
 NIL
@@ -1479,7 +1481,7 @@ nr_of_villages
 nr_of_villages
 2
 500
-99.0
+100.0
 1
 1
 NIL
@@ -1494,7 +1496,7 @@ nr_default_friends_inter_village
 nr_default_friends_inter_village
 1
 10
-10.0
+5.0
 1
 1
 NIL
@@ -1694,7 +1696,7 @@ INPUTBOX
 336
 108
 run_until_day_x
-359.0
+360.0
 1
 0
 Number
@@ -1771,7 +1773,7 @@ direct_ad_nr_of_villages
 direct_ad_nr_of_villages
 0
 100
-49.0
+50.0
 1
 1
 % of villages
@@ -1786,7 +1788,7 @@ train_chiefs_nr
 train_chiefs_nr
 0
 100
-49.0
+50.0
 1
 1
 % of chiefs
@@ -1855,7 +1857,7 @@ nr_of_neighborhoods
 nr_of_neighborhoods
 0
 nr_of_villages
-19.0
+0.0
 1
 1
 NIL
@@ -1870,7 +1872,7 @@ percentage_of_farmers_in_farmgroup
 percentage_of_farmers_in_farmgroup
 0
 100
-49.0
+50.0
 1
 1
 NIL
@@ -1885,7 +1887,7 @@ direct_ad_frequency
 direct_ad_frequency
 0
 365
-179.0
+360.0
 1
 1
 days
@@ -1922,7 +1924,7 @@ train_chiefs_frequency
 train_chiefs_frequency
 0
 365
-179.0
+360.0
 1
 1
 days
@@ -1996,7 +1998,7 @@ avg_inter_mention_percentage
 avg_inter_mention_percentage
 0
 100
-1.7
+1.0
 0.1
 1
 NIL
@@ -2011,7 +2013,7 @@ avg_intra_mention_percentage
 avg_intra_mention_percentage
 0
 100
-2.1
+2.0
 0.1
 1
 NIL

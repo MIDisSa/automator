@@ -3,7 +3,7 @@ package com.example.automator.helper;
 import org.springframework.util.Assert;
 
 public class DataInput {
-    private String trainChiefInfluence = "1.75";
+    private String trainChiefInfluence = "88";
     private String nrDefaultFriendsInterVillage = "5";
     private String stdNrDefaultFriendsInterVillage = "1";
     private String avgIntraVillageInteractionFrequency = "4";
